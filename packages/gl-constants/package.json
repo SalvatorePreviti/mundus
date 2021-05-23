@@ -1,0 +1,39 @@
+{
+  "name": "@mundus/gl-constants",
+  "type": "module",
+  "sideEffects": false,
+  "version": "0.0.1",
+  "private": true,
+  "description": "All webgl constants, optimized for tree shaking",
+  "keywords": [
+    "webgl",
+    "webgl constants"
+  ],
+  "license": "MIT",
+  "author": "Salvatore Previti",
+  "types": "./index.d.ts",
+  "main": "./index.cjs",
+  "exports": {
+    "./*": "./*",
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./index": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./index.js": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./lookup": {
+      "import": "./lookup.js",
+      "require": "./lookup.cjs"
+    },
+    "./lookup.js": {
+      "import": "./lookup.js",
+      "require": "./lookup.cjs"
+    }
+  }
+}

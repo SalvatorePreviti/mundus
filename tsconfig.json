@@ -1,3 +1,5 @@
 {
-  "extends": "@balsamic/eslint-config"
+  "extends": "@balsamic/eslint-config",
+  "compilerOptions": {},
+  "exclude": ["packages/gl-constants"]
 }
