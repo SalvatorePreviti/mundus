@@ -1,5 +1,6 @@
-# dotfiles
+.downloads
 
+# dotfiles
 !.*.js
 !.*._js
 !.*.jsx

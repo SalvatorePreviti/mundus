@@ -66,6 +66,7 @@
     "**/.fuse_hidden*": true
   },
   "search.exclude": {
+    ".downloads/": true,
     "**/node_modules": true,
     "**/bower_components": true,
     "**/package-lock.json": true,

@@ -198,14 +198,14 @@ export enum GL_CONSTANTS {
   FUNC_ADD = 0x8006,
 
   /**
-   * FUNC_SUBTRACT = 0x800A
+   * FUNC_SUBTRACT = 0x800a
    * Passed to blendEquation or blendEquationSeparate to specify a subtraction blend function (source - destination).
    * Blending equations - Constant passed to blendEquation() or blendEquationSeparate() to control how the blending is calculated (for both, RBG and alpha, or separately).
    */
   FUNC_SUBTRACT = 0x800a,
 
   /**
-   * FUNC_REVERSE_SUBTRACT = 0x800B
+   * FUNC_REVERSE_SUBTRACT = 0x800b
    * Passed to blendEquation or blendEquationSeparate to specify a reverse subtraction blend function (destination - source).
    * Blending equations - Constant passed to blendEquation() or blendEquationSeparate() to control how the blending is calculated (for both, RBG and alpha, or separately).
    */
@@ -228,35 +228,35 @@ export enum GL_CONSTANTS {
   BLEND_EQUATION_RGB = 0x8009,
 
   /**
-   * BLEND_EQUATION_ALPHA = 0x883D
+   * BLEND_EQUATION_ALPHA = 0x883d
    * Passed to getParameter to get the current alpha blend function. Same as BLEND_EQUATION
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   BLEND_EQUATION_ALPHA = 0x883d,
 
   /**
-   * BLEND_DST_RGB = 0x80C8
+   * BLEND_DST_RGB = 0x80c8
    * Passed to getParameter to get the current destination RGB blend function.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   BLEND_DST_RGB = 0x80c8,
 
   /**
-   * BLEND_SRC_RGB = 0x80C9
+   * BLEND_SRC_RGB = 0x80c9
    * Passed to getParameter to get the current destination RGB blend function.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   BLEND_SRC_RGB = 0x80c9,
 
   /**
-   * BLEND_DST_ALPHA = 0x80CA
+   * BLEND_DST_ALPHA = 0x80ca
    * Passed to getParameter to get the current destination alpha blend function.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   BLEND_DST_ALPHA = 0x80ca,
 
   /**
-   * BLEND_SRC_ALPHA = 0x80CB
+   * BLEND_SRC_ALPHA = 0x80cb
    * Passed to getParameter to get the current source alpha blend function.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
@@ -284,118 +284,118 @@ export enum GL_CONSTANTS {
   ELEMENT_ARRAY_BUFFER_BINDING = 0x8895,
 
   /**
-   * LINE_WIDTH = 0x0B21
+   * LINE_WIDTH = 0x0b21
    * Passed to getParameter to get the current lineWidth (set by the lineWidth method).
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   LINE_WIDTH = 0x0b21,
 
   /**
-   * ALIASED_POINT_SIZE_RANGE = 0x846D
+   * ALIASED_POINT_SIZE_RANGE = 0x846d
    * Passed to getParameter to get the current size of a point drawn with gl.POINTS
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   ALIASED_POINT_SIZE_RANGE = 0x846d,
 
   /**
-   * ALIASED_LINE_WIDTH_RANGE = 0x846E
+   * ALIASED_LINE_WIDTH_RANGE = 0x846e
    * Passed to getParameter to get the range of available widths for a line. Returns a length-2 array with the lo value at 0, and hight at 1.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   ALIASED_LINE_WIDTH_RANGE = 0x846e,
 
   /**
-   * CULL_FACE_MODE = 0x0B45
+   * CULL_FACE_MODE = 0x0b45
    * Passed to getParameter to get the current value of cullFace. Should return FRONT, BACK, or FRONT_AND_BACK
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   CULL_FACE_MODE = 0x0b45,
 
   /**
-   * FRONT_FACE = 0x0B46
+   * FRONT_FACE = 0x0b46
    * Passed to getParameter to determine the current value of frontFace. Should return CW or CCW.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   FRONT_FACE = 0x0b46,
 
   /**
-   * DEPTH_RANGE = 0x0B70
+   * DEPTH_RANGE = 0x0b70
    * Passed to getParameter to return a length-2 array of floats giving the current depth range.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   DEPTH_RANGE = 0x0b70,
 
   /**
-   * DEPTH_WRITEMASK = 0x0B72
+   * DEPTH_WRITEMASK = 0x0b72
    * Passed to getParameter to determine if the depth write mask is enabled.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   DEPTH_WRITEMASK = 0x0b72,
 
   /**
-   * DEPTH_CLEAR_VALUE = 0x0B73
+   * DEPTH_CLEAR_VALUE = 0x0b73
    * Passed to getParameter to determine the current depth clear value.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   DEPTH_CLEAR_VALUE = 0x0b73,
 
   /**
-   * DEPTH_FUNC = 0x0B74
+   * DEPTH_FUNC = 0x0b74
    * Passed to getParameter to get the current depth function. Returns NEVER, ALWAYS, LESS, EQUAL, LEQUAL, GREATER, GEQUAL, or NOTEQUAL.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   DEPTH_FUNC = 0x0b74,
 
   /**
-   * STENCIL_CLEAR_VALUE = 0x0B91
+   * STENCIL_CLEAR_VALUE = 0x0b91
    * Passed to getParameter to get the value the stencil will be cleared to.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_CLEAR_VALUE = 0x0b91,
 
   /**
-   * STENCIL_FUNC = 0x0B92
+   * STENCIL_FUNC = 0x0b92
    * Passed to getParameter to get the current stencil function. Returns NEVER, ALWAYS, LESS, EQUAL, LEQUAL, GREATER, GEQUAL, or NOTEQUAL.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_FUNC = 0x0b92,
 
   /**
-   * STENCIL_FAIL = 0x0B94
+   * STENCIL_FAIL = 0x0b94
    * Passed to getParameter to get the current stencil fail function. Should return KEEP, REPLACE, INCR, DECR, INVERT, INCR_WRAP, or DECR_WRAP.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_FAIL = 0x0b94,
 
   /**
-   * STENCIL_PASS_DEPTH_FAIL = 0x0B95
+   * STENCIL_PASS_DEPTH_FAIL = 0x0b95
    * Passed to getParameter to get the current stencil fail function should the depth buffer test fail. Should return KEEP, REPLACE, INCR, DECR, INVERT, INCR_WRAP, or DECR_WRAP.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_PASS_DEPTH_FAIL = 0x0b95,
 
   /**
-   * STENCIL_PASS_DEPTH_PASS = 0x0B96
+   * STENCIL_PASS_DEPTH_PASS = 0x0b96
    * Passed to getParameter to get the current stencil fail function should the depth buffer test pass. Should return KEEP, REPLACE, INCR, DECR, INVERT, INCR_WRAP, or DECR_WRAP.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_PASS_DEPTH_PASS = 0x0b96,
 
   /**
-   * STENCIL_REF = 0x0B97
+   * STENCIL_REF = 0x0b97
    * Passed to getParameter to get the reference value used for stencil tests.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_REF = 0x0b97,
 
   /**
-   * STENCIL_VALUE_MASK = 0x0B93
+   * STENCIL_VALUE_MASK = 0x0b93
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_VALUE_MASK = 0x0b93,
 
   /**
-   * STENCIL_WRITEMASK = 0x0B98
+   * STENCIL_WRITEMASK = 0x0b98
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_WRITEMASK = 0x0b98,
@@ -425,117 +425,117 @@ export enum GL_CONSTANTS {
   STENCIL_BACK_PASS_DEPTH_PASS = 0x8803,
 
   /**
-   * STENCIL_BACK_REF = 0x8CA3
+   * STENCIL_BACK_REF = 0x8ca3
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_BACK_REF = 0x8ca3,
 
   /**
-   * STENCIL_BACK_VALUE_MASK = 0x8CA4
+   * STENCIL_BACK_VALUE_MASK = 0x8ca4
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_BACK_VALUE_MASK = 0x8ca4,
 
   /**
-   * STENCIL_BACK_WRITEMASK = 0x8CA5
+   * STENCIL_BACK_WRITEMASK = 0x8ca5
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_BACK_WRITEMASK = 0x8ca5,
 
   /**
-   * VIEWPORT = 0x0BA2
+   * VIEWPORT = 0x0ba2
    * Returns an Int32Array with four elements for the current viewport dimensions.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   VIEWPORT = 0x0ba2,
 
   /**
-   * SCISSOR_BOX = 0x0C10
+   * SCISSOR_BOX = 0x0c10
    * Returns an Int32Array with four elements for the current scissor box dimensions.
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SCISSOR_BOX = 0x0c10,
 
   /**
-   * COLOR_CLEAR_VALUE = 0x0C22
+   * COLOR_CLEAR_VALUE = 0x0c22
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   COLOR_CLEAR_VALUE = 0x0c22,
 
   /**
-   * COLOR_WRITEMASK = 0x0C23
+   * COLOR_WRITEMASK = 0x0c23
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   COLOR_WRITEMASK = 0x0c23,
 
   /**
-   * UNPACK_ALIGNMENT = 0x0CF5
+   * UNPACK_ALIGNMENT = 0x0cf5
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_ALIGNMENT = 0x0cf5,
 
   /**
-   * PACK_ALIGNMENT = 0x0D05
+   * PACK_ALIGNMENT = 0x0d05
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   PACK_ALIGNMENT = 0x0d05,
 
   /**
-   * MAX_TEXTURE_SIZE = 0x0D33
+   * MAX_TEXTURE_SIZE = 0x0d33
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_TEXTURE_SIZE = 0x0d33,
 
   /**
-   * MAX_VIEWPORT_DIMS = 0x0D3A
+   * MAX_VIEWPORT_DIMS = 0x0d3a
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_VIEWPORT_DIMS = 0x0d3a,
 
   /**
-   * SUBPIXEL_BITS = 0x0D50
+   * SUBPIXEL_BITS = 0x0d50
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SUBPIXEL_BITS = 0x0d50,
 
   /**
-   * RED_BITS = 0x0D52
+   * RED_BITS = 0x0d52
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   RED_BITS = 0x0d52,
 
   /**
-   * GREEN_BITS = 0x0D53
+   * GREEN_BITS = 0x0d53
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   GREEN_BITS = 0x0d53,
 
   /**
-   * BLUE_BITS = 0x0D54
+   * BLUE_BITS = 0x0d54
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   BLUE_BITS = 0x0d54,
 
   /**
-   * ALPHA_BITS = 0x0D55
+   * ALPHA_BITS = 0x0d55
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   ALPHA_BITS = 0x0d55,
 
   /**
-   * DEPTH_BITS = 0x0D56
+   * DEPTH_BITS = 0x0d56
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   DEPTH_BITS = 0x0d56,
 
   /**
-   * STENCIL_BITS = 0x0D57
+   * STENCIL_BITS = 0x0d57
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   STENCIL_BITS = 0x0d57,
 
   /**
-   * POLYGON_OFFSET_UNITS = 0x2A00
+   * POLYGON_OFFSET_UNITS = 0x2a00
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   POLYGON_OFFSET_UNITS = 0x2a00,
@@ -553,61 +553,61 @@ export enum GL_CONSTANTS {
   TEXTURE_BINDING_2D = 0x8069,
 
   /**
-   * SAMPLE_BUFFERS = 0x80A8
+   * SAMPLE_BUFFERS = 0x80a8
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SAMPLE_BUFFERS = 0x80a8,
 
   /**
-   * SAMPLES = 0x80A9
+   * SAMPLES = 0x80a9
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SAMPLES = 0x80a9,
 
   /**
-   * SAMPLE_COVERAGE_VALUE = 0x80AA
+   * SAMPLE_COVERAGE_VALUE = 0x80aa
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SAMPLE_COVERAGE_VALUE = 0x80aa,
 
   /**
-   * SAMPLE_COVERAGE_INVERT = 0x80AB
+   * SAMPLE_COVERAGE_INVERT = 0x80ab
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   SAMPLE_COVERAGE_INVERT = 0x80ab,
 
   /**
-   * COMPRESSED_TEXTURE_FORMATS = 0x86A3
+   * COMPRESSED_TEXTURE_FORMATS = 0x86a3
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   COMPRESSED_TEXTURE_FORMATS = 0x86a3,
 
   /**
-   * VENDOR = 0x1F00
+   * VENDOR = 0x1f00
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   VENDOR = 0x1f00,
 
   /**
-   * RENDERER = 0x1F01
+   * RENDERER = 0x1f01
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   RENDERER = 0x1f01,
 
   /**
-   * VERSION = 0x1F02
+   * VERSION = 0x1f02
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   VERSION = 0x1f02,
 
   /**
-   * IMPLEMENTATION_COLOR_READ_TYPE = 0x8B9A
+   * IMPLEMENTATION_COLOR_READ_TYPE = 0x8b9a
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   IMPLEMENTATION_COLOR_READ_TYPE = 0x8b9a,
 
   /**
-   * IMPLEMENTATION_COLOR_READ_FORMAT = 0x8B9B
+   * IMPLEMENTATION_COLOR_READ_FORMAT = 0x8b9b
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   IMPLEMENTATION_COLOR_READ_FORMAT = 0x8b9b,
@@ -621,21 +621,21 @@ export enum GL_CONSTANTS {
   // Buffers - Constants passed to bufferData(), bufferSubData(), bindBuffer(), or getBufferParameter().
 
   /**
-   * STATIC_DRAW = 0x88E4
+   * STATIC_DRAW = 0x88e4
    * Passed to bufferData as a hint about whether the contents of the buffer are likely to be used often and not change often.
    * Buffers - Constant passed to bufferData(), bufferSubData(), bindBuffer(), or getBufferParameter().
    */
   STATIC_DRAW = 0x88e4,
 
   /**
-   * STREAM_DRAW = 0x88E0
+   * STREAM_DRAW = 0x88e0
    * Passed to bufferData as a hint about whether the contents of the buffer are likely to not be used often.
    * Buffers - Constant passed to bufferData(), bufferSubData(), bindBuffer(), or getBufferParameter().
    */
   STREAM_DRAW = 0x88e0,
 
   /**
-   * DYNAMIC_DRAW = 0x88E8
+   * DYNAMIC_DRAW = 0x88e8
    * Passed to bufferData as a hint about whether the contents of the buffer are likely to be used often and change often.
    * Buffers - Constant passed to bufferData(), bufferSubData(), bindBuffer(), or getBufferParameter().
    */
@@ -703,7 +703,7 @@ export enum GL_CONSTANTS {
   VERTEX_ATTRIB_ARRAY_TYPE = 0x8625,
 
   /**
-   * VERTEX_ATTRIB_ARRAY_NORMALIZED = 0x886A
+   * VERTEX_ATTRIB_ARRAY_NORMALIZED = 0x886a
    * Vertex attributes - Constant passed to getVertexAttrib().
    */
   VERTEX_ATTRIB_ARRAY_NORMALIZED = 0x886a,
@@ -715,7 +715,7 @@ export enum GL_CONSTANTS {
   VERTEX_ATTRIB_ARRAY_POINTER = 0x8645,
 
   /**
-   * VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889F
+   * VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889f
    * Vertex attributes - Constant passed to getVertexAttrib().
    */
   VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889f,
@@ -723,7 +723,7 @@ export enum GL_CONSTANTS {
   // Culling - Constants passed to cullFace().
 
   /**
-   * CULL_FACE = 0x0B44
+   * CULL_FACE = 0x0b44
    * Passed to enable/disable to turn on/off culling. Can also be used with getParameter to find the current culling method.
    * Culling - Constant passed to cullFace().
    */
@@ -753,21 +753,21 @@ export enum GL_CONSTANTS {
   // Enabling and disabling - Constants passed to enable() or disable().
 
   /**
-   * BLEND = 0x0BE2
+   * BLEND = 0x0be2
    * Passed to enable/disable to turn on/off blending. Can also be used with getParameter to find the current blending method.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
   BLEND = 0x0be2,
 
   /**
-   * DEPTH_TEST = 0x0B71
+   * DEPTH_TEST = 0x0b71
    * Passed to enable/disable to turn on/off the depth test. Can also be used with getParameter to query the depth test.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
   DEPTH_TEST = 0x0b71,
 
   /**
-   * DITHER = 0x0BD0
+   * DITHER = 0x0bd0
    * Passed to enable/disable to turn on/off dithering. Can also be used with getParameter to find the current dithering method.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
@@ -781,28 +781,28 @@ export enum GL_CONSTANTS {
   POLYGON_OFFSET_FILL = 0x8037,
 
   /**
-   * SAMPLE_ALPHA_TO_COVERAGE = 0x809E
+   * SAMPLE_ALPHA_TO_COVERAGE = 0x809e
    * Passed to enable/disable to turn on/off the alpha to coverage. Used in multi-sampling alpha channels.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
   SAMPLE_ALPHA_TO_COVERAGE = 0x809e,
 
   /**
-   * SAMPLE_COVERAGE = 0x80A0
+   * SAMPLE_COVERAGE = 0x80a0
    * Passed to enable/disable to turn on/off the sample coverage. Used in multi-sampling.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
   SAMPLE_COVERAGE = 0x80a0,
 
   /**
-   * SCISSOR_TEST = 0x0C11
+   * SCISSOR_TEST = 0x0c11
    * Passed to enable/disable to turn on/off the scissor test. Can also be used with getParameter to query the scissor test.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
   SCISSOR_TEST = 0x0c11,
 
   /**
-   * STENCIL_TEST = 0x0B90
+   * STENCIL_TEST = 0x0b90
    * Passed to enable/disable to turn on/off the stencil test. Can also be used with getParameter to query the stencil test.
    * Enabling and disabling - Constant passed to enable() or disable().
    */
@@ -975,7 +975,7 @@ export enum GL_CONSTANTS {
   LUMINANCE = 0x1909,
 
   /**
-   * LUMINANCE_ALPHA = 0x190A
+   * LUMINANCE_ALPHA = 0x190a
    * Pixel formats
    */
   LUMINANCE_ALPHA = 0x190a,
@@ -1009,63 +1009,63 @@ export enum GL_CONSTANTS {
   // Shaders - Constants passed to createShader() or getShaderParameter()
 
   /**
-   * FRAGMENT_SHADER = 0x8B30
+   * FRAGMENT_SHADER = 0x8b30
    * Passed to createShader to define a fragment shader.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   FRAGMENT_SHADER = 0x8b30,
 
   /**
-   * VERTEX_SHADER = 0x8B31
+   * VERTEX_SHADER = 0x8b31
    * Passed to createShader to define a vertex shader
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   VERTEX_SHADER = 0x8b31,
 
   /**
-   * COMPILE_STATUS = 0x8B81
+   * COMPILE_STATUS = 0x8b81
    * Passed to getShaderParameter to get the status of the compilation. Returns false if the shader was not compiled. You can then query getShaderInfoLog to find the exact error
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   COMPILE_STATUS = 0x8b81,
 
   /**
-   * DELETE_STATUS = 0x8B80
+   * DELETE_STATUS = 0x8b80
    * Passed to getShaderParameter to determine if a shader was deleted via deleteShader. Returns true if it was, false otherwise.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   DELETE_STATUS = 0x8b80,
 
   /**
-   * LINK_STATUS = 0x8B82
+   * LINK_STATUS = 0x8b82
    * Passed to getProgramParameter after calling linkProgram to determine if a program was linked correctly. Returns false if there were errors. Use getProgramInfoLog to find the exact error.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   LINK_STATUS = 0x8b82,
 
   /**
-   * VALIDATE_STATUS = 0x8B83
+   * VALIDATE_STATUS = 0x8b83
    * Passed to getProgramParameter after calling validateProgram to determine if it is valid. Returns false if errors were found.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   VALIDATE_STATUS = 0x8b83,
 
   /**
-   * ATTACHED_SHADERS = 0x8B85
+   * ATTACHED_SHADERS = 0x8b85
    * Passed to getProgramParameter after calling attachShader to determine if the shader was attached correctly. Returns false if errors occurred.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   ATTACHED_SHADERS = 0x8b85,
 
   /**
-   * ACTIVE_ATTRIBUTES = 0x8B89
+   * ACTIVE_ATTRIBUTES = 0x8b89
    * Passed to getProgramParameter to get the number of attributes active in a program.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   ACTIVE_ATTRIBUTES = 0x8b89,
 
   /**
-   * ACTIVE_UNIFORMS = 0x8B86
+   * ACTIVE_UNIFORMS = 0x8b86
    * Passed to getProgramParameter to get the number of uniforms active in a program.
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
@@ -1079,25 +1079,25 @@ export enum GL_CONSTANTS {
   MAX_VERTEX_ATTRIBS = 0x8869,
 
   /**
-   * MAX_VERTEX_UNIFORM_VECTORS = 0x8DFB
+   * MAX_VERTEX_UNIFORM_VECTORS = 0x8dfb
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   MAX_VERTEX_UNIFORM_VECTORS = 0x8dfb,
 
   /**
-   * MAX_VARYING_VECTORS = 0x8DFC
+   * MAX_VARYING_VECTORS = 0x8dfc
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   MAX_VARYING_VECTORS = 0x8dfc,
 
   /**
-   * MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8B4D
+   * MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8b4d
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8b4d,
 
   /**
-   * MAX_VERTEX_TEXTURE_IMAGE_UNITS = 0x8B4C
+   * MAX_VERTEX_TEXTURE_IMAGE_UNITS = 0x8b4c
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   MAX_VERTEX_TEXTURE_IMAGE_UNITS = 0x8b4c,
@@ -1110,25 +1110,25 @@ export enum GL_CONSTANTS {
   MAX_TEXTURE_IMAGE_UNITS = 0x8872,
 
   /**
-   * MAX_FRAGMENT_UNIFORM_VECTORS = 0x8DFD
+   * MAX_FRAGMENT_UNIFORM_VECTORS = 0x8dfd
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   MAX_FRAGMENT_UNIFORM_VECTORS = 0x8dfd,
 
   /**
-   * SHADER_TYPE = 0x8B4F
+   * SHADER_TYPE = 0x8b4f
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   SHADER_TYPE = 0x8b4f,
 
   /**
-   * SHADING_LANGUAGE_VERSION = 0x8B8C
+   * SHADING_LANGUAGE_VERSION = 0x8b8c
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   SHADING_LANGUAGE_VERSION = 0x8b8c,
 
   /**
-   * CURRENT_PROGRAM = 0x8B8D
+   * CURRENT_PROGRAM = 0x8b8d
    * Shaders - Constant passed to createShader() or getShaderParameter()
    */
   CURRENT_PROGRAM = 0x8b8d,
@@ -1194,31 +1194,31 @@ export enum GL_CONSTANTS {
   // Stencil actions - Constants passed to stencilOp().
 
   /**
-   * KEEP = 0x1E00
+   * KEEP = 0x1e00
    * Stencil actions - Constant passed to stencilOp().
    */
   KEEP = 0x1e00,
 
   /**
-   * REPLACE = 0x1E01
+   * REPLACE = 0x1e01
    * Stencil actions - Constant passed to stencilOp().
    */
   REPLACE = 0x1e01,
 
   /**
-   * INCR = 0x1E02
+   * INCR = 0x1e02
    * Stencil actions - Constant passed to stencilOp().
    */
   INCR = 0x1e02,
 
   /**
-   * DECR = 0x1E03
+   * DECR = 0x1e03
    * Stencil actions - Constant passed to stencilOp().
    */
   DECR = 0x1e03,
 
   /**
-   * INVERT = 0x150A
+   * INVERT = 0x150a
    * Stencil actions - Constant passed to stencilOp().
    */
   INVERT = 0x150a,
@@ -1298,7 +1298,7 @@ export enum GL_CONSTANTS {
   TEXTURE_WRAP_T = 0x2803,
 
   /**
-   * TEXTURE_2D = 0x0DE1
+   * TEXTURE_2D = 0x0de1
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_2D = 0x0de1,
@@ -1352,19 +1352,19 @@ export enum GL_CONSTANTS {
   TEXTURE_CUBE_MAP_POSITIVE_Z = 0x8519,
 
   /**
-   * TEXTURE_CUBE_MAP_NEGATIVE_Z = 0x851A
+   * TEXTURE_CUBE_MAP_NEGATIVE_Z = 0x851a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_CUBE_MAP_NEGATIVE_Z = 0x851a,
 
   /**
-   * MAX_CUBE_MAP_TEXTURE_SIZE = 0x851C
+   * MAX_CUBE_MAP_TEXTURE_SIZE = 0x851c
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   MAX_CUBE_MAP_TEXTURE_SIZE = 0x851c,
 
   /**
-   * ACTIVE_TEXTURE = 0x84E0
+   * ACTIVE_TEXTURE = 0x84e0
    * The current active texture unit.
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
@@ -1377,7 +1377,7 @@ export enum GL_CONSTANTS {
   REPEAT = 0x2901,
 
   /**
-   * CLAMP_TO_EDGE = 0x812F
+   * CLAMP_TO_EDGE = 0x812f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   CLAMP_TO_EDGE = 0x812f,
@@ -1391,91 +1391,91 @@ export enum GL_CONSTANTS {
   // Uniform types
 
   /**
-   * FLOAT_VEC2 = 0x8B50
+   * FLOAT_VEC2 = 0x8b50
    * Uniform types
    */
   FLOAT_VEC2 = 0x8b50,
 
   /**
-   * FLOAT_VEC3 = 0x8B51
+   * FLOAT_VEC3 = 0x8b51
    * Uniform types
    */
   FLOAT_VEC3 = 0x8b51,
 
   /**
-   * FLOAT_VEC4 = 0x8B52
+   * FLOAT_VEC4 = 0x8b52
    * Uniform types
    */
   FLOAT_VEC4 = 0x8b52,
 
   /**
-   * INT_VEC2 = 0x8B53
+   * INT_VEC2 = 0x8b53
    * Uniform types
    */
   INT_VEC2 = 0x8b53,
 
   /**
-   * INT_VEC3 = 0x8B54
+   * INT_VEC3 = 0x8b54
    * Uniform types
    */
   INT_VEC3 = 0x8b54,
 
   /**
-   * INT_VEC4 = 0x8B55
+   * INT_VEC4 = 0x8b55
    * Uniform types
    */
   INT_VEC4 = 0x8b55,
 
   /**
-   * BOOL = 0x8B56
+   * BOOL = 0x8b56
    * Uniform types
    */
   BOOL = 0x8b56,
 
   /**
-   * BOOL_VEC2 = 0x8B57
+   * BOOL_VEC2 = 0x8b57
    * Uniform types
    */
   BOOL_VEC2 = 0x8b57,
 
   /**
-   * BOOL_VEC3 = 0x8B58
+   * BOOL_VEC3 = 0x8b58
    * Uniform types
    */
   BOOL_VEC3 = 0x8b58,
 
   /**
-   * BOOL_VEC4 = 0x8B59
+   * BOOL_VEC4 = 0x8b59
    * Uniform types
    */
   BOOL_VEC4 = 0x8b59,
 
   /**
-   * FLOAT_MAT2 = 0x8B5A
+   * FLOAT_MAT2 = 0x8b5a
    * Uniform types
    */
   FLOAT_MAT2 = 0x8b5a,
 
   /**
-   * FLOAT_MAT3 = 0x8B5B
+   * FLOAT_MAT3 = 0x8b5b
    * Uniform types
    */
   FLOAT_MAT3 = 0x8b5b,
 
   /**
-   * FLOAT_MAT4 = 0x8B5C
+   * FLOAT_MAT4 = 0x8b5c
    * Uniform types
    */
   FLOAT_MAT4 = 0x8b5c,
 
   /**
-   * SAMPLER_2D = 0x8B5E
+   * SAMPLER_2D = 0x8b5e
    * Uniform types
    */
   SAMPLER_2D = 0x8b5e,
 
   /**
-   * SAMPLER_CUBE = 0x8B60
+   * SAMPLER_CUBE = 0x8b60
    * Uniform types
    */
   SAMPLER_CUBE = 0x8b60,
@@ -1483,37 +1483,37 @@ export enum GL_CONSTANTS {
   // Shader precision-specified types
 
   /**
-   * LOW_FLOAT = 0x8DF0
+   * LOW_FLOAT = 0x8df0
    * Shader precision-specified types
    */
   LOW_FLOAT = 0x8df0,
 
   /**
-   * MEDIUM_FLOAT = 0x8DF1
+   * MEDIUM_FLOAT = 0x8df1
    * Shader precision-specified types
    */
   MEDIUM_FLOAT = 0x8df1,
 
   /**
-   * HIGH_FLOAT = 0x8DF2
+   * HIGH_FLOAT = 0x8df2
    * Shader precision-specified types
    */
   HIGH_FLOAT = 0x8df2,
 
   /**
-   * LOW_INT = 0x8DF3
+   * LOW_INT = 0x8df3
    * Shader precision-specified types
    */
   LOW_INT = 0x8df3,
 
   /**
-   * MEDIUM_INT = 0x8DF4
+   * MEDIUM_INT = 0x8df4
    * Shader precision-specified types
    */
   MEDIUM_INT = 0x8df4,
 
   /**
-   * HIGH_INT = 0x8DF5
+   * HIGH_INT = 0x8df5
    * Shader precision-specified types
    */
   HIGH_INT = 0x8df5,
@@ -1521,13 +1521,13 @@ export enum GL_CONSTANTS {
   // Framebuffers and renderbuffers
 
   /**
-   * FRAMEBUFFER = 0x8D40
+   * FRAMEBUFFER = 0x8d40
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER = 0x8d40,
 
   /**
-   * RENDERBUFFER = 0x8D41
+   * RENDERBUFFER = 0x8d41
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER = 0x8d41,
@@ -1545,127 +1545,127 @@ export enum GL_CONSTANTS {
   RGB5_A1 = 0x8057,
 
   /**
-   * RGB565 = 0x8D62
+   * RGB565 = 0x8d62
    * Framebuffers and renderbuffers
    */
   RGB565 = 0x8d62,
 
   /**
-   * DEPTH_COMPONENT16 = 0x81A5
+   * DEPTH_COMPONENT16 = 0x81a5
    * Framebuffers and renderbuffers
    */
   DEPTH_COMPONENT16 = 0x81a5,
 
   /**
-   * STENCIL_INDEX8 = 0x8D48
+   * STENCIL_INDEX8 = 0x8d48
    * Framebuffers and renderbuffers
    */
   STENCIL_INDEX8 = 0x8d48,
 
   /**
-   * DEPTH_STENCIL = 0x84F9
+   * DEPTH_STENCIL = 0x84f9
    * Framebuffers and renderbuffers
    */
   DEPTH_STENCIL = 0x84f9,
 
   /**
-   * RENDERBUFFER_WIDTH = 0x8D42
+   * RENDERBUFFER_WIDTH = 0x8d42
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_WIDTH = 0x8d42,
 
   /**
-   * RENDERBUFFER_HEIGHT = 0x8D43
+   * RENDERBUFFER_HEIGHT = 0x8d43
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_HEIGHT = 0x8d43,
 
   /**
-   * RENDERBUFFER_INTERNAL_FORMAT = 0x8D44
+   * RENDERBUFFER_INTERNAL_FORMAT = 0x8d44
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_INTERNAL_FORMAT = 0x8d44,
 
   /**
-   * RENDERBUFFER_RED_SIZE = 0x8D50
+   * RENDERBUFFER_RED_SIZE = 0x8d50
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_RED_SIZE = 0x8d50,
 
   /**
-   * RENDERBUFFER_GREEN_SIZE = 0x8D51
+   * RENDERBUFFER_GREEN_SIZE = 0x8d51
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_GREEN_SIZE = 0x8d51,
 
   /**
-   * RENDERBUFFER_BLUE_SIZE = 0x8D52
+   * RENDERBUFFER_BLUE_SIZE = 0x8d52
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_BLUE_SIZE = 0x8d52,
 
   /**
-   * RENDERBUFFER_ALPHA_SIZE = 0x8D53
+   * RENDERBUFFER_ALPHA_SIZE = 0x8d53
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_ALPHA_SIZE = 0x8d53,
 
   /**
-   * RENDERBUFFER_DEPTH_SIZE = 0x8D54
+   * RENDERBUFFER_DEPTH_SIZE = 0x8d54
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_DEPTH_SIZE = 0x8d54,
 
   /**
-   * RENDERBUFFER_STENCIL_SIZE = 0x8D55
+   * RENDERBUFFER_STENCIL_SIZE = 0x8d55
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_STENCIL_SIZE = 0x8d55,
 
   /**
-   * FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 0x8CD0
+   * FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 0x8cd0
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 0x8cd0,
 
   /**
-   * FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 0x8CD1
+   * FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 0x8cd1
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 0x8cd1,
 
   /**
-   * FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 0x8CD2
+   * FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 0x8cd2
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 0x8cd2,
 
   /**
-   * FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 0x8CD3
+   * FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 0x8cd3
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 0x8cd3,
 
   /**
-   * COLOR_ATTACHMENT0 = 0x8CE0
+   * COLOR_ATTACHMENT0 = 0x8ce0
    * Framebuffers and renderbuffers
    */
   COLOR_ATTACHMENT0 = 0x8ce0,
 
   /**
-   * DEPTH_ATTACHMENT = 0x8D00
+   * DEPTH_ATTACHMENT = 0x8d00
    * Framebuffers and renderbuffers
    */
   DEPTH_ATTACHMENT = 0x8d00,
 
   /**
-   * STENCIL_ATTACHMENT = 0x8D20
+   * STENCIL_ATTACHMENT = 0x8d20
    * Framebuffers and renderbuffers
    */
   STENCIL_ATTACHMENT = 0x8d20,
 
   /**
-   * DEPTH_STENCIL_ATTACHMENT = 0x821A
+   * DEPTH_STENCIL_ATTACHMENT = 0x821a
    * Framebuffers and renderbuffers
    */
   DEPTH_STENCIL_ATTACHMENT = 0x821a,
@@ -1677,49 +1677,49 @@ export enum GL_CONSTANTS {
   NONE = 0,
 
   /**
-   * FRAMEBUFFER_COMPLETE = 0x8CD5
+   * FRAMEBUFFER_COMPLETE = 0x8cd5
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_COMPLETE = 0x8cd5,
 
   /**
-   * FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 0x8CD6
+   * FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 0x8cd6
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 0x8cd6,
 
   /**
-   * FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 0x8CD7
+   * FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 0x8cd7
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 0x8cd7,
 
   /**
-   * FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 0x8CD9
+   * FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 0x8cd9
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 0x8cd9,
 
   /**
-   * FRAMEBUFFER_UNSUPPORTED = 0x8CDD
+   * FRAMEBUFFER_UNSUPPORTED = 0x8cdd
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_UNSUPPORTED = 0x8cdd,
 
   /**
-   * FRAMEBUFFER_BINDING = 0x8CA6
+   * FRAMEBUFFER_BINDING = 0x8ca6
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_BINDING = 0x8ca6,
 
   /**
-   * RENDERBUFFER_BINDING = 0x8CA7
+   * RENDERBUFFER_BINDING = 0x8ca7
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_BINDING = 0x8ca7,
 
   /**
-   * MAX_RENDERBUFFER_SIZE = 0x84E8
+   * MAX_RENDERBUFFER_SIZE = 0x84e8
    * Framebuffers and renderbuffers
    */
   MAX_RENDERBUFFER_SIZE = 0x84e8,
@@ -1753,61 +1753,61 @@ export enum GL_CONSTANTS {
   // Getting GL parameter information - Constants passed to getParameter() to specify what information to return.
 
   /**
-   * READ_BUFFER = 0x0C02
+   * READ_BUFFER = 0x0c02
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   READ_BUFFER = 0x0c02,
 
   /**
-   * UNPACK_ROW_LENGTH = 0x0CF2
+   * UNPACK_ROW_LENGTH = 0x0cf2
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_ROW_LENGTH = 0x0cf2,
 
   /**
-   * UNPACK_SKIP_ROWS = 0x0CF3
+   * UNPACK_SKIP_ROWS = 0x0cf3
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_SKIP_ROWS = 0x0cf3,
 
   /**
-   * UNPACK_SKIP_PIXELS = 0x0CF4
+   * UNPACK_SKIP_PIXELS = 0x0cf4
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_SKIP_PIXELS = 0x0cf4,
 
   /**
-   * PACK_ROW_LENGTH = 0x0D02
+   * PACK_ROW_LENGTH = 0x0d02
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   PACK_ROW_LENGTH = 0x0d02,
 
   /**
-   * PACK_SKIP_ROWS = 0x0D03
+   * PACK_SKIP_ROWS = 0x0d03
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   PACK_SKIP_ROWS = 0x0d03,
 
   /**
-   * PACK_SKIP_PIXELS = 0x0D04
+   * PACK_SKIP_PIXELS = 0x0d04
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   PACK_SKIP_PIXELS = 0x0d04,
 
   /**
-   * TEXTURE_BINDING_3D = 0x806A
+   * TEXTURE_BINDING_3D = 0x806a
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   TEXTURE_BINDING_3D = 0x806a,
 
   /**
-   * UNPACK_SKIP_IMAGES = 0x806D
+   * UNPACK_SKIP_IMAGES = 0x806d
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_SKIP_IMAGES = 0x806d,
 
   /**
-   * UNPACK_IMAGE_HEIGHT = 0x806E
+   * UNPACK_IMAGE_HEIGHT = 0x806e
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   UNPACK_IMAGE_HEIGHT = 0x806e,
@@ -1819,37 +1819,37 @@ export enum GL_CONSTANTS {
   MAX_3D_TEXTURE_SIZE = 0x8073,
 
   /**
-   * MAX_ELEMENTS_VERTICES = 0x80E8
+   * MAX_ELEMENTS_VERTICES = 0x80e8
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_ELEMENTS_VERTICES = 0x80e8,
 
   /**
-   * MAX_ELEMENTS_INDICES = 0x80E9
+   * MAX_ELEMENTS_INDICES = 0x80e9
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_ELEMENTS_INDICES = 0x80e9,
 
   /**
-   * MAX_TEXTURE_LOD_BIAS = 0x84FD
+   * MAX_TEXTURE_LOD_BIAS = 0x84fd
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_TEXTURE_LOD_BIAS = 0x84fd,
 
   /**
-   * MAX_FRAGMENT_UNIFORM_COMPONENTS = 0x8B49
+   * MAX_FRAGMENT_UNIFORM_COMPONENTS = 0x8b49
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_FRAGMENT_UNIFORM_COMPONENTS = 0x8b49,
 
   /**
-   * MAX_VERTEX_UNIFORM_COMPONENTS = 0x8B4A
+   * MAX_VERTEX_UNIFORM_COMPONENTS = 0x8b4a
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_VERTEX_UNIFORM_COMPONENTS = 0x8b4a,
 
   /**
-   * MAX_ARRAY_TEXTURE_LAYERS = 0x88FF
+   * MAX_ARRAY_TEXTURE_LAYERS = 0x88ff
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_ARRAY_TEXTURE_LAYERS = 0x88ff,
@@ -1867,25 +1867,25 @@ export enum GL_CONSTANTS {
   MAX_PROGRAM_TEXEL_OFFSET = 0x8905,
 
   /**
-   * MAX_VARYING_COMPONENTS = 0x8B4B
+   * MAX_VARYING_COMPONENTS = 0x8b4b
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_VARYING_COMPONENTS = 0x8b4b,
 
   /**
-   * FRAGMENT_SHADER_DERIVATIVE_HINT = 0x8B8B
+   * FRAGMENT_SHADER_DERIVATIVE_HINT = 0x8b8b
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   FRAGMENT_SHADER_DERIVATIVE_HINT = 0x8b8b,
 
   /**
-   * RASTERIZER_DISCARD = 0x8C89
+   * RASTERIZER_DISCARD = 0x8c89
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   RASTERIZER_DISCARD = 0x8c89,
 
   /**
-   * VERTEX_ARRAY_BINDING = 0x85B5
+   * VERTEX_ARRAY_BINDING = 0x85b5
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   VERTEX_ARRAY_BINDING = 0x85b5,
@@ -1909,7 +1909,7 @@ export enum GL_CONSTANTS {
   MAX_SERVER_WAIT_TIMEOUT = 0x9111,
 
   /**
-   * MAX_ELEMENT_INDEX = 0x8D6B
+   * MAX_ELEMENT_INDEX = 0x8d6b
    * Getting GL parameter information - Constant passed to getParameter() to specify what information to return.
    */
   MAX_ELEMENT_INDEX = 0x8d6b,
@@ -1941,7 +1941,7 @@ export enum GL_CONSTANTS {
   RGB10_A2 = 0x8059,
 
   /**
-   * TEXTURE_3D = 0x806F
+   * TEXTURE_3D = 0x806f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_3D = 0x806f,
@@ -1953,61 +1953,61 @@ export enum GL_CONSTANTS {
   TEXTURE_WRAP_R = 0x8072,
 
   /**
-   * TEXTURE_MIN_LOD = 0x813A
+   * TEXTURE_MIN_LOD = 0x813a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_MIN_LOD = 0x813a,
 
   /**
-   * TEXTURE_MAX_LOD = 0x813B
+   * TEXTURE_MAX_LOD = 0x813b
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_MAX_LOD = 0x813b,
 
   /**
-   * TEXTURE_BASE_LEVEL = 0x813C
+   * TEXTURE_BASE_LEVEL = 0x813c
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_BASE_LEVEL = 0x813c,
 
   /**
-   * TEXTURE_MAX_LEVEL = 0x813D
+   * TEXTURE_MAX_LEVEL = 0x813d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_MAX_LEVEL = 0x813d,
 
   /**
-   * TEXTURE_COMPARE_MODE = 0x884C
+   * TEXTURE_COMPARE_MODE = 0x884c
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_COMPARE_MODE = 0x884c,
 
   /**
-   * TEXTURE_COMPARE_FUNC = 0x884D
+   * TEXTURE_COMPARE_FUNC = 0x884d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_COMPARE_FUNC = 0x884d,
 
   /**
-   * SRGB = 0x8C40
+   * SRGB = 0x8c40
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   SRGB = 0x8c40,
 
   /**
-   * SRGB8 = 0x8C41
+   * SRGB8 = 0x8c41
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   SRGB8 = 0x8c41,
 
   /**
-   * SRGB8_ALPHA8 = 0x8C43
+   * SRGB8_ALPHA8 = 0x8c43
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   SRGB8_ALPHA8 = 0x8c43,
 
   /**
-   * COMPARE_REF_TO_TEXTURE = 0x884E
+   * COMPARE_REF_TO_TEXTURE = 0x884e
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   COMPARE_REF_TO_TEXTURE = 0x884e,
@@ -2025,127 +2025,127 @@ export enum GL_CONSTANTS {
   RGB32F = 0x8815,
 
   /**
-   * RGBA16F = 0x881A
+   * RGBA16F = 0x881a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA16F = 0x881a,
 
   /**
-   * RGB16F = 0x881B
+   * RGB16F = 0x881b
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB16F = 0x881b,
 
   /**
-   * TEXTURE_2D_ARRAY = 0x8C1A
+   * TEXTURE_2D_ARRAY = 0x8c1a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_2D_ARRAY = 0x8c1a,
 
   /**
-   * TEXTURE_BINDING_2D_ARRAY = 0x8C1D
+   * TEXTURE_BINDING_2D_ARRAY = 0x8c1d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_BINDING_2D_ARRAY = 0x8c1d,
 
   /**
-   * R11F_G11F_B10F = 0x8C3A
+   * R11F_G11F_B10F = 0x8c3a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   R11F_G11F_B10F = 0x8c3a,
 
   /**
-   * RGB9_E5 = 0x8C3D
+   * RGB9_E5 = 0x8c3d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB9_E5 = 0x8c3d,
 
   /**
-   * RGBA32UI = 0x8D70
+   * RGBA32UI = 0x8d70
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA32UI = 0x8d70,
 
   /**
-   * RGB32UI = 0x8D71
+   * RGB32UI = 0x8d71
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB32UI = 0x8d71,
 
   /**
-   * RGBA16UI = 0x8D76
+   * RGBA16UI = 0x8d76
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA16UI = 0x8d76,
 
   /**
-   * RGB16UI = 0x8D77
+   * RGB16UI = 0x8d77
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB16UI = 0x8d77,
 
   /**
-   * RGBA8UI = 0x8D7C
+   * RGBA8UI = 0x8d7c
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA8UI = 0x8d7c,
 
   /**
-   * RGB8UI = 0x8D7D
+   * RGB8UI = 0x8d7d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB8UI = 0x8d7d,
 
   /**
-   * RGBA32I = 0x8D82
+   * RGBA32I = 0x8d82
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA32I = 0x8d82,
 
   /**
-   * RGB32I = 0x8D83
+   * RGB32I = 0x8d83
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB32I = 0x8d83,
 
   /**
-   * RGBA16I = 0x8D88
+   * RGBA16I = 0x8d88
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA16I = 0x8d88,
 
   /**
-   * RGB16I = 0x8D89
+   * RGB16I = 0x8d89
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB16I = 0x8d89,
 
   /**
-   * RGBA8I = 0x8D8E
+   * RGBA8I = 0x8d8e
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA8I = 0x8d8e,
 
   /**
-   * RGB8I = 0x8D8F
+   * RGB8I = 0x8d8f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB8I = 0x8d8f,
 
   /**
-   * RED_INTEGER = 0x8D94
+   * RED_INTEGER = 0x8d94
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RED_INTEGER = 0x8d94,
 
   /**
-   * RGB_INTEGER = 0x8D98
+   * RGB_INTEGER = 0x8d98
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB_INTEGER = 0x8d98,
 
   /**
-   * RGBA_INTEGER = 0x8D99
+   * RGBA_INTEGER = 0x8d99
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA_INTEGER = 0x8d99,
@@ -2157,25 +2157,25 @@ export enum GL_CONSTANTS {
   R8 = 0x8229,
 
   /**
-   * RG8 = 0x822B
+   * RG8 = 0x822b
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG8 = 0x822b,
 
   /**
-   * R16F = 0x822D
+   * R16F = 0x822d
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   R16F = 0x822d,
 
   /**
-   * R32F = 0x822E
+   * R32F = 0x822e
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   R32F = 0x822e,
 
   /**
-   * RG16F = 0x822F
+   * RG16F = 0x822f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG16F = 0x822f,
@@ -2241,61 +2241,61 @@ export enum GL_CONSTANTS {
   RG16I = 0x8239,
 
   /**
-   * RG16UI = 0x823A
+   * RG16UI = 0x823a
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG16UI = 0x823a,
 
   /**
-   * RG32I = 0x823B
+   * RG32I = 0x823b
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG32I = 0x823b,
 
   /**
-   * RG32UI = 0x823C
+   * RG32UI = 0x823c
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG32UI = 0x823c,
 
   /**
-   * R8_SNORM = 0x8F94
+   * R8_SNORM = 0x8f94
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   R8_SNORM = 0x8f94,
 
   /**
-   * RG8_SNORM = 0x8F95
+   * RG8_SNORM = 0x8f95
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RG8_SNORM = 0x8f95,
 
   /**
-   * RGB8_SNORM = 0x8F96
+   * RGB8_SNORM = 0x8f96
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB8_SNORM = 0x8f96,
 
   /**
-   * RGBA8_SNORM = 0x8F97
+   * RGBA8_SNORM = 0x8f97
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGBA8_SNORM = 0x8f97,
 
   /**
-   * RGB10_A2UI = 0x906F
+   * RGB10_A2UI = 0x906f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   RGB10_A2UI = 0x906f,
 
   /**
-   * TEXTURE_IMMUTABLE_FORMAT = 0x912F
+   * TEXTURE_IMMUTABLE_FORMAT = 0x912f
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_IMMUTABLE_FORMAT = 0x912f,
 
   /**
-   * TEXTURE_IMMUTABLE_LEVELS = 0x82DF
+   * TEXTURE_IMMUTABLE_LEVELS = 0x82df
    * Textures - Constant passed to texParameteri(), texParameterf(), bindTexture(), texImage2D(), and others.
    */
   TEXTURE_IMMUTABLE_LEVELS = 0x82df,
@@ -2309,31 +2309,31 @@ export enum GL_CONSTANTS {
   UNSIGNED_INT_2_10_10_10_REV = 0x8368,
 
   /**
-   * UNSIGNED_INT_10F_11F_11F_REV = 0x8C3B
+   * UNSIGNED_INT_10F_11F_11F_REV = 0x8c3b
    * Pixel types
    */
   UNSIGNED_INT_10F_11F_11F_REV = 0x8c3b,
 
   /**
-   * UNSIGNED_INT_5_9_9_9_REV = 0x8C3E
+   * UNSIGNED_INT_5_9_9_9_REV = 0x8c3e
    * Pixel types
    */
   UNSIGNED_INT_5_9_9_9_REV = 0x8c3e,
 
   /**
-   * FLOAT_32_UNSIGNED_INT_24_8_REV = 0x8DAD
+   * FLOAT_32_UNSIGNED_INT_24_8_REV = 0x8dad
    * Pixel types
    */
   FLOAT_32_UNSIGNED_INT_24_8_REV = 0x8dad,
 
   /**
-   * UNSIGNED_INT_24_8 = 0x84FA
+   * UNSIGNED_INT_24_8 = 0x84fa
    * Pixel types
    */
   UNSIGNED_INT_24_8 = 0x84fa,
 
   /**
-   * HALF_FLOAT = 0x140B
+   * HALF_FLOAT = 0x140b
    * Pixel types
    */
   HALF_FLOAT = 0x140b,
@@ -2351,7 +2351,7 @@ export enum GL_CONSTANTS {
   RG_INTEGER = 0x8228,
 
   /**
-   * INT_2_10_10_10_REV = 0x8D9F
+   * INT_2_10_10_10_REV = 0x8d9f
    * Pixel types
    */
   INT_2_10_10_10_REV = 0x8d9f,
@@ -2377,13 +2377,13 @@ export enum GL_CONSTANTS {
   QUERY_RESULT_AVAILABLE = 0x8867,
 
   /**
-   * ANY_SAMPLES_PASSED = 0x8C2F
+   * ANY_SAMPLES_PASSED = 0x8c2f
    * Queries
    */
   ANY_SAMPLES_PASSED = 0x8c2f,
 
   /**
-   * ANY_SAMPLES_PASSED_CONSERVATIVE = 0x8D6A
+   * ANY_SAMPLES_PASSED_CONSERVATIVE = 0x8d6a
    * Queries
    */
   ANY_SAMPLES_PASSED_CONSERVATIVE = 0x8d6a,
@@ -2427,37 +2427,37 @@ export enum GL_CONSTANTS {
   DRAW_BUFFER4 = 0x8829,
 
   /**
-   * DRAW_BUFFER5 = 0x882A
+   * DRAW_BUFFER5 = 0x882a
    * Draw buffers
    */
   DRAW_BUFFER5 = 0x882a,
 
   /**
-   * DRAW_BUFFER6 = 0x882B
+   * DRAW_BUFFER6 = 0x882b
    * Draw buffers
    */
   DRAW_BUFFER6 = 0x882b,
 
   /**
-   * DRAW_BUFFER7 = 0x882C
+   * DRAW_BUFFER7 = 0x882c
    * Draw buffers
    */
   DRAW_BUFFER7 = 0x882c,
 
   /**
-   * DRAW_BUFFER8 = 0x882D
+   * DRAW_BUFFER8 = 0x882d
    * Draw buffers
    */
   DRAW_BUFFER8 = 0x882d,
 
   /**
-   * DRAW_BUFFER9 = 0x882E
+   * DRAW_BUFFER9 = 0x882e
    * Draw buffers
    */
   DRAW_BUFFER9 = 0x882e,
 
   /**
-   * DRAW_BUFFER10 = 0x882F
+   * DRAW_BUFFER10 = 0x882f
    * Draw buffers
    */
   DRAW_BUFFER10 = 0x882f,
@@ -2493,97 +2493,97 @@ export enum GL_CONSTANTS {
   DRAW_BUFFER15 = 0x8834,
 
   /**
-   * MAX_COLOR_ATTACHMENTS = 0x8CDF
+   * MAX_COLOR_ATTACHMENTS = 0x8cdf
    * Draw buffers
    */
   MAX_COLOR_ATTACHMENTS = 0x8cdf,
 
   /**
-   * COLOR_ATTACHMENT1 = 0x8CE1
+   * COLOR_ATTACHMENT1 = 0x8ce1
    * Draw buffers
    */
   COLOR_ATTACHMENT1 = 0x8ce1,
 
   /**
-   * COLOR_ATTACHMENT2 = 0x8CE2
+   * COLOR_ATTACHMENT2 = 0x8ce2
    * Draw buffers
    */
   COLOR_ATTACHMENT2 = 0x8ce2,
 
   /**
-   * COLOR_ATTACHMENT3 = 0x8CE3
+   * COLOR_ATTACHMENT3 = 0x8ce3
    * Draw buffers
    */
   COLOR_ATTACHMENT3 = 0x8ce3,
 
   /**
-   * COLOR_ATTACHMENT4 = 0x8CE4
+   * COLOR_ATTACHMENT4 = 0x8ce4
    * Draw buffers
    */
   COLOR_ATTACHMENT4 = 0x8ce4,
 
   /**
-   * COLOR_ATTACHMENT5 = 0x8CE5
+   * COLOR_ATTACHMENT5 = 0x8ce5
    * Draw buffers
    */
   COLOR_ATTACHMENT5 = 0x8ce5,
 
   /**
-   * COLOR_ATTACHMENT6 = 0x8CE6
+   * COLOR_ATTACHMENT6 = 0x8ce6
    * Draw buffers
    */
   COLOR_ATTACHMENT6 = 0x8ce6,
 
   /**
-   * COLOR_ATTACHMENT7 = 0x8CE7
+   * COLOR_ATTACHMENT7 = 0x8ce7
    * Draw buffers
    */
   COLOR_ATTACHMENT7 = 0x8ce7,
 
   /**
-   * COLOR_ATTACHMENT8 = 0x8CE8
+   * COLOR_ATTACHMENT8 = 0x8ce8
    * Draw buffers
    */
   COLOR_ATTACHMENT8 = 0x8ce8,
 
   /**
-   * COLOR_ATTACHMENT9 = 0x8CE9
+   * COLOR_ATTACHMENT9 = 0x8ce9
    * Draw buffers
    */
   COLOR_ATTACHMENT9 = 0x8ce9,
 
   /**
-   * COLOR_ATTACHMENT10 = 0x8CEA
+   * COLOR_ATTACHMENT10 = 0x8cea
    * Draw buffers
    */
   COLOR_ATTACHMENT10 = 0x8cea,
 
   /**
-   * COLOR_ATTACHMENT11 = 0x8CEB
+   * COLOR_ATTACHMENT11 = 0x8ceb
    * Draw buffers
    */
   COLOR_ATTACHMENT11 = 0x8ceb,
 
   /**
-   * COLOR_ATTACHMENT12 = 0x8CEC
+   * COLOR_ATTACHMENT12 = 0x8cec
    * Draw buffers
    */
   COLOR_ATTACHMENT12 = 0x8cec,
 
   /**
-   * COLOR_ATTACHMENT13 = 0x8CED
+   * COLOR_ATTACHMENT13 = 0x8ced
    * Draw buffers
    */
   COLOR_ATTACHMENT13 = 0x8ced,
 
   /**
-   * COLOR_ATTACHMENT14 = 0x8CEE
+   * COLOR_ATTACHMENT14 = 0x8cee
    * Draw buffers
    */
   COLOR_ATTACHMENT14 = 0x8cee,
 
   /**
-   * COLOR_ATTACHMENT15 = 0x8CEF
+   * COLOR_ATTACHMENT15 = 0x8cef
    * Draw buffers
    */
   COLOR_ATTACHMENT15 = 0x8cef,
@@ -2591,85 +2591,85 @@ export enum GL_CONSTANTS {
   // Samplers
 
   /**
-   * SAMPLER_3D = 0x8B5F
+   * SAMPLER_3D = 0x8b5f
    * Samplers
    */
   SAMPLER_3D = 0x8b5f,
 
   /**
-   * SAMPLER_2D_SHADOW = 0x8B62
+   * SAMPLER_2D_SHADOW = 0x8b62
    * Samplers
    */
   SAMPLER_2D_SHADOW = 0x8b62,
 
   /**
-   * SAMPLER_2D_ARRAY = 0x8DC1
+   * SAMPLER_2D_ARRAY = 0x8dc1
    * Samplers
    */
   SAMPLER_2D_ARRAY = 0x8dc1,
 
   /**
-   * SAMPLER_2D_ARRAY_SHADOW = 0x8DC4
+   * SAMPLER_2D_ARRAY_SHADOW = 0x8dc4
    * Samplers
    */
   SAMPLER_2D_ARRAY_SHADOW = 0x8dc4,
 
   /**
-   * SAMPLER_CUBE_SHADOW = 0x8DC5
+   * SAMPLER_CUBE_SHADOW = 0x8dc5
    * Samplers
    */
   SAMPLER_CUBE_SHADOW = 0x8dc5,
 
   /**
-   * INT_SAMPLER_2D = 0x8DCA
+   * INT_SAMPLER_2D = 0x8dca
    * Samplers
    */
   INT_SAMPLER_2D = 0x8dca,
 
   /**
-   * INT_SAMPLER_3D = 0x8DCB
+   * INT_SAMPLER_3D = 0x8dcb
    * Samplers
    */
   INT_SAMPLER_3D = 0x8dcb,
 
   /**
-   * INT_SAMPLER_CUBE = 0x8DCC
+   * INT_SAMPLER_CUBE = 0x8dcc
    * Samplers
    */
   INT_SAMPLER_CUBE = 0x8dcc,
 
   /**
-   * INT_SAMPLER_2D_ARRAY = 0x8DCF
+   * INT_SAMPLER_2D_ARRAY = 0x8dcf
    * Samplers
    */
   INT_SAMPLER_2D_ARRAY = 0x8dcf,
 
   /**
-   * UNSIGNED_INT_SAMPLER_2D = 0x8DD2
+   * UNSIGNED_INT_SAMPLER_2D = 0x8dd2
    * Samplers
    */
   UNSIGNED_INT_SAMPLER_2D = 0x8dd2,
 
   /**
-   * UNSIGNED_INT_SAMPLER_3D = 0x8DD3
+   * UNSIGNED_INT_SAMPLER_3D = 0x8dd3
    * Samplers
    */
   UNSIGNED_INT_SAMPLER_3D = 0x8dd3,
 
   /**
-   * UNSIGNED_INT_SAMPLER_CUBE = 0x8DD4
+   * UNSIGNED_INT_SAMPLER_CUBE = 0x8dd4
    * Samplers
    */
   UNSIGNED_INT_SAMPLER_CUBE = 0x8dd4,
 
   /**
-   * UNSIGNED_INT_SAMPLER_2D_ARRAY = 0x8DD7
+   * UNSIGNED_INT_SAMPLER_2D_ARRAY = 0x8dd7
    * Samplers
    */
   UNSIGNED_INT_SAMPLER_2D_ARRAY = 0x8dd7,
 
   /**
-   * MAX_SAMPLES = 0x8D57
+   * MAX_SAMPLES = 0x8d57
    * Samplers
    */
   MAX_SAMPLES = 0x8d57,
@@ -2683,49 +2683,49 @@ export enum GL_CONSTANTS {
   // Buffers
 
   /**
-   * PIXEL_PACK_BUFFER = 0x88EB
+   * PIXEL_PACK_BUFFER = 0x88eb
    * Buffers
    */
   PIXEL_PACK_BUFFER = 0x88eb,
 
   /**
-   * PIXEL_UNPACK_BUFFER = 0x88EC
+   * PIXEL_UNPACK_BUFFER = 0x88ec
    * Buffers
    */
   PIXEL_UNPACK_BUFFER = 0x88ec,
 
   /**
-   * PIXEL_PACK_BUFFER_BINDING = 0x88ED
+   * PIXEL_PACK_BUFFER_BINDING = 0x88ed
    * Buffers
    */
   PIXEL_PACK_BUFFER_BINDING = 0x88ed,
 
   /**
-   * PIXEL_UNPACK_BUFFER_BINDING = 0x88EF
+   * PIXEL_UNPACK_BUFFER_BINDING = 0x88ef
    * Buffers
    */
   PIXEL_UNPACK_BUFFER_BINDING = 0x88ef,
 
   /**
-   * COPY_READ_BUFFER = 0x8F36
+   * COPY_READ_BUFFER = 0x8f36
    * Buffers
    */
   COPY_READ_BUFFER = 0x8f36,
 
   /**
-   * COPY_WRITE_BUFFER = 0x8F37
+   * COPY_WRITE_BUFFER = 0x8f37
    * Buffers
    */
   COPY_WRITE_BUFFER = 0x8f37,
 
   /**
-   * COPY_READ_BUFFER_BINDING = 0x8F36
+   * COPY_READ_BUFFER_BINDING = 0x8f36
    * Buffers
    */
   COPY_READ_BUFFER_BINDING = 0x8f36,
 
   /**
-   * COPY_WRITE_BUFFER_BINDING = 0x8F37
+   * COPY_WRITE_BUFFER_BINDING = 0x8f37
    * Buffers
    */
   COPY_WRITE_BUFFER_BINDING = 0x8f37,
@@ -2733,67 +2733,67 @@ export enum GL_CONSTANTS {
   // Data types
 
   /**
-   * FLOAT_MAT2x3 = 0x8B65
+   * FLOAT_MAT2x3 = 0x8b65
    * Data types
    */
   FLOAT_MAT2x3 = 0x8b65,
 
   /**
-   * FLOAT_MAT2x4 = 0x8B66
+   * FLOAT_MAT2x4 = 0x8b66
    * Data types
    */
   FLOAT_MAT2x4 = 0x8b66,
 
   /**
-   * FLOAT_MAT3x2 = 0x8B67
+   * FLOAT_MAT3x2 = 0x8b67
    * Data types
    */
   FLOAT_MAT3x2 = 0x8b67,
 
   /**
-   * FLOAT_MAT3x4 = 0x8B68
+   * FLOAT_MAT3x4 = 0x8b68
    * Data types
    */
   FLOAT_MAT3x4 = 0x8b68,
 
   /**
-   * FLOAT_MAT4x2 = 0x8B69
+   * FLOAT_MAT4x2 = 0x8b69
    * Data types
    */
   FLOAT_MAT4x2 = 0x8b69,
 
   /**
-   * FLOAT_MAT4x3 = 0x8B6A
+   * FLOAT_MAT4x3 = 0x8b6a
    * Data types
    */
   FLOAT_MAT4x3 = 0x8b6a,
 
   /**
-   * UNSIGNED_INT_VEC2 = 0x8DC6
+   * UNSIGNED_INT_VEC2 = 0x8dc6
    * Data types
    */
   UNSIGNED_INT_VEC2 = 0x8dc6,
 
   /**
-   * UNSIGNED_INT_VEC3 = 0x8DC7
+   * UNSIGNED_INT_VEC3 = 0x8dc7
    * Data types
    */
   UNSIGNED_INT_VEC3 = 0x8dc7,
 
   /**
-   * UNSIGNED_INT_VEC4 = 0x8DC8
+   * UNSIGNED_INT_VEC4 = 0x8dc8
    * Data types
    */
   UNSIGNED_INT_VEC4 = 0x8dc8,
 
   /**
-   * UNSIGNED_NORMALIZED = 0x8C17
+   * UNSIGNED_NORMALIZED = 0x8c17
    * Data types
    */
   UNSIGNED_NORMALIZED = 0x8c17,
 
   /**
-   * SIGNED_NORMALIZED = 0x8F9C
+   * SIGNED_NORMALIZED = 0x8f9c
    * Data types
    */
   SIGNED_NORMALIZED = 0x8f9c,
@@ -2801,13 +2801,13 @@ export enum GL_CONSTANTS {
   // Vertex attributes
 
   /**
-   * VERTEX_ATTRIB_ARRAY_INTEGER = 0x88FD
+   * VERTEX_ATTRIB_ARRAY_INTEGER = 0x88fd
    * Vertex attributes
    */
   VERTEX_ATTRIB_ARRAY_INTEGER = 0x88fd,
 
   /**
-   * VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88FE
+   * VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88fe
    * Vertex attributes
    */
   VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88fe,
@@ -2815,97 +2815,97 @@ export enum GL_CONSTANTS {
   // Transform feedback
 
   /**
-   * TRANSFORM_FEEDBACK_BUFFER_MODE = 0x8C7F
+   * TRANSFORM_FEEDBACK_BUFFER_MODE = 0x8c7f
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BUFFER_MODE = 0x8c7f,
 
   /**
-   * MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS = 0x8C80
+   * MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS = 0x8c80
    * Transform feedback
    */
   MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS = 0x8c80,
 
   /**
-   * TRANSFORM_FEEDBACK_VARYINGS = 0x8C83
+   * TRANSFORM_FEEDBACK_VARYINGS = 0x8c83
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_VARYINGS = 0x8c83,
 
   /**
-   * TRANSFORM_FEEDBACK_BUFFER_START = 0x8C84
+   * TRANSFORM_FEEDBACK_BUFFER_START = 0x8c84
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BUFFER_START = 0x8c84,
 
   /**
-   * TRANSFORM_FEEDBACK_BUFFER_SIZE = 0x8C85
+   * TRANSFORM_FEEDBACK_BUFFER_SIZE = 0x8c85
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BUFFER_SIZE = 0x8c85,
 
   /**
-   * TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 0x8C88
+   * TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 0x8c88
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 0x8c88,
 
   /**
-   * MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS = 0x8C8A
+   * MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS = 0x8c8a
    * Transform feedback
    */
   MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS = 0x8c8a,
 
   /**
-   * MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS = 0x8C8B
+   * MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS = 0x8c8b
    * Transform feedback
    */
   MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS = 0x8c8b,
 
   /**
-   * INTERLEAVED_ATTRIBS = 0x8C8C
+   * INTERLEAVED_ATTRIBS = 0x8c8c
    * Transform feedback
    */
   INTERLEAVED_ATTRIBS = 0x8c8c,
 
   /**
-   * SEPARATE_ATTRIBS = 0x8C8D
+   * SEPARATE_ATTRIBS = 0x8c8d
    * Transform feedback
    */
   SEPARATE_ATTRIBS = 0x8c8d,
 
   /**
-   * TRANSFORM_FEEDBACK_BUFFER = 0x8C8E
+   * TRANSFORM_FEEDBACK_BUFFER = 0x8c8e
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BUFFER = 0x8c8e,
 
   /**
-   * TRANSFORM_FEEDBACK_BUFFER_BINDING = 0x8C8F
+   * TRANSFORM_FEEDBACK_BUFFER_BINDING = 0x8c8f
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BUFFER_BINDING = 0x8c8f,
 
   /**
-   * TRANSFORM_FEEDBACK = 0x8E22
+   * TRANSFORM_FEEDBACK = 0x8e22
    * Transform feedback
    */
   TRANSFORM_FEEDBACK = 0x8e22,
 
   /**
-   * TRANSFORM_FEEDBACK_PAUSED = 0x8E23
+   * TRANSFORM_FEEDBACK_PAUSED = 0x8e23
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_PAUSED = 0x8e23,
 
   /**
-   * TRANSFORM_FEEDBACK_ACTIVE = 0x8E24
+   * TRANSFORM_FEEDBACK_ACTIVE = 0x8e24
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_ACTIVE = 0x8e24,
 
   /**
-   * TRANSFORM_FEEDBACK_BINDING = 0x8E25
+   * TRANSFORM_FEEDBACK_BINDING = 0x8e25
    * Transform feedback
    */
   TRANSFORM_FEEDBACK_BINDING = 0x8e25,
@@ -2967,61 +2967,61 @@ export enum GL_CONSTANTS {
   FRAMEBUFFER_DEFAULT = 0x8218,
 
   /*
-   * DEPTH_STENCIL_ATTACHMENT = 0x821A
+   * DEPTH_STENCIL_ATTACHMENT = 0x821a
    * Framebuffers and renderbuffers
    */
-  // DEPTH_STENCIL_ATTACHMENT = 0x821A,
+  // DEPTH_STENCIL_ATTACHMENT = 0x821a,
 
   /*
-   * DEPTH_STENCIL = 0x84F9
+   * DEPTH_STENCIL = 0x84f9
    * Framebuffers and renderbuffers
    */
-  // DEPTH_STENCIL = 0x84F9,
+  // DEPTH_STENCIL = 0x84f9,
 
   /**
-   * DEPTH24_STENCIL8 = 0x88F0
+   * DEPTH24_STENCIL8 = 0x88f0
    * Framebuffers and renderbuffers
    */
   DEPTH24_STENCIL8 = 0x88f0,
 
   /**
-   * DRAW_FRAMEBUFFER_BINDING = 0x8CA6
+   * DRAW_FRAMEBUFFER_BINDING = 0x8ca6
    * Framebuffers and renderbuffers
    */
   DRAW_FRAMEBUFFER_BINDING = 0x8ca6,
 
   /**
-   * READ_FRAMEBUFFER = 0x8CA8
+   * READ_FRAMEBUFFER = 0x8ca8
    * Framebuffers and renderbuffers
    */
   READ_FRAMEBUFFER = 0x8ca8,
 
   /**
-   * DRAW_FRAMEBUFFER = 0x8CA9
+   * DRAW_FRAMEBUFFER = 0x8ca9
    * Framebuffers and renderbuffers
    */
   DRAW_FRAMEBUFFER = 0x8ca9,
 
   /**
-   * READ_FRAMEBUFFER_BINDING = 0x8CAA
+   * READ_FRAMEBUFFER_BINDING = 0x8caa
    * Framebuffers and renderbuffers
    */
   READ_FRAMEBUFFER_BINDING = 0x8caa,
 
   /**
-   * RENDERBUFFER_SAMPLES = 0x8CAB
+   * RENDERBUFFER_SAMPLES = 0x8cab
    * Framebuffers and renderbuffers
    */
   RENDERBUFFER_SAMPLES = 0x8cab,
 
   /**
-   * FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER = 0x8CD4
+   * FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER = 0x8cd4
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER = 0x8cd4,
 
   /**
-   * FRAMEBUFFER_INCOMPLETE_MULTISAMPLE = 0x8D56
+   * FRAMEBUFFER_INCOMPLETE_MULTISAMPLE = 0x8d56
    * Framebuffers and renderbuffers
    */
   FRAMEBUFFER_INCOMPLETE_MULTISAMPLE = 0x8d56,
@@ -3029,157 +3029,157 @@ export enum GL_CONSTANTS {
   // Uniforms
 
   /**
-   * UNIFORM_BUFFER = 0x8A11
+   * UNIFORM_BUFFER = 0x8a11
    * Uniforms
    */
   UNIFORM_BUFFER = 0x8a11,
 
   /**
-   * UNIFORM_BUFFER_BINDING = 0x8A28
+   * UNIFORM_BUFFER_BINDING = 0x8a28
    * Uniforms
    */
   UNIFORM_BUFFER_BINDING = 0x8a28,
 
   /**
-   * UNIFORM_BUFFER_START = 0x8A29
+   * UNIFORM_BUFFER_START = 0x8a29
    * Uniforms
    */
   UNIFORM_BUFFER_START = 0x8a29,
 
   /**
-   * UNIFORM_BUFFER_SIZE = 0x8A2A
+   * UNIFORM_BUFFER_SIZE = 0x8a2a
    * Uniforms
    */
   UNIFORM_BUFFER_SIZE = 0x8a2a,
 
   /**
-   * MAX_VERTEX_UNIFORM_BLOCKS = 0x8A2B
+   * MAX_VERTEX_UNIFORM_BLOCKS = 0x8a2b
    * Uniforms
    */
   MAX_VERTEX_UNIFORM_BLOCKS = 0x8a2b,
 
   /**
-   * MAX_FRAGMENT_UNIFORM_BLOCKS = 0x8A2D
+   * MAX_FRAGMENT_UNIFORM_BLOCKS = 0x8a2d
    * Uniforms
    */
   MAX_FRAGMENT_UNIFORM_BLOCKS = 0x8a2d,
 
   /**
-   * MAX_COMBINED_UNIFORM_BLOCKS = 0x8A2E
+   * MAX_COMBINED_UNIFORM_BLOCKS = 0x8a2e
    * Uniforms
    */
   MAX_COMBINED_UNIFORM_BLOCKS = 0x8a2e,
 
   /**
-   * MAX_UNIFORM_BUFFER_BINDINGS = 0x8A2F
+   * MAX_UNIFORM_BUFFER_BINDINGS = 0x8a2f
    * Uniforms
    */
   MAX_UNIFORM_BUFFER_BINDINGS = 0x8a2f,
 
   /**
-   * MAX_UNIFORM_BLOCK_SIZE = 0x8A30
+   * MAX_UNIFORM_BLOCK_SIZE = 0x8a30
    * Uniforms
    */
   MAX_UNIFORM_BLOCK_SIZE = 0x8a30,
 
   /**
-   * MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS = 0x8A31
+   * MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS = 0x8a31
    * Uniforms
    */
   MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS = 0x8a31,
 
   /**
-   * MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS = 0x8A33
+   * MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS = 0x8a33
    * Uniforms
    */
   MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS = 0x8a33,
 
   /**
-   * UNIFORM_BUFFER_OFFSET_ALIGNMENT = 0x8A34
+   * UNIFORM_BUFFER_OFFSET_ALIGNMENT = 0x8a34
    * Uniforms
    */
   UNIFORM_BUFFER_OFFSET_ALIGNMENT = 0x8a34,
 
   /**
-   * ACTIVE_UNIFORM_BLOCKS = 0x8A36
+   * ACTIVE_UNIFORM_BLOCKS = 0x8a36
    * Uniforms
    */
   ACTIVE_UNIFORM_BLOCKS = 0x8a36,
 
   /**
-   * UNIFORM_TYPE = 0x8A37
+   * UNIFORM_TYPE = 0x8a37
    * Uniforms
    */
   UNIFORM_TYPE = 0x8a37,
 
   /**
-   * UNIFORM_SIZE = 0x8A38
+   * UNIFORM_SIZE = 0x8a38
    * Uniforms
    */
   UNIFORM_SIZE = 0x8a38,
 
   /**
-   * UNIFORM_BLOCK_INDEX = 0x8A3A
+   * UNIFORM_BLOCK_INDEX = 0x8a3a
    * Uniforms
    */
   UNIFORM_BLOCK_INDEX = 0x8a3a,
 
   /**
-   * UNIFORM_OFFSET = 0x8A3B
+   * UNIFORM_OFFSET = 0x8a3b
    * Uniforms
    */
   UNIFORM_OFFSET = 0x8a3b,
 
   /**
-   * UNIFORM_ARRAY_STRIDE = 0x8A3C
+   * UNIFORM_ARRAY_STRIDE = 0x8a3c
    * Uniforms
    */
   UNIFORM_ARRAY_STRIDE = 0x8a3c,
 
   /**
-   * UNIFORM_MATRIX_STRIDE = 0x8A3D
+   * UNIFORM_MATRIX_STRIDE = 0x8a3d
    * Uniforms
    */
   UNIFORM_MATRIX_STRIDE = 0x8a3d,
 
   /**
-   * UNIFORM_IS_ROW_MAJOR = 0x8A3E
+   * UNIFORM_IS_ROW_MAJOR = 0x8a3e
    * Uniforms
    */
   UNIFORM_IS_ROW_MAJOR = 0x8a3e,
 
   /**
-   * UNIFORM_BLOCK_BINDING = 0x8A3F
+   * UNIFORM_BLOCK_BINDING = 0x8a3f
    * Uniforms
    */
   UNIFORM_BLOCK_BINDING = 0x8a3f,
 
   /**
-   * UNIFORM_BLOCK_DATA_SIZE = 0x8A40
+   * UNIFORM_BLOCK_DATA_SIZE = 0x8a40
    * Uniforms
    */
   UNIFORM_BLOCK_DATA_SIZE = 0x8a40,
 
   /**
-   * UNIFORM_BLOCK_ACTIVE_UNIFORMS = 0x8A42
+   * UNIFORM_BLOCK_ACTIVE_UNIFORMS = 0x8a42
    * Uniforms
    */
   UNIFORM_BLOCK_ACTIVE_UNIFORMS = 0x8a42,
 
   /**
-   * UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 0x8A43
+   * UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 0x8a43
    * Uniforms
    */
   UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 0x8a43,
 
   /**
-   * UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 0x8A44
+   * UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 0x8a44
    * Uniforms
    */
   UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 0x8a44,
 
   /**
-   * UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 0x8A46
+   * UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 0x8a46
    * Uniforms
    */
   UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 0x8a46,
@@ -3235,25 +3235,25 @@ export enum GL_CONSTANTS {
   SIGNALED = 0x9119,
 
   /**
-   * ALREADY_SIGNALED = 0x911A
+   * ALREADY_SIGNALED = 0x911a
    * Sync objects
    */
   ALREADY_SIGNALED = 0x911a,
 
   /**
-   * TIMEOUT_EXPIRED = 0x911B
+   * TIMEOUT_EXPIRED = 0x911b
    * Sync objects
    */
   TIMEOUT_EXPIRED = 0x911b,
 
   /**
-   * CONDITION_SATISFIED = 0x911C
+   * CONDITION_SATISFIED = 0x911c
    * Sync objects
    */
   CONDITION_SATISFIED = 0x911c,
 
   /**
-   * WAIT_FAILED = 0x911D
+   * WAIT_FAILED = 0x911d
    * Sync objects
    */
   WAIT_FAILED = 0x911d,
@@ -3297,61 +3297,61 @@ export enum GL_CONSTANTS {
   MAX = 0x8008,
 
   /**
-   * DEPTH_COMPONENT24 = 0x81A6
+   * DEPTH_COMPONENT24 = 0x81a6
    * Miscellaneous constants
    */
   DEPTH_COMPONENT24 = 0x81a6,
 
   /**
-   * STREAM_READ = 0x88E1
+   * STREAM_READ = 0x88e1
    * Miscellaneous constants
    */
   STREAM_READ = 0x88e1,
 
   /**
-   * STREAM_COPY = 0x88E2
+   * STREAM_COPY = 0x88e2
    * Miscellaneous constants
    */
   STREAM_COPY = 0x88e2,
 
   /**
-   * STATIC_READ = 0x88E5
+   * STATIC_READ = 0x88e5
    * Miscellaneous constants
    */
   STATIC_READ = 0x88e5,
 
   /**
-   * STATIC_COPY = 0x88E6
+   * STATIC_COPY = 0x88e6
    * Miscellaneous constants
    */
   STATIC_COPY = 0x88e6,
 
   /**
-   * DYNAMIC_READ = 0x88E9
+   * DYNAMIC_READ = 0x88e9
    * Miscellaneous constants
    */
   DYNAMIC_READ = 0x88e9,
 
   /**
-   * DYNAMIC_COPY = 0x88EA
+   * DYNAMIC_COPY = 0x88ea
    * Miscellaneous constants
    */
   DYNAMIC_COPY = 0x88ea,
 
   /**
-   * DEPTH_COMPONENT32F = 0x8CAC
+   * DEPTH_COMPONENT32F = 0x8cac
    * Miscellaneous constants
    */
   DEPTH_COMPONENT32F = 0x8cac,
 
   /**
-   * DEPTH32F_STENCIL8 = 0x8CAD
+   * DEPTH32F_STENCIL8 = 0x8cad
    * Miscellaneous constants
    */
   DEPTH32F_STENCIL8 = 0x8cad,
 
   /**
-   * INVALID_INDEX = 0xFFFFFFFF
+   * INVALID_INDEX = 0xffffffff
    * Miscellaneous constants
    */
   INVALID_INDEX = 0xffffffff,
@@ -3371,7 +3371,7 @@ export enum GL_CONSTANTS {
   // ANGLE_instanced_arrays
 
   /**
-   * VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 0x88FE
+   * VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 0x88fe
    * Describes the frequency divisor used for instanced rendering.
    * ANGLE_instanced_arrays
    */
@@ -3396,14 +3396,14 @@ export enum GL_CONSTANTS {
   // EXT_texture_filter_anisotropic
 
   /**
-   * MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FF
+   * MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84ff
    * Returns the maximum available anisotropy.
    * EXT_texture_filter_anisotropic
    */
   MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84ff,
 
   /**
-   * TEXTURE_MAX_ANISOTROPY_EXT = 0x84FE
+   * TEXTURE_MAX_ANISOTROPY_EXT = 0x84fe
    * Passed to texParameter to set the desired maximum anisotropy for a texture.
    * EXT_texture_filter_anisotropic
    */
@@ -3412,28 +3412,28 @@ export enum GL_CONSTANTS {
   // WEBGL_compressed_texture_s3tc
 
   /**
-   * COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83F0
+   * COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83f0
    * A DXT1-compressed image in an RGB image format.
    * WEBGL_compressed_texture_s3tc
    */
   COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83f0,
 
   /**
-   * COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83F1
+   * COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83f1
    * A DXT1-compressed image in an RGB image format with a simple on/off alpha value.
    * WEBGL_compressed_texture_s3tc
    */
   COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83f1,
 
   /**
-   * COMPRESSED_RGBA_S3TC_DXT3_EXT = 0x83F2
+   * COMPRESSED_RGBA_S3TC_DXT3_EXT = 0x83f2
    * A DXT3-compressed image in an RGBA image format. Compared to a 32-bit RGBA texture, it offers 4:1 compression.
    * WEBGL_compressed_texture_s3tc
    */
   COMPRESSED_RGBA_S3TC_DXT3_EXT = 0x83f2,
 
   /**
-   * COMPRESSED_RGBA_S3TC_DXT5_EXT = 0x83F3
+   * COMPRESSED_RGBA_S3TC_DXT5_EXT = 0x83f3
    * A DXT5-compressed image in an RGBA image format. It also provides a 4:1 compression, but differs to the DXT3 compression in how the alpha compression is done.
    * WEBGL_compressed_texture_s3tc
    */
@@ -3514,28 +3514,28 @@ export enum GL_CONSTANTS {
   // WEBGL_compressed_texture_pvrtc
 
   /**
-   * COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 0x8C00
+   * COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 0x8c00
    * RGB compression in 4-bit mode. One block for each 4×4 pixels.
    * WEBGL_compressed_texture_pvrtc
    */
   COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 0x8c00,
 
   /**
-   * COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 0x8C02
+   * COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 0x8c02
    * RGBA compression in 4-bit mode. One block for each 4×4 pixels.
    * WEBGL_compressed_texture_pvrtc
    */
   COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 0x8c02,
 
   /**
-   * COMPRESSED_RGB_PVRTC_2BPPV1_IMG = 0x8C01
+   * COMPRESSED_RGB_PVRTC_2BPPV1_IMG = 0x8c01
    * RGB compression in 2-bit mode. One block for each 8×4 pixels.
    * WEBGL_compressed_texture_pvrtc
    */
   COMPRESSED_RGB_PVRTC_2BPPV1_IMG = 0x8c01,
 
   /**
-   * COMPRESSED_RGBA_PVRTC_2BPPV1_IMG = 0x8C03
+   * COMPRESSED_RGBA_PVRTC_2BPPV1_IMG = 0x8c03
    * RGBA compression in 2-bit mode. One block for each 8×4 pixe
    * WEBGL_compressed_texture_pvrtc
    */
@@ -3544,7 +3544,7 @@ export enum GL_CONSTANTS {
   // WEBGL_compressed_texture_etc1
 
   /**
-   * COMPRESSED_RGB_ETC1_WEBGL = 0x8D64
+   * COMPRESSED_RGB_ETC1_WEBGL = 0x8d64
    * Compresses 24-bit RGB data with no alpha channel.
    * WEBGL_compressed_texture_etc1
    */
@@ -3553,21 +3553,21 @@ export enum GL_CONSTANTS {
   // WEBGL_compressed_texture_atc
 
   /**
-   * COMPRESSED_RGB_ATC_WEBGL = 0x8C92
+   * COMPRESSED_RGB_ATC_WEBGL = 0x8c92
    * Compresses RGB textures with no alpha channel.
    * WEBGL_compressed_texture_atc
    */
   COMPRESSED_RGB_ATC_WEBGL = 0x8c92,
 
   /**
-   * COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL = 0x8C92
+   * COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL = 0x8c92
    * Compresses RGBA textures using explicit alpha encoding (useful when alpha transitions are sharp).
    * WEBGL_compressed_texture_atc
    */
   COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL = 0x8c92,
 
   /**
-   * COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL = 0x87EE
+   * COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL = 0x87ee
    * Compresses RGBA textures using interpolated alpha encoding (useful when alpha transitions are gradient).
    * WEBGL_compressed_texture_atc
    */
@@ -3576,7 +3576,7 @@ export enum GL_CONSTANTS {
   // WEBGL_depth_texture
 
   /**
-   * UNSIGNED_INT_24_8_WEBGL = 0x84FA
+   * UNSIGNED_INT_24_8_WEBGL = 0x84fa
    * Unsigned integer type for 24-bit depth texture data.
    * WEBGL_depth_texture
    */
@@ -3585,7 +3585,7 @@ export enum GL_CONSTANTS {
   // OES_texture_half_float
 
   /**
-   * HALF_FLOAT_OES = 0x8D61
+   * HALF_FLOAT_OES = 0x8d61
    * Half floating-point type (16-bit).
    * OES_texture_half_float
    */
@@ -3614,7 +3614,7 @@ export enum GL_CONSTANTS {
   FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT = 0x8211,
 
   /**
-   * UNSIGNED_NORMALIZED_EXT = 0x8C17
+   * UNSIGNED_NORMALIZED_EXT = 0x8c17
    * WEBGL_color_buffer_float
    */
   UNSIGNED_NORMALIZED_EXT = 0x8c17,
@@ -3638,21 +3638,21 @@ export enum GL_CONSTANTS {
   // EXT_sRGB
 
   /**
-   * SRGB_EXT = 0x8C40
+   * SRGB_EXT = 0x8c40
    * Unsized sRGB format that leaves the precision up to the driver.
    * EXT_sRGB
    */
   SRGB_EXT = 0x8c40,
 
   /**
-   * SRGB_ALPHA_EXT = 0x8C42
+   * SRGB_ALPHA_EXT = 0x8c42
    * Unsized sRGB format with unsized alpha component.
    * EXT_sRGB
    */
   SRGB_ALPHA_EXT = 0x8c42,
 
   /**
-   * SRGB8_ALPHA8_EXT = 0x8C43
+   * SRGB8_ALPHA8_EXT = 0x8c43
    * Sized (8-bit) sRGB and alpha formats.
    * EXT_sRGB
    */
@@ -3668,7 +3668,7 @@ export enum GL_CONSTANTS {
   // OES_standard_derivatives
 
   /**
-   * FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 0x8B8B
+   * FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 0x8b8b
    * Indicates the accuracy of the derivative calculation for the GLSL built-in functions: dFdx, dFdy, and fwidth.
    * OES_standard_derivatives
    */
@@ -3677,112 +3677,112 @@ export enum GL_CONSTANTS {
   // WEBGL_draw_buffers
 
   /**
-   * COLOR_ATTACHMENT0_WEBGL = 0x8CE0
+   * COLOR_ATTACHMENT0_WEBGL = 0x8ce0
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT0_WEBGL = 0x8ce0,
 
   /**
-   * COLOR_ATTACHMENT1_WEBGL = 0x8CE1
+   * COLOR_ATTACHMENT1_WEBGL = 0x8ce1
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT1_WEBGL = 0x8ce1,
 
   /**
-   * COLOR_ATTACHMENT2_WEBGL = 0x8CE2
+   * COLOR_ATTACHMENT2_WEBGL = 0x8ce2
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT2_WEBGL = 0x8ce2,
 
   /**
-   * COLOR_ATTACHMENT3_WEBGL = 0x8CE3
+   * COLOR_ATTACHMENT3_WEBGL = 0x8ce3
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT3_WEBGL = 0x8ce3,
 
   /**
-   * COLOR_ATTACHMENT4_WEBGL = 0x8CE4
+   * COLOR_ATTACHMENT4_WEBGL = 0x8ce4
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT4_WEBGL = 0x8ce4,
 
   /**
-   * COLOR_ATTACHMENT5_WEBGL = 0x8CE5
+   * COLOR_ATTACHMENT5_WEBGL = 0x8ce5
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT5_WEBGL = 0x8ce5,
 
   /**
-   * COLOR_ATTACHMENT6_WEBGL = 0x8CE6
+   * COLOR_ATTACHMENT6_WEBGL = 0x8ce6
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT6_WEBGL = 0x8ce6,
 
   /**
-   * COLOR_ATTACHMENT7_WEBGL = 0x8CE7
+   * COLOR_ATTACHMENT7_WEBGL = 0x8ce7
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT7_WEBGL = 0x8ce7,
 
   /**
-   * COLOR_ATTACHMENT8_WEBGL = 0x8CE8
+   * COLOR_ATTACHMENT8_WEBGL = 0x8ce8
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT8_WEBGL = 0x8ce8,
 
   /**
-   * COLOR_ATTACHMENT9_WEBGL = 0x8CE9
+   * COLOR_ATTACHMENT9_WEBGL = 0x8ce9
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT9_WEBGL = 0x8ce9,
 
   /**
-   * COLOR_ATTACHMENT10_WEBGL = 0x8CEA
+   * COLOR_ATTACHMENT10_WEBGL = 0x8cea
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT10_WEBGL = 0x8cea,
 
   /**
-   * COLOR_ATTACHMENT11_WEBGL = 0x8CEB
+   * COLOR_ATTACHMENT11_WEBGL = 0x8ceb
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT11_WEBGL = 0x8ceb,
 
   /**
-   * COLOR_ATTACHMENT12_WEBGL = 0x8CEC
+   * COLOR_ATTACHMENT12_WEBGL = 0x8cec
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT12_WEBGL = 0x8cec,
 
   /**
-   * COLOR_ATTACHMENT13_WEBGL = 0x8CED
+   * COLOR_ATTACHMENT13_WEBGL = 0x8ced
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT13_WEBGL = 0x8ced,
 
   /**
-   * COLOR_ATTACHMENT14_WEBGL = 0x8CEE
+   * COLOR_ATTACHMENT14_WEBGL = 0x8cee
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
   COLOR_ATTACHMENT14_WEBGL = 0x8cee,
 
   /**
-   * COLOR_ATTACHMENT15_WEBGL = 0x8CEF
+   * COLOR_ATTACHMENT15_WEBGL = 0x8cef
    * Framebuffer color attachment point
    * WEBGL_draw_buffers
    */
@@ -3824,42 +3824,42 @@ export enum GL_CONSTANTS {
   DRAW_BUFFER4_WEBGL = 0x8829,
 
   /**
-   * DRAW_BUFFER5_WEBGL = 0x882A
+   * DRAW_BUFFER5_WEBGL = 0x882a
    * Draw buffer
    * WEBGL_draw_buffers
    */
   DRAW_BUFFER5_WEBGL = 0x882a,
 
   /**
-   * DRAW_BUFFER6_WEBGL = 0x882B
+   * DRAW_BUFFER6_WEBGL = 0x882b
    * Draw buffer
    * WEBGL_draw_buffers
    */
   DRAW_BUFFER6_WEBGL = 0x882b,
 
   /**
-   * DRAW_BUFFER7_WEBGL = 0x882C
+   * DRAW_BUFFER7_WEBGL = 0x882c
    * Draw buffer
    * WEBGL_draw_buffers
    */
   DRAW_BUFFER7_WEBGL = 0x882c,
 
   /**
-   * DRAW_BUFFER8_WEBGL = 0x882D
+   * DRAW_BUFFER8_WEBGL = 0x882d
    * Draw buffer
    * WEBGL_draw_buffers
    */
   DRAW_BUFFER8_WEBGL = 0x882d,
 
   /**
-   * DRAW_BUFFER9_WEBGL = 0x882E
+   * DRAW_BUFFER9_WEBGL = 0x882e
    * Draw buffer
    * WEBGL_draw_buffers
    */
   DRAW_BUFFER9_WEBGL = 0x882e,
 
   /**
-   * DRAW_BUFFER10_WEBGL = 0x882F
+   * DRAW_BUFFER10_WEBGL = 0x882f
    * Draw buffer
    * WEBGL_draw_buffers
    */
@@ -3901,7 +3901,7 @@ export enum GL_CONSTANTS {
   DRAW_BUFFER15_WEBGL = 0x8834,
 
   /**
-   * MAX_COLOR_ATTACHMENTS_WEBGL = 0x8CDF
+   * MAX_COLOR_ATTACHMENTS_WEBGL = 0x8cdf
    * Maximum number of framebuffer color attachment points
    * WEBGL_draw_buffers
    */
@@ -3917,7 +3917,7 @@ export enum GL_CONSTANTS {
   // OES_vertex_array_object
 
   /**
-   * VERTEX_ARRAY_BINDING_OES = 0x85B5
+   * VERTEX_ARRAY_BINDING_OES = 0x85b5
    * The bound vertex array object (VAO).
    * OES_vertex_array_object
    */
@@ -3954,21 +3954,21 @@ export enum GL_CONSTANTS {
   QUERY_RESULT_AVAILABLE_EXT = 0x8867,
 
   /**
-   * TIME_ELAPSED_EXT = 0x88BF
+   * TIME_ELAPSED_EXT = 0x88bf
    * Elapsed time (in nanoseconds).
    * EXT_disjoint_timer_query
    */
   TIME_ELAPSED_EXT = 0x88bf,
 
   /**
-   * TIMESTAMP_EXT = 0x8E28
+   * TIMESTAMP_EXT = 0x8e28
    * The current time.
    * EXT_disjoint_timer_query
    */
   TIMESTAMP_EXT = 0x8e28,
 
   /**
-   * GPU_DISJOINT_EXT = 0x8FBB
+   * GPU_DISJOINT_EXT = 0x8fbb
    * A Boolean indicating whether or not the GPU performed any disjoint operation.
    * EXT_disjoint_timer_query
    */

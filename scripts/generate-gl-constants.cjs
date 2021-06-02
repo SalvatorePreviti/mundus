@@ -7,7 +7,7 @@ const ROOT_DIR = path.dirname(__dirname)
 const GL_CONSTANTS_DIR = path.resolve(ROOT_DIR, 'packages/gl-constants')
 
 const CONSTANTS_HTML_URL = 'https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants'
-const CONSTANTS_HTML_CACHE = 'scripts/.downloaded_webgl_api_constants.html'
+const CONSTANTS_HTML_CACHE = '.downloads/.downloaded_webgl_api_constants.html'
 const CONSTANTS_EXPECTED_COUNT = 609
 
 const FILE_HEADER =
@@ -165,7 +165,10 @@ function parseConstantsFromHtml(html) {
       if (tds.length) {
         const name = cheerioToString(tds[0])
         if (name && !name.includes(' ')) {
-          const value = cheerioToString(tds[1])
+          let value = cheerioToString(tds[1])
+          if (value.startsWith('0x')) {
+            value = value.toLowerCase()
+          }
           const description = cheerioToString(tds[2]).replace('to clear to clear', 'to clear')
           parsed.push({
             name,
@@ -224,7 +227,7 @@ function fixSpaces(s) {
 }
 
 function downloadHtml(url, cacheFilename = null) {
-  cacheFilename = path.resolve(GL_CONSTANTS_DIR, cacheFilename)
+  cacheFilename = path.resolve(ROOT_DIR, cacheFilename)
   if (cacheFilename) {
     try {
       const result = fs.readFileSync(cacheFilename, 'utf8')
