@@ -3,37 +3,23 @@
   "type": "module",
   "sideEffects": false,
   "version": "0.0.1",
-  "private": true,
-  "description": "All webgl constants, optimized for tree shaking",
+  "description": "All webgl2 constants in a tree shakeable package",
   "keywords": [
+    "mundus",
     "webgl",
-    "webgl constants"
+    "webgl2",
+    "webgl constants",
+    "webgl2 constants"
   ],
+  "bugs": {
+    "url": "https://github.com/SalvatorePreviti/mundus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalvatorePreviti/mundus.git"
+  },
   "license": "MIT",
   "author": "Salvatore Previti",
-  "types": "./index.d.ts",
-  "main": "./index.cjs",
-  "exports": {
-    "./*": "./*",
-    ".": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    },
-    "./index": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    },
-    "./index.js": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    },
-    "./lookup": {
-      "import": "./lookup.js",
-      "require": "./lookup.cjs"
-    },
-    "./lookup.js": {
-      "import": "./lookup.js",
-      "require": "./lookup.cjs"
-    }
-  }
+  "types": "./esm/index.d.ts",
+  "main": "./esm/index.js"
 }
