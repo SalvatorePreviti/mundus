@@ -1,4 +1,5 @@
-dist/
+/packages/**/*.cjs
+/packages/**/*.mjs
 
 # excluded files for security
 .npmrc
