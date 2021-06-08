@@ -55,6 +55,9 @@
   "typescript.format.semicolons": "remove",
   "files.eol": "\n",
   "files.exclude": {
+    //"**/*.cjs": { "when": "$(basename).ts" },
+    //"**/*.mjs": { "when": "$(basename).ts" },
+    //"**/*.d.ts": { "when": "$(basename).ts" },
     "**/.git": true,
     "**/.svn": true,
     "**/.hg": true,

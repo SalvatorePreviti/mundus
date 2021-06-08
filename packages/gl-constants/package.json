@@ -1,6 +1,7 @@
 {
   "name": "@mundus/gl-constants",
-  "type": "module",
+  "main": "index.cjs",
+  "module": "index.mjs",
   "sideEffects": false,
   "version": "0.0.1",
   "description": "All webgl2 constants in a tree shakeable package",
@@ -18,8 +19,9 @@
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
   },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "license": "MIT",
-  "author": "Salvatore Previti",
-  "types": "./esm/index.d.ts",
-  "main": "./esm/index.js"
+  "author": "Salvatore Previti"
 }

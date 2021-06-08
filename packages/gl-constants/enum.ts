@@ -3978,7 +3978,7 @@ export enum GL_CONSTANTS {
 /**
  * Infer the name of a webgl2 constant from its value, useful for debugging
  */
-export function glConstantToString(value: GL_CONSTANTS | number | null | undefined): string | undefined {
+export function glConstantGetName(value: GL_CONSTANTS | number | null | undefined): string | undefined {
   return typeof value === 'number' ? (GL_CONSTANTS as any)[value] : undefined
 }
 

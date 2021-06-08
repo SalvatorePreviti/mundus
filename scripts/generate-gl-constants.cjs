@@ -55,8 +55,7 @@ function generateEnumTs(parsed) {
   result += '/**\n'
   result += ' * Infer the name of a webgl2 constant from its value, useful for debugging\n'
   result += ' */\n'
-  result +=
-    'export function glConstantToString(value: GL_CONSTANTS | number | null | undefined): string | undefined {\n'
+  result += 'export function glConstantGetName(value: GL_CONSTANTS | number | null | undefined): string | undefined {\n'
   result += "  return typeof value === 'number' ? (GL_CONSTANTS as any)[value] : undefined\n"
   result += '}\n\n'
   result += 'export default GL_CONSTANTS'
