@@ -1,4 +1,5 @@
-/* eslint-disable */ // prettier-ignore
+// prettier-ignore
+/* eslint-disable */
 const GL_DEPTH_BUFFER_BIT = 256;
 const GL_STENCIL_BUFFER_BIT = 1024
 const GL_COLOR_BUFFER_BIT = 16384
