@@ -8,9 +8,6 @@
   ],
   "license": "MIT",
   "author": "Salvatore Previti",
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "bugs": {
     "url": "https://github.com/SalvatorePreviti/mundus/issues"
   },
@@ -18,12 +15,18 @@
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "esrun-build --workspaces",
+    "build": "esrun-build --workspaces --dts",
+    "test": "esrun --mocha test/**/*.ts",
     "generate-gl-constants": "node scripts/generate-gl-constants.cjs",
-    "precommit": "lint-staged && pretty-quick --staged",
-    "prepublish": "npm run build",
+    "precommit": "npm run build && lint-staged && pretty-quick --staged",
     "postinstall": "husky install"
   },
   "lint-staged": {
@@ -31,26 +34,31 @@
       "eslint --fix --max-warnings=0"
     ]
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
-    "@balsamic/eslint-config": "^0.0.17",
-    "@balsamic/esrun": "^0.0.11",
+    "@balsamic/eslint-config": "^0.0.18",
+    "@balsamic/esrun": "^0.0.12",
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
-    "cheerio": "^1.0.0-rc.9",
+    "chai": "^4.3.4",
+    "cheerio": "1.0.0-rc.10",
     "comment-json": "^4.1.0",
     "deepmerge": "^4.2.2",
-    "esbuild": "^0.12.7",
+    "esbuild": "^0.12.8",
     "eslint": "^7.28.0",
+    "eslint-plugin-chai-expect": "^2.2.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-node": "^11.1.0",
     "fast-glob": "^3.2.5",
     "husky": "^6.0.0",
+    "i": "^0.3.6",
     "jsonc": "^2.0.0",
     "lint-staged": "^11.0.0",
+    "mocha": "^9.0.0",
+    "npm": "^7.16.0",
     "pretty-quick": "^3.1.0",
     "tsconfig-resolver": "^3.0.1",
     "typescript": "^4.3.2"

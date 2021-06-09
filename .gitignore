@@ -1,5 +1,6 @@
 /packages/**/*.cjs
 /packages/**/*.mjs
+/packages/**/*.d.ts
 
 # excluded files for security
 .npmrc

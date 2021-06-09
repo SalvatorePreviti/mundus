@@ -38,6 +38,44 @@ function generateIndexTs(parsed) {
   return result
 }
 
+function generateEnumFunctions() {
+  return [
+    '/**',
+    ' * The names of all webgl2 constants',
+    ' */',
+    'export type GL_CONSTANTS_NAME = keyof typeof GL_CONSTANTS',
+    '',
+    '/**',
+    ' * The array of all webgl2 constant names',
+    ' */',
+    'export const GL_CONSTANTS_NAMES: GL_CONSTANTS_NAME[] = /* #__PURE__ */ (() => {',
+    '  const _startWithNumberRegex = /^[-0-9]/',
+    '  return Object.keys(GL_CONSTANTS).filter((key) => !_startWithNumberRegex.test(key)) as any',
+    '})()',
+    '',
+    '/**',
+    ' * Infer the name of a webgl2 constant from its value, useful for debugging',
+    ' */',
+    'export function glConstantGetName(value: GL_CONSTANTS | string | number | null | undefined): string | undefined {',
+    "  if (typeof value === 'number') {",
+    '    return (GL_CONSTANTS as any)[value]',
+    '  }',
+    "  if (typeof value !== 'string') {",
+    '    return undefined',
+    '  }',
+    '  let found = (GL_CONSTANTS as any)[value]',
+    "  if (typeof found === 'string') {",
+    '    return found',
+    '  }',
+    "  if (typeof found === 'number') {",
+    '    return value',
+    '  }',
+    '  found = (GL_CONSTANTS as any)[parseInt(value)]',
+    "  return typeof found === 'string' ? found : undefined",
+    '}'
+  ].join('\n')
+}
+
 function generateEnumTs(parsed) {
   let result = FILE_HEADER
   result += '/**\n'
@@ -52,13 +90,8 @@ function generateEnumTs(parsed) {
     fnRepeated: (c) => `// ${c.name} = ${c.value}`
   })
   result += '}\n\n'
-  result += '/**\n'
-  result += ' * Infer the name of a webgl2 constant from its value, useful for debugging\n'
-  result += ' */\n'
-  result += 'export function glConstantGetName(value: GL_CONSTANTS | number | null | undefined): string | undefined {\n'
-  result += "  return typeof value === 'number' ? (GL_CONSTANTS as any)[value] : undefined\n"
-  result += '}\n\n'
-  result += 'export default GL_CONSTANTS'
+  result += 'export default GL_CONSTANTS\n\n'
+  result += generateEnumFunctions()
   return result
 }
 

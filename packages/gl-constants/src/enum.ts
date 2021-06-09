@@ -3975,6 +3975,8 @@ export enum GL_CONSTANTS {
   GPU_DISJOINT_EXT = 0x8fbb
 }
 
+export default GL_CONSTANTS
+
 /**
  * The names of all webgl2 constants
  */
@@ -4008,5 +4010,3 @@ export function glConstantGetName(value: GL_CONSTANTS | string | number | null |
   found = (GL_CONSTANTS as any)[parseInt(value)]
   return typeof found === 'string' ? found : undefined
 }
-
-export default GL_CONSTANTS
