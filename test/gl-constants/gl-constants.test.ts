@@ -1,12 +1,20 @@
 import { GL_ANY_SAMPLES_PASSED, GL_DEPTH_CLEAR_VALUE, GL_NO_ERROR } from '@mundus/gl-constants'
+import * as IMPORTED_GL_CONSTANTS from '@mundus/gl-constants'
 import { GL_CONSTANTS, glConstantGetName, GL_CONSTANTS_NAMES } from '@mundus/gl-constants/enum'
 import { expect } from 'chai'
 
 describe('gl-costants', () => {
-  describe('GL constants exports some known constants', () => {
-    expect(GL_ANY_SAMPLES_PASSED).to.equal(35887)
-    expect(GL_DEPTH_CLEAR_VALUE).to.equal(2931)
-    expect(GL_NO_ERROR).to.equal(0)
+  describe('@mundus/gl-constants', () => {
+    it('exports some known constants', () => {
+      expect(GL_ANY_SAMPLES_PASSED).to.equal(35887)
+      expect(GL_DEPTH_CLEAR_VALUE).to.equal(2931)
+      expect(GL_NO_ERROR).to.equal(0)
+    })
+    it('exports all chrome constants', () => {
+      for (const [k, v] of Object.entries(getChromeConstants())) {
+        expect((IMPORTED_GL_CONSTANTS as any)[`GL_${k}`]).to.equal(v, k)
+      }
+    })
   })
 
   describe('GL_CONSTANTS enum', () => {
@@ -65,6 +73,11 @@ describe('gl-costants', () => {
     it('returns constant name if found by name', () => {
       expect(glConstantGetName('DEPTH_BUFFER_BIT')).to.equal('DEPTH_BUFFER_BIT')
       expect(glConstantGetName('FRAMEBUFFER_ATTACHMENT_RED_SIZE')).to.equal('FRAMEBUFFER_ATTACHMENT_RED_SIZE')
+    })
+
+    it('returns constant name also if starts with GL_', () => {
+      expect(glConstantGetName('GL_DEPTH_BUFFER_BIT')).to.equal('DEPTH_BUFFER_BIT')
+      expect(glConstantGetName('GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE')).to.equal('FRAMEBUFFER_ATTACHMENT_RED_SIZE')
     })
 
     it('returns undefined if no constant found', () => {

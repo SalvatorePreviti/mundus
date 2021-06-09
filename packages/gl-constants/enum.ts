@@ -4004,6 +4004,9 @@ export function glConstantGetName(value: GL_CONSTANTS | string | number | null |
   if (typeof found === 'string') {
     return found
   }
+  if (value.startsWith('GL_')) {
+    return glConstantGetName(value.slice(3))
+  }
   if (typeof found === 'number') {
     return value
   }

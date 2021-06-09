@@ -1,7 +1,6 @@
 {
   "name": "@mundus/gl-constants",
-  "main": "index.cjs",
-  "module": "index.mjs",
+  "type": "module",
   "sideEffects": false,
   "version": "0.0.1",
   "description": "All webgl2 constants in a tree shakeable package",

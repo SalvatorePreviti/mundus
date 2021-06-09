@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const https = require('https')
 const cheerio = require('cheerio')
+const prettier = require('prettier')
 
 const ROOT_DIR = path.dirname(__dirname)
 const GL_CONSTANTS_DIR = path.resolve(ROOT_DIR, 'packages/gl-constants')
@@ -67,6 +68,9 @@ function generateEnumFunctions() {
     "  if (typeof found === 'string') {",
     '    return found',
     '  }',
+    "  if (value.startsWith('GL_')) {",
+    '    return glConstantGetName(value.slice(3));',
+    '  }',
     "  if (typeof found === 'number') {",
     '    return value',
     '  }',
@@ -82,7 +86,7 @@ function generateEnumTs(parsed) {
   result += ' * All Webgl2 constants in a single enum.\n'
   result += ' * NOTE: Use this only for debugging or tooling, enum values are not tree shakeable\n'
   result += ' */\n'
-  result += 'export enum GL_CONSTANTS {\n\n'
+  result += 'export enum GL_CONSTANTS {\n'
   result += generateConstantsCode(parsed, {
     indent: '  ',
     separator: ',\n',
@@ -100,13 +104,24 @@ function writeSourceFile(filename, content) {
   try {
     fs.mkdirSync(path.dirname(filepath), { recursive: true })
   } catch (_) {}
-  fs.writeFileSync(filepath, content)
-  console.log(' -', filename, 'written.')
+
+  if (filename.endsWith('.ts')) {
+    const prettierConfig = prettier.resolveConfig.sync(filepath)
+    content = prettier.format(content, { ...prettierConfig, filepath, parser: 'typescript' })
+  }
+
+  if (fs.readFileSync(filepath, 'utf-8') !== content) {
+    fs.writeFileSync(filepath, content)
+    console.log(' -', filename, 'written.')
+  } else {
+    console.log(' -', filename, 'unchanged.')
+  }
 }
 
 function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepeated = null }) {
   let prevGroup = ''
   let text = ''
+  let isFirst = true
 
   const ensureSeparated = () => {
     if (text && !text.endsWith('\n\n')) {
@@ -132,7 +147,11 @@ function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepe
     const value = c.repeated ? fnRepeated && fnRepeated(c) : fn(c)
 
     if (value) {
-      ensureSeparated()
+      if (isFirst) {
+        isFirst = false
+      } else {
+        ensureSeparated()
+      }
       if (pendingGroup) {
         text += `${indent}// ${pendingGroup}\n\n`
         pendingGroup = null
