@@ -18,8 +18,8 @@ const FILE_HEADER =
 async function main() {
   const parsed = parseConstantsFromHtml(await downloadHtml(CONSTANTS_HTML_URL, CONSTANTS_HTML_CACHE))
 
-  writeSourceFile('src/index.ts', generateIndexTs(parsed))
-  writeSourceFile('src/enum.ts', generateEnumTs(parsed))
+  writeSourceFile('index.ts', generateIndexTs(parsed))
+  writeSourceFile('enum.ts', generateEnumTs(parsed))
 }
 
 main().catch((e) => {
