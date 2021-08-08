@@ -1,0 +1,23 @@
+{
+  "name": "@mundus/math",
+  "type": "module",
+  "sideEffects": false,
+  "version": "0.0.1",
+  "description": "Math constants and functions",
+  "keywords": [
+    "mundus",
+    "math"
+  ],
+  "bugs": {
+    "url": "https://github.com/SalvatorePreviti/mundus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalvatorePreviti/mundus.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "MIT",
+  "author": "Salvatore Previti"
+}

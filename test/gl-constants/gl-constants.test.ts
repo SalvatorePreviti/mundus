@@ -3,8 +3,8 @@ import * as IMPORTED_GL_CONSTANTS from '@mundus/gl-constants'
 import { GL_CONSTANTS, glConstantGetName, GL_CONSTANTS_NAMES } from '@mundus/gl-constants/enum'
 import { expect } from 'chai'
 
-describe('gl-costants', () => {
-  describe('@mundus/gl-constants', () => {
+describe('@mundus/gl-constants', () => {
+  describe('exported constants', () => {
     it('exports some known constants', () => {
       expect(GL_ANY_SAMPLES_PASSED).to.equal(35887)
       expect(GL_DEPTH_CLEAR_VALUE).to.equal(2931)
