@@ -164,7 +164,17 @@ export const {
   trunc
 } = Math
 
+/** A tolerance value that is good in most circumstances for numbers. */
 export const DEFAULT_TOLERANCE = 0.0000001
+
+/** The closest number to zero that can be represented in a 32 bit float, approximately 1.17549435082228750797e-38. */
+export const FLOAT_MIN_VALUE = 1.17549435082228750797e-38
+
+/** The maximum positive value that can be represented in a 32 bit float, approximately 3.40282346638528859812e38. */
+export const FLOAT_MAX_VALUE = 3.40282346638528859812e38
+
+/** The value of FLOAT_EPSILON is the difference between 1 and the smallest value greater than 1 that is representable as a 32 bit floatig point value, approximately 1.1920928955078125e-7. */
+export const FLOAT_EPSILON = 1.1920928955078125e-7
 
 /** The value of the largest integer n such that n and n + 1 are both exactly representable as a Number value. The value of Number.MAX_SAFE_INTEGER is 9007199254740991 2^53 − 1. */
 export const MAX_SAFE_INTEGER = 2 ** 53 - 1
@@ -1413,12 +1423,13 @@ export const length4D = /* #__PURE__ */ (x: number, y: number, z: number, w: num
   sqrt(x * x + y * y + z * z + w * w)
 
 /** Gets the angle in radians between two vectors */
-export const angle2D = /* #__PURE__ */ (ax: number, ay: number, bx: number, by: number) =>
-  acosSafe(num_divSafe(dot2D(ax, ay, bx, by), sqrt(lengthSquared2D(ax, ay) * lengthSquared2D(bx, by))))
+export const angle2D = /* #__PURE__ */ (ax: number, ay: number, bx: number, by: number) => atan2(bx - ax, by - ay)
 
 /** Gets the angle in radians between two vectors */
 export const angle3D = /* #__PURE__ */ (ax: number, ay: number, az: number, bx: number, by: number, bz: number) =>
-  acosSafe(num_divSafe(dot3D(ax, ay, az, bx, by, bz), sqrt(lengthSquared3D(ax, ay, az) * lengthSquared3D(bx, by, bz))))
+  acosSafe(
+    num_divSafe(ax * bx + ay * by + az * bz, sqrt((ax * ax + ay * ay + az * bz) * (bx * bx + by * by + az * bz)))
+  )
 
 /** Gets the angle in radians between two vectors */
 export const angle4D = (
@@ -1433,7 +1444,14 @@ export const angle4D = (
 ) =>
   acosSafe(
     num_divSafe(
-      dot4D(ax, ay, az, aw, bx, by, bz, bw),
-      sqrt(lengthSquared4D(ax, ay, az, aw) * lengthSquared4D(bx, by, bz, bw))
+      ax * bx + ay * by + az * bz + aw * bw,
+      sqrt((ax * ax + ay * ay + az * bz + aw * bw) * (bx * bx + by * by + az * bz + aw * bw))
     )
   )
+
+/** Gets a size in bytes in an human readable form. */
+export const humanReadableSizeInBytes = (bytes: number): string => {
+  bytes = roundFromZero(bytes)
+  const i = min(floor(logN(abs(bytes), 1024)), 6) || 0
+  return `${+(bytes / 1024 ** i).toFixed(2)} ${'BkMGTPE'[i]}${i ? 'B' : ''}`
+}
