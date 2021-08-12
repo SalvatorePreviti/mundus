@@ -2,7 +2,7 @@
   "name": "@mundus/math",
   "type": "module",
   "sideEffects": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Math constants and functions",
   "keywords": [
     "mundus",

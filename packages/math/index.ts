@@ -522,10 +522,17 @@ export const isNearlyEqualRelative = /* #__PURE__ */ (a: number, b: number, tole
 
 /**
  * @param value Determines whether a value is inside the specified range.
- * @returns value - minimum >= 0 && value - maximum <= 0
+ * @returns value >= minimum && value <= maximum
  */
 export const isInRange = /* #__PURE__ */ (value: number, minimum: number, maximum: number) =>
-  value - minimum >= 0 && value - maximum <= 0
+  value >= minimum && value <= maximum
+
+/**
+ * @param value Determines whether a value is inside the specified range, excluding the extremes.
+ * @returns value > minimum && value < maximum
+ */
+export const isInsideRange = /* #__PURE__ */ (value: number, minimum: number, maximum: number) =>
+  value > minimum && value < maximum
 
 /** Returns -n */
 export const num_negate = /* #__PURE__ */ /* #__INLINE__ */ (n: number) => -n
