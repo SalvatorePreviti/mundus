@@ -1,9 +1,10 @@
 {
   "name": "@mundus/math",
+  "version": "0.0.6",
   "type": "module",
   "sideEffects": false,
-  "version": "0.0.5",
   "module": "index.mjs",
+  "source": "index.ts",
   "description": "Math constants and functions",
   "keywords": [
     "mundus",

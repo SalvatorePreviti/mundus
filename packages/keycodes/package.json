@@ -1,8 +1,10 @@
 {
   "name": "@mundus/keycodes",
-  "type": "module",
-  "sideEffects": false,
   "version": "0.0.1",
+  "type": "module",
+  "module": "index.mjs",
+  "source": "index.ts",
+  "sideEffects": false,
   "description": "Named keycodes",
   "keywords": [
     "mundus"
