@@ -2,7 +2,8 @@
   "name": "@mundus/math",
   "type": "module",
   "sideEffects": false,
-  "version": "0.0.3",
+  "version": "0.0.5",
+  "module": "index.mjs",
   "description": "Math constants and functions",
   "keywords": [
     "mundus",
