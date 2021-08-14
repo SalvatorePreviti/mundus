@@ -258,6 +258,9 @@ export const AVOGADRO_CONSTANT = 6.02214199e23
 /** Zero kelvin in celsius, -273.15 */
 export const ZERO_KELVIN_IN_CELSIUS = -273.15
 
+/** Maximum size for JS13K zip file, 13312 */
+export const JS13K_SIZE_IN_BYTES = 13312
+
 /** One Yotta, 1e24 */
 export const YOTTA = 1e24
 
@@ -1463,6 +1466,6 @@ export const angle4D = (
 /** Gets a size in bytes in an human readable form. */
 export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string => {
   bytes = roundFromZero(bytes)
-  const i = min(floor(logN(abs(bytes), 1024)), 6) || 0
-  return `${+(bytes / 1024 ** i).toFixed(2)} ${'BkMGTPE'[i]}${i ? 'B' : ''}`
+  const i = bytes && (min(floor(logN(abs(bytes), 1024)), 6) || 0)
+  return `${+(bytes / 1024 ** i).toFixed(2)} ${i ? ' kMGTPE'[i] : ''}B`
 }
