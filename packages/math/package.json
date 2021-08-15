@@ -1,6 +1,6 @@
 {
   "name": "@mundus/math",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",
@@ -16,9 +16,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
-  },
-  "engines": {
-    "node": ">=14.0.0"
   },
   "license": "MIT",
   "author": "Salvatore Previti"

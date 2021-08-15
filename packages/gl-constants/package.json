@@ -1,6 +1,6 @@
 {
   "name": "@mundus/gl-constants",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "module": "index.mjs",
   "source": "index.ts",
@@ -19,9 +19,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
-  },
-  "engines": {
-    "node": ">=14.0.0"
   },
   "license": "MIT",
   "author": "Salvatore Previti"

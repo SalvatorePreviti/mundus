@@ -36,7 +36,7 @@ import {
   PI,
   SQRT1_2,
   SQRT2,
-  pow,
+  num_pow,
   pow2,
   pow3,
   pow4,
@@ -171,10 +171,10 @@ describe('@mudus/math math', () => {
 
   describe('pows', () => {
     it('has working pow', () => {
-      expect(pow(1, 1)).to.equal(1)
-      expect(pow(4, 12.4)).to.equal(29210829.678681508)
-      expect(pow(4, 12.4)).to.equal(29210829.678681508)
-      expect(pow(0.5, -3)).to.equal(8)
+      expect(num_pow(1, 1)).to.equal(1)
+      expect(num_pow(4, 12.4)).to.equal(29210829.678681508)
+      expect(num_pow(4, 12.4)).to.equal(29210829.678681508)
+      expect(num_pow(0.5, -3)).to.equal(8)
     })
     it('has working pow2', () => {
       expect(pow2(1)).to.equal(1)

@@ -370,7 +370,7 @@ export const roundToZero = /* @__PURE__ */ (value: number) => (value > 0 ? floor
  * Returns the inverse of the square root of a number. 1 / sqrt(x)
  * @returns 1 / sqrt(x)
  */
-export const invSqrt = /* @__PURE__ */ /* #__INLINE__ */ (x: number) => 1 / sqrt(x)
+export const invSqrt = /* @__PURE__ */ /* @__INLINE__ */ (x: number) => 1 / sqrt(x)
 
 /**
  * Returns the sign of the x, indicating whether x is positive, negative or zero.
@@ -408,13 +408,6 @@ export const max = /* @__PURE__ */ (a: number, b: number | undefined | null): nu
   a < (b as number) ? (b as number) : a
 
 /**
- * Returns the value of a base expression taken to a specified power.
- * @param x The base value of the expression.
- * @param y The exponent value of the expression.
- */
-export const pow = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => a ** b
-
-/**
  * Computes the squared of the given value.
  * @param n The value to square
  * @returns n*n
@@ -440,28 +433,28 @@ export const pow4 = /* @__PURE__ */ (n: number) => n * n * n * n
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow5 = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => n ** 5
+export const pow5 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 5
 
 /**
  * Computes the 6th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow6 = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => n ** 6
+export const pow6 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 6
 
 /**
  * Computes the 7th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow7 = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => n ** 7
+export const pow7 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 7
 
 /**
  * Computes the 8th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow8 = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => n ** 8
+export const pow8 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 8
 
 /**
  * Computes x to the power of x, pow(x, x)
@@ -483,13 +476,13 @@ export const euclideanModulo = /* @__PURE__ */ (x: number, m: number): number =>
  * @param value The value to check
  * @returns True if value === 0, false if not
  */
-export const isZero = /* @__PURE__ */ /* #__INLINE__ */ (value: unknown): value is 0 => value === 0
+export const isZero = /* @__PURE__ */ /* @__INLINE__ */ (value: unknown): value is 0 => value === 0
 
 /**
  * Returns true if the given value is not exactly the number 0.
  * @returns value !== 0
  */
-export const isNonZero = /* @__PURE__ */ /* #__INLINE__ */ (value: unknown): boolean => value !== 0
+export const isNonZero = /* @__PURE__ */ /* @__INLINE__ */ (value: unknown): boolean => value !== 0
 
 /**
  * Returns true if the given value is near to zero, abs(value) < tolerance
@@ -538,22 +531,22 @@ export const isInsideRange = /* @__PURE__ */ (value: number, minimum: number, ma
   value > minimum && value < maximum
 
 /** Returns -n */
-export const num_negate = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => -n
+export const num_negate = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => -n
 
 /** Returns 1/n */
-export const num_inverse = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => 1 / n
+export const num_inverse = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => 1 / n
 
 /** Returns a + b */
-export const num_add = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => a + b
+export const num_add = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a + b
 
 /** Returns a - b */
-export const num_sub = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => a - b
+export const num_sub = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a - b
 
 /** Returns a * b */
-export const num_mul = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => a * b
+export const num_mul = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a * b
 
 /** Returns a / b */
-export const num_div = /* @__PURE__ */ /* #__INLINE__ */ (numerator: number, denominator: number): number =>
+export const num_div = /* @__PURE__ */ /* @__INLINE__ */ (numerator: number, denominator: number): number =>
   numerator / denominator
 
 /** Returns b && a / b */
@@ -561,47 +554,54 @@ export const num_divSafe = /* @__PURE__ */ (numerator: number, denominator: numb
   denominator && numerator / denominator
 
 /** Returns a % b */
-export const num_mod = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => a % b
+export const num_mod = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a % b
+
+/**
+ * Returns the value of a base expression taken to a specified power.
+ * @param x The base value of the expression.
+ * @param y The exponent value of the expression.
+ */
+export const num_pow = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a ** b
 
 /** Returns a + b * scale */
-export const num_addScale = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number, scale: number): number =>
+export const num_addScale = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number, scale: number): number =>
   a + b * scale
 
 /** Returns x - x * x */
 export const num_minusSquaredScalar = /* @__PURE__ */ (x: number) => x - x * x
 
 /** Returns true if a > b */
-export const num_gt = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a > b
+export const num_gt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a > b
 
 /** Returns true if a >= b */
-export const num_gte = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a >= b
+export const num_gte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a >= b
 
 /** Returns true if a < b */
-export const num_lt = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a < b
+export const num_lt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a < b
 
 /** Returns true if a <= b */
-export const num_lte = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a <= b
+export const num_lte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a <= b
 
 /** Returns a & b, with a 32 bit integer precision */
-export const int32_and = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a & b
+export const int32_and = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a & b
 
 /** Returns a | b */
-export const int32_or = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a | b
+export const int32_or = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a | b
 
 /** Returns a ^ b */
-export const int32_xor = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number) => a ^ b
+export const int32_xor = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a ^ b
 
 /** Returns ~n */
-export const int32_not = /* @__PURE__ */ /* #__INLINE__ */ (n: number) => ~n
+export const int32_not = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => ~n
 
 /** Returns n << amount */
-export const int32_shl = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: number) => n << amount
+export const int32_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n << amount
 
 /** Returns n >> amount */
-export const int32_shr = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: number) => n >> amount
+export const int32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n >> amount
 
 /** Returns n >>> amount, right shift of 32 bit unsigned integers */
-export const uint32_shr = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: number) => n >>> amount
+export const uint32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n >>> amount
 
 /** 32 bit binary left rotation */
 export const int32_rotl = /* @__PURE__ */ (n: number, amount: number) => (n << amount) | (n >>> (32 - amount))
@@ -635,7 +635,7 @@ export const int32_popCnt = /* @__PURE__ */ (i32: number): number => {
  * @param b Second value
  * @returns The number of different bits between two numbers
  */
-export const int32_hamming = /* @__PURE__ */ /* #__INLINE__ */ (a: number, b: number): number => int32_popCnt(a ^ b)
+export const int32_hamming = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => int32_popCnt(a ^ b)
 
 /**
  * Reverse the bits of the given 32 bit number.
@@ -670,10 +670,10 @@ export const int53_xor = /* @__PURE__ */ (a: number, b: number) =>
 export const int53_not = /* @__PURE__ */ (n: number) => -n - 1
 
 /** Returns n << amount, with a 53 bit integer precision */
-export const int53_shl = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: number) => floor(n * 2 ** amount)
+export const int53_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => floor(n * 2 ** amount)
 
 /** Returns n >> amount, with a 53 bit integer precision */
-export const int53_shr = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: number) => floor(n / 2 ** amount)
+export const int53_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => floor(n / 2 ** amount)
 
 /**
  * Returns the logarithm of the given value to the given base.
@@ -682,7 +682,7 @@ export const int53_shr = /* @__PURE__ */ /* #__INLINE__ */ (n: number, amount: n
 export const logN = /* @__PURE__ */ (value: number, base: number) => log(value) / log(base)
 
 /** The natural logarithm of one minus the specified value. log1p(-x) */
-export const log1m = /* @__PURE__ */ /* #__INLINE__ */ (x: number) => log1p(-x)
+export const log1m = /* @__PURE__ */ /* @__INLINE__ */ (x: number) => log1p(-x)
 
 /** Computes the logit functio. log(x / (1 - x)). See https://en.wikipedia.org/wiki/Logit */
 export const logit = (x: number) => log(x / (1 - x))
@@ -745,14 +745,14 @@ export const angleWrapSigned = /* @__PURE__ */ (radians: number) => wrapSigned(r
  * @param radians The angle in radians to wrap between 0 (included) and 2*PI (excluded)
  * @returns The angle in radians wrapped so it is always between 0 (included) and 2*PI (excluded)
  */
-export const angleWrapUnsigned = /* @__PURE__ */ /* #__INLINE__ */ (radians: number) => wrapUnsigned(radians, TWO_PI)
+export const angleWrapUnsigned = /* @__PURE__ */ /* @__INLINE__ */ (radians: number) => wrapUnsigned(radians, TWO_PI)
 
 /**
  * Wraps an angle so that the returned value will be between 0 (included) and 2*PI (excluded) following a triangle wave shape.
  * @param radians The angle in radians to pingpong
  * @returns radians pingpong PI
  */
-export const angleWrapPingPong = /* @__PURE__ */ /* #__INLINE__ */ (radians: number) => wrapPingPong(radians, TWO_PI)
+export const angleWrapPingPong = /* @__PURE__ */ /* @__INLINE__ */ (radians: number) => wrapPingPong(radians, TWO_PI)
 
 /**
  * Gets the shortest difference betwee two angles, in a range between -PI (excluded) to PI (included)
@@ -760,7 +760,7 @@ export const angleWrapPingPong = /* @__PURE__ */ /* #__INLINE__ */ (radians: num
  * @param targetRadias Second angle
  * @returns The shortest angle between sourceRadians to targetRadians, in a range between -PI (excluded) to PI (included)
  */
-export const angleDeltaSigned = /* @__PURE__ */ /* #__INLINE__ */ (
+export const angleDeltaSigned = /* @__PURE__ */ /* @__INLINE__ */ (
   sourceRadians: number,
   targetRadians: number
 ): number => angleWrapSigned(targetRadians - sourceRadians)
@@ -771,7 +771,7 @@ export const angleDeltaSigned = /* @__PURE__ */ /* #__INLINE__ */ (
  * @param targetRadias Second angle
  * @returns The shortest angle between sourceRadians to targetRadians, in a range between 0 (included) to 2*PI (excluded)
  */
-export const angleDeltaUnsigned = /* @__PURE__ */ /* #__INLINE__ */ (
+export const angleDeltaUnsigned = /* @__PURE__ */ /* @__INLINE__ */ (
   sourceRadians: number,
   targetRadians: number
 ): number => angleWrapUnsigned(targetRadians - sourceRadians)
@@ -781,70 +781,70 @@ export const angleDeltaUnsigned = /* @__PURE__ */ /* #__INLINE__ */ (
  * @param x The input
  * @returns The cotangent of x
  */
-export const cot = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => 1 / tan(x)
+export const cot = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / tan(x)
 
 /**
  * Trigonometry - coth - Gets the hyperbolic tangent of x, 1 / tanh(x)
  * @param x The input
  * @returns The hyperbolic tangent of x
  */
-export const coth = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => 1 / tanh(x)
+export const coth = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / tanh(x)
 
 /**
  * Trigonometry - acoth - The inverse hyperbolic cotangent of x, atanh(1 / x)
  * @param x The input
  * @returns The inverse hyperbolic cotagent of a number.
  */
-export const acoth = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => atanh(1 / x)
+export const acoth = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => atanh(1 / x)
 
 /**
  * Trigonometry - csc - Gets the cosecant of x, 1 / sin(x)
  * @param x The input
  * @returns The cosecant of x
  */
-export const csc = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => 1 / sin(x)
+export const csc = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / sin(x)
 
 /**
  * Trigonometry - csch - Gets the hyperbolic cosecant of x, 1 / sinh(x)
  * @param x
  * @returns The hyperbolic cosecant of x
  */
-export const csch = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => 1 / sinh(x)
+export const csch = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / sinh(x)
 
 /**
  * Trigonometry - acsch - Gets the inverse hyperbolic cosecant of x, asinh(1 / x)
  * @param x The input
  * @returns The inverse hyperbolic cosecant of x
  */
-export const acsch = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => asinh(1 / x)
+export const acsch = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => asinh(1 / x)
 
 /**
  * Trigonometry - acsc - Gets the inverse cosecant function (arccosecant function) of x, asin(1 / x)
  * @param x The input
  * @returns The arcosecant of a number
  */
-export const acsc = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => asin(1 / x)
+export const acsc = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => asin(1 / x)
 
 /**
  * Trigonometry - sec - Gets the secant of x, 1 / cos(x)
  * @param x The input
  * @returns The secant of a number
  */
-export const sec = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => 1 / cos(x)
+export const sec = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / cos(x)
 
 /**
  * Trigonometry - asec - Gets the Inverse Secant (sec-1) of x in radians, acos(1 / x)
  * @param x The input
  * @returns The inverse secant of x
  */
-export const asec = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => acos(1 / x)
+export const asec = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => acos(1 / x)
 
 /**
  * Trigonometry - asech - Gets the inverse hyperbolic secant of x, acosh(1 / x)
  * @param x The input
  * @returns The inverse hyperbolic secant of x
  */
-export const asech = /* @__PURE__ */ /* #__INLINE__ */ (x: number): number => acosh(1 / x)
+export const asech = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => acosh(1 / x)
 
 /**
  * Trigonometry - gudermannian - atan(sinh(x))
@@ -902,14 +902,14 @@ export const floorPow2 = /* @__PURE__ */ (value: number): number => 2 ** floor(l
  * @param degrees Agle in degrees
  * @returns Angle in radianss
  */
-export const degToRad = /* @__PURE__ */ /* #__INLINE__ */ (degrees: number): number => degrees * DEG_PER_RAD
+export const degToRad = /* @__PURE__ */ /* @__INLINE__ */ (degrees: number): number => degrees * DEG_PER_RAD
 
 /**
  * Converts an angle in radians to degrees (radians * 180 / PI)
  * @param radians Agle in radians
  * @returns Angle in degrees
  */
-export const radToDeg = /* @__PURE__ */ /* #__INLINE__ */ (radians: number): number => radians / DEG_PER_RAD
+export const radToDeg = /* @__PURE__ */ /* @__INLINE__ */ (radians: number): number => radians / DEG_PER_RAD
 
 /**
  * Clamps a value between a minimum and a maximum

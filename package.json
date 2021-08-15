@@ -15,9 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "workspaces": [
     "packages/*"
   ],
