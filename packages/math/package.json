@@ -1,6 +1,6 @@
 {
   "name": "@mundus/math",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",

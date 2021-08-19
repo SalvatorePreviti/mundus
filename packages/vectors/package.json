@@ -1,6 +1,6 @@
 {
   "name": "@mundus/vectors",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",
@@ -19,7 +19,7 @@
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
   },
   "peerDependencies": {
-    "@mundus/math": ">=0.0.10"
+    "@mundus/math": ">=0.0.11"
   },
   "license": "MIT",
   "author": "Salvatore Previti"

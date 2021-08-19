@@ -110,7 +110,7 @@ import {
   EasingFunction,
   timeDamp,
   num_divSafe,
-  clampLength
+  clampLengthMultiplier
 } from '@mundus/math'
 
 export type IsVec2Fn = <T extends Vec2In = Vec2In>(v: T | null | undefined | false) => v is T
@@ -441,6 +441,25 @@ export const vec3_length = (a: Vec3In) => sqrt(vec2_lengthSquared(a))
 /** Gets the length (magnitude) of a vector */
 export const vec4_length = (a: Vec4In) => sqrt(vec2_lengthSquared(a))
 
+/** Gets the squared euclidean istance between two vectors */
+export const vec2_distanceSquared = (a: Vec2In, b: Vec2In): number => lengthSquared2D(a.x - b.x, a.y - b.y)
+
+/** Gets the squared euclidean istance between two vectors */
+export const vec3_distanceSquared = (a: Vec3In, b: Vec3In): number => lengthSquared3D(a.x - b.x, a.y - b.y, a.z - b.z)
+
+/** Gets the squared euclidean istance between two vectors */
+export const vec4_distanceSquared = (a: Vec4In, b: Vec4In): number =>
+  lengthSquared4D(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w)
+
+/** Gets the euclidean istance between two vectors */
+export const vec2_distance = (a: Vec2In, b: Vec2In): number => sqrt(vec2_distanceSquared(a, b))
+
+/** Gets the euclidean istance between two vectors */
+export const vec3_distance = (a: Vec3In, b: Vec3In): number => sqrt(vec3_distanceSquared(a, b))
+
+/** Gets the euclidean istance between two vectors */
+export const vec4_distance = (a: Vec4In, b: Vec4In): number => sqrt(vec4_distanceSquared(a, b))
+
 /** Computes true if the given 2D vector is very near to be {x:0, y:0}, given the optional tolerance */
 export const vec2_isNearlyZero = /* @__PURE__ */ (v: Vec2In, epsilon?: number) =>
   isNearlyZero(v.x, epsilon) && isNearlyZero(v.y, epsilon)
@@ -717,48 +736,63 @@ export const vec3_scalarPow = <R extends Vec3Out = Vec3Out>(out: R, v: number, e
 export const vec4_scalarPow = <R extends Vec4Out = Vec4Out>(out: R, v: number, exponent: Vec4In) =>
   vec4_set(out, v ** exponent.x, v ** exponent.y, v ** exponent.z, v ** exponent.w)
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_min = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
   vec2_set(out, min(a.x, b.x), min(a.y, b.y))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_min = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
   vec3_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_min = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
   vec4_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z), min(a.w, b.w))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_minScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
   vec2_set(out, min(a.x, b), min(a.y, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_minScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
   vec3_set(out, min(a.x, b), min(a.y, b), min(a.z, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_minScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
   vec4_set(out, min(a.x, b), min(a.y, b), min(a.z, b), min(a.w, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_max = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
   vec2_set(out, max(a.x, b.x), max(a.y, b.y))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_max = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
   vec3_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_max = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
   vec4_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z), max(a.w, b.w))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_maxScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
   vec2_set(out, max(a.x, b), max(a.y, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_maxScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
   vec3_set(out, max(a.x, b), max(a.y, b), max(a.z, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_maxScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
   vec4_set(out, max(a.x, b), max(a.y, b), max(a.z, b), max(a.w, b))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_clamp = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, minimum: Vec2In, maximum: Vec2In) =>
   vec2_set(out, clamp(v.x, minimum.x, maximum.x), clamp(v.y, minimum.y, maximum.y))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_clamp = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, minimum: Vec3In, maximum: Vec3In) =>
   vec3_set(out, clamp(v.x, minimum.x, maximum.x), clamp(v.y, minimum.y, maximum.y), clamp(v.z, minimum.z, maximum.z))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_clamp = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minimum: Vec4In, maximum: Vec4In) =>
   vec4_set(
     out,
@@ -768,12 +802,15 @@ export const vec4_clamp = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minim
     clamp(v.w, minimum.w, maximum.w)
   )
 
+/** Clamps a value between a minimum and a maximum */
 export const vec2_clampScalar = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, minimum?: number, maximum?: number) =>
   vec2_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec3_clampScalar = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, minimum?: number, maximum?: number) =>
   vec3_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum), clamp(v.z, minimum, maximum))
 
+/** Clamps a value between a minimum and a maximum */
 export const vec4_clampScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minimum?: number, maximum?: number) =>
   vec4_set(
     out,
@@ -783,12 +820,15 @@ export const vec4_clampScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In,
     clamp(v.w, minimum, maximum)
   )
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec2_euclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
   vec2_set(out, euclideanModulo(a.x, b.x), euclideanModulo(a.y, b.y))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec3_euclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
   vec3_set(out, euclideanModulo(a.x, b.x), euclideanModulo(a.y, b.y), euclideanModulo(a.z, b.z))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec4_euclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
   vec4_set(
     out,
@@ -798,21 +838,27 @@ export const vec4_euclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: Vec
     euclideanModulo(a.w, b.w)
   )
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec2_euclideanModuloScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
   vec2_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec3_euclideanModuloScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
   vec3_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b), euclideanModulo(a.z, b))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec4_euclideanModuloScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
   vec4_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b), euclideanModulo(a.z, b), euclideanModulo(a.w, b))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec2_scalarEuclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
   vec2_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec3_scalarEuclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In) =>
   vec3_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y), euclideanModulo(a, b.z))
 
+/** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
 export const vec4_scalarEuclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In) =>
   vec4_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y), euclideanModulo(a, b.z), euclideanModulo(a, b.w))
 
@@ -1587,6 +1633,18 @@ export const vec3_rotateZ = <R extends Vec3Out = Vec3Out>(
   return vec3_set(out, p0 * c - p1 * s + originX, p0 * s + p1 * c + originY, z)
 }
 
+/** The midpoint of a vector */
+export const vec2_midpoint = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+  vec2_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2)
+
+/** The midpoint of a vector */
+export const vec3_midpoint = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+  vec3_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2)
+
+/** The midpoint of a vector */
+export const vec4_midpoint = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+  vec4_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2, (a.w + b.w) / 2)
+
 /** Linear interpolation between two vectors */
 export const vec2_lerp = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number) =>
   vec2_set(out, lerp(a.x, b.x, t), lerp(a.y, b.y, t))
@@ -2066,18 +2124,18 @@ export const vec2_clampLength = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
   v: Vec2In,
   minLength: number,
   maxLength: number
-) => vec2_mulScalar(out, v, clampLength(vec2_length(v), minLength, maxLength))
+) => vec2_mulScalar(out, v, clampLengthMultiplier(vec2_length(v), minLength, maxLength))
 
 export const vec3_clampLength = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
   out: R,
   v: Vec3In,
   minLength: number,
   maxLength: number
-) => vec3_mulScalar(out, v, clampLength(vec3_length(v), minLength, maxLength))
+) => vec3_mulScalar(out, v, clampLengthMultiplier(vec3_length(v), minLength, maxLength))
 
 export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   out: R,
   v: Vec4In,
   minLength: number,
   maxLength: number
-) => vec4_mulScalar(out, v, clampLength(vec4_length(v), minLength, maxLength))
+) => vec4_mulScalar(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
