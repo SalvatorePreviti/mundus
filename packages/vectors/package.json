@@ -18,6 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
   },
+  "peerDependencies": {
+    "@mundus/math": ">=0.0.10"
+  },
   "license": "MIT",
   "author": "Salvatore Previti"
 }
