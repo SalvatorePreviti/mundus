@@ -109,7 +109,8 @@ import {
   dot4D,
   EasingFunction,
   timeDamp,
-  num_divSafe
+  num_divSafe,
+  clampLength
 } from '@mundus/math'
 
 export type IsVec2Fn = <T extends Vec2In = Vec2In>(v: T | null | undefined | false) => v is T
@@ -210,6 +211,42 @@ export const vec4_set = <R extends Vec4Out = Vec4Out>(out: R, x: number, y: numb
   out.w = w
   return out
 }
+
+/** Returns the sum of all components of a vector */
+export const vec2_sum = (v: Vec2In) => v.x + v.y
+
+/** Returns the sum of all components of a vector */
+export const vec3_sum = (v: Vec3In) => v.x + v.y + v.z
+
+/** Returns the sum of all components of a vector */
+export const vec4_sum = (v: Vec4In) => v.x + v.y + v.z + v.w
+
+/** Returns the product of all components of a vector */
+export const vec2_product = (v: Vec2In) => v.x * v.y
+
+/** Returns the product of all components of a vector */
+export const vec3_product = (v: Vec3In) => v.x * v.y * v.z
+
+/** Returns the product of all components of a vector */
+export const vec4_product = (v: Vec4In) => v.x * v.y * v.z * v.w
+
+/** Returns the value of the smallest component in a vector */
+export const vec2_minComponent = (v: Vec2In) => min(v.x, v.y)
+
+/** Returns the value of the smallest component in a vector */
+export const vec3_minComponent = (v: Vec3In) => min(min(v.x, v.y), v.z)
+
+/** Returns the value of the smallest component in a vector */
+export const vec4_minComponent = (v: Vec4In) => min(min(min(v.x, v.y), v.z), v.w)
+
+/** Returns the value of the largest component in a vector */
+export const vec2_maxComponent = (v: Vec2In) => max(v.x, v.y)
+
+/** Returns the value of the largest component in a vector */
+export const vec3_maxComponent = (v: Vec3In) => max(max(v.x, v.y), v.z)
+
+/** Returns the value of the largest component in a vector */
+export const vec4_maxComponent = (v: Vec4In) => max(max(max(v.x, v.y), v.z), v.w)
 
 /** Copies a 2D vector to another */
 export const vec2_copy = <R extends Vec2Out = Vec2Out>(out: R, copy: Vec2In): R => vec2_set(out, copy.x, copy.y)
@@ -2024,12 +2061,23 @@ export const vec3_slide = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, 
 export const vec4_slide = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, normal: Vec4In) =>
   vec4_addScaleScalar(out, a, normal, -vec4_dot(a, normal))
 
-export const vec2_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
+export const vec2_clampLength = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
+  out: R,
+  v: Vec2In,
+  minLength: number,
+  maxLength: number
+) => vec2_mulScalar(out, v, clampLength(vec2_length(v), minLength, maxLength))
+
+export const vec3_clampLength = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
+  out: R,
+  v: Vec3In,
+  minLength: number,
+  maxLength: number
+) => vec3_mulScalar(out, v, clampLength(vec3_length(v), minLength, maxLength))
+
+export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   out: R,
   v: Vec4In,
   minLength: number,
   maxLength: number
-) => {
-  const length = vec2_length(v)
-  return vec2_mulScalar(out, vec2_divScalar(out, v, length || 1), clamp(length, minLength, maxLength))
-}
+) => vec4_mulScalar(out, v, clampLength(vec4_length(v), minLength, maxLength))

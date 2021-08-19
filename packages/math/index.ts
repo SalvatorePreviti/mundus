@@ -1470,3 +1470,6 @@ export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string 
   const i = bytes && (min(floor(logN(abs(bytes), 1024)), 6) || 0)
   return `${+(bytes / 1024 ** i).toFixed(2)} ${i ? ' kMGTPE'[i] : ''}B`
 }
+
+export const clampLength = /* @__PURE__ */ (length: number, minLength: number, maxLength: number) =>
+  clamp(length, minLength, maxLength) / (length || 1)
