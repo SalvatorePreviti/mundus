@@ -408,7 +408,7 @@ export const max = /* @__PURE__ */ (a: number, b: number | undefined | null): nu
   a < (b as number) ? (b as number) : a
 
 /**
- * Computes the squared of the given value.
+ * Computes the square of the given value.
  * @param n The value to square
  * @returns n*n
  */
@@ -488,32 +488,31 @@ export const isNonZero = /* @__PURE__ */ /* @__INLINE__ */ (value: unknown): boo
  * Returns true if the given value is near to zero, abs(value) < tolerance
  * @param value The number to check
  * @param epsilon The optional tolerance to use, by default is Number.EPSILON
- * @returns
  */
-export const isNearlyZero = /* @__PURE__ */ (value: number, epsilon: number = EPSILON) => abs(value) < epsilon
+export const isNearlyZero = /* @__PURE__ */ (value: number, epsilon: number = FLOAT_EPSILON) => abs(value) < epsilon
 
 /**
  * Returns true if two numbers are equal given an absolute tolerance.
  * To use a relative tolerance use nearlyEquals instead
  * @param a A number
  * @param b A number
- * @param tolerance The optional absolute tolerance to use
+ * @param epsilon The optional absolute tolerance to use
  * @returns True if a is almost equal to b
  */
-export const isNearlyEqualAbsolute = /* @__PURE__ */ (a: number, b: number, tolerance: number = DEFAULT_TOLERANCE) =>
-  abs(a - b) < tolerance
+export const isNearlyEqualAbsolute = /* @__PURE__ */ (a: number, b: number, epsilon: number = DEFAULT_TOLERANCE) =>
+  abs(a - b) < epsilon
 
 /**
  * Returns true if two numbers are nearly equals.
  * Is uses relative tolerance, the bigger the numbers the higher the tolerance becomes.
  * @param a A number
  * @param b A number
- * @param tolerance Optional relative tolerance to use
+ * @param epsilon Optional relative tolerance to use
  * @returns True if a is almost equal to b
  */
-export const isNearlyEqualRelative = /* @__PURE__ */ (a: number, b: number, tolerance: number = EPSILON) => {
+export const isNearlyEqualRelative = /* @__PURE__ */ (a: number, b: number, epsilon: number = FLOAT_EPSILON) => {
   const diff = abs(a - b)
-  return a === b || diff < tolerance * EPSILON || diff < max(abs(a), abs(b)) * tolerance
+  return a === b || diff < epsilon * EPSILON || diff < max(abs(a), abs(b)) * epsilon
 }
 
 /**
@@ -582,6 +581,11 @@ export const num_lt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) =
 /** Returns true if a <= b */
 export const num_lte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a <= b
 
+export const int32_fromFloat = (n: number) => n | 0
+
+/** Returns ~n */
+export const int32_not = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => ~n
+
 /** Returns a & b, with a 32 bit integer precision */
 export const int32_and = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a & b
 
@@ -590,9 +594,6 @@ export const int32_or = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number)
 
 /** Returns a ^ b */
 export const int32_xor = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a ^ b
-
-/** Returns ~n */
-export const int32_not = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => ~n
 
 /** Returns n << amount */
 export const int32_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n << amount
@@ -1126,7 +1127,7 @@ export const easeInOutSmootherstep = /* @__PURE__ */ (t: number) => t * t * t * 
  * @param to The end value
  * @returns from + t * (to - from)
  */
-export const lerp = /* @__PURE__ */ (t: number, from: number, to: number): number => t * (to - from) + from
+export const lerp = /* @__PURE__ */ (from: number, to: number, t: number): number => t * (to - from) + from
 
 /**
  * Linear interpolation between two angles in radians
@@ -1134,7 +1135,7 @@ export const lerp = /* @__PURE__ */ (t: number, from: number, to: number): numbe
  * @param fromRadians The start angle, in radias
  * @param toRadians The end angle, in radians
  */
-export const angleLerpSigned = /* @__PURE__ */ (t: number, fromRadians: number, toRadians: number): number =>
+export const angleLerpSigned = /* @__PURE__ */ (fromRadians: number, toRadians: number, t: number): number =>
   angleWrapSigned(fromRadians + angleWrapSigned(toRadians - fromRadians) * t)
 
 /**
@@ -1143,7 +1144,7 @@ export const angleLerpSigned = /* @__PURE__ */ (t: number, fromRadians: number, 
  * @param fromRadians The start angle, in radias
  * @param toRadians The end angle, in radians
  */
-export const angleLerpUnsigned = /* @__PURE__ */ (t: number, fromRadians: number, toRadians: number): number =>
+export const angleLerpUnsigned = /* @__PURE__ */ (fromRadians: number, toRadians: number, t: number): number =>
   angleWrapUnsigned(fromRadians + angleWrapUnsigned(toRadians - fromRadians) * t)
 
 /** Moves a value toward a target */
@@ -1166,7 +1167,7 @@ export const angleMoveTowards = (currentRadians: number, targetRadians: number, 
  * @param to The end value
  * @returns t to pass to lerp to compute v
  */
-export const lerpInverse = /* @__PURE__ */ (v: number, from: number, to: number): number =>
+export const lerpInverse = /* @__PURE__ */ (from: number, to: number, v: number): number =>
   (v - from) / (to - from) || 0
 
 /**
@@ -1258,8 +1259,8 @@ export type EasingFunction<T = number> = (t: T) => T
  * @param to The maximum value
  * @returns The interpolation from from to to
  */
-export const easing = /* @__PURE__ */ (easingFunction: EasingFunction, t: number, from: number, to: number): number =>
-  lerp(easingFunction(clamp(t)), from, to)
+export const easing = /* @__PURE__ */ (from: number, to: number, t: number, easingFunction: EasingFunction): number =>
+  lerp(from, to, easingFunction(clamp(t)))
 
 /**
  * Builds a function that computes the interpolation between two values using an easing function
@@ -1268,8 +1269,8 @@ export const easing = /* @__PURE__ */ (easingFunction: EasingFunction, t: number
  */
 export const makeEasing =
   /* @__PURE__ */
-  (easingFunction: EasingFunction) => /* @__PURE__ */ (t: number, from: number, to: number) =>
-    lerp(easingFunction(clamp(t)), from, to)
+  (easingFunction: EasingFunction) => /* @__PURE__ */ (from: number, to: number, t: number) =>
+    lerp(from, to, easingFunction(clamp(t)))
 
 /** Smoothstep interpolation between two values. */
 export const smoothstep = /* @__PURE__ */ makeEasing(easeInOutSmoothstep)
@@ -1289,16 +1290,16 @@ export const smoothstepInverse = /* @__PURE__ */ (y: number): number => 0.5 - si
 
 /**
  * Bilinear 2D linear interpolation between four values
- * @param x The X amount
- * @param y The Y amount
  * @param p00 Value 1
  * @param p10 Value 2
  * @param p01 Value 3
  * @param p11 Value 4
+ * @param tx The X amount
+ * @param ty The Y amount
  * @returns The 2d bilinear interpolation
  */
-export const bilerp = /* @__PURE__ */ (x: number, y: number, p00: number, p10: number, p01: number, p11: number) =>
-  lerp(lerp(x, p00, p10), lerp(x, p01, p11), y)
+export const bilerp = /* @__PURE__ */ (p00: number, p10: number, p01: number, p11: number, tx: number, ty: number) =>
+  lerp(lerp(p00, p10, tx), lerp(p01, p11, tx), ty)
 
 /**
  * Interpolation of t over an Hermite spline defined by two values and two tangents.
@@ -1373,7 +1374,7 @@ export const decodeRgbaBytes = /* @__PURE__ */ (r: number, g: number, b: number,
 
 /** Returns a random number between minimum and maximum */
 export const mathRandomRange = /* @__PURE__ */ (minimum: number, maximum: number) =>
-  lerp(mathRandom(), minimum, maximum)
+  lerp(minimum, maximum, mathRandom())
 
 /**
  * Creates a new xoshiro/128** random generator. Returns a function that when invoked returns a new uint32 value.

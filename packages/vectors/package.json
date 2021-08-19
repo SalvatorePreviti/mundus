@@ -1,0 +1,23 @@
+{
+  "name": "@mundus/vectors",
+  "version": "0.0.1",
+  "type": "module",
+  "sideEffects": false,
+  "module": "index.mjs",
+  "source": "index.ts",
+  "description": "Vectors for 2D and 3D",
+  "keywords": [
+    "mundus",
+    "math",
+    "3D"
+  ],
+  "bugs": {
+    "url": "https://github.com/SalvatorePreviti/mundus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalvatorePreviti/mundus.git"
+  },
+  "license": "MIT",
+  "author": "Salvatore Previti"
+}

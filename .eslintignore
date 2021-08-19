@@ -1,4 +1,6 @@
 .downloads
+packages/**/*.cjs
+packages/**/*.js
 
 # dotfiles
 !.*.js
