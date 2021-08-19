@@ -96,7 +96,7 @@ import {
   lengthSquared2D,
   lengthSquared3D,
   lengthSquared4D,
-  cross2D,
+  perpDotProduct2D,
   lerp,
   smoothstep,
   smootherstep,
@@ -110,7 +110,8 @@ import {
   EasingFunction,
   timeDamp,
   num_divSafe,
-  clampLengthMultiplier
+  clampLengthMultiplier,
+  pointInTriangle2D
 } from '@mundus/math'
 
 export type IsVec2Fn = <T extends Vec2In = Vec2In>(v: T | null | undefined | false) => v is T
@@ -1565,7 +1566,7 @@ export const vec3_trunc = /* @__PURE__ */ vec3_makeSetEach(trunc)
 export const vec4_trunc = /* @__PURE__ */ vec4_makeSetEach(trunc)
 
 /** Computes the 2D cross product */
-export const vec2_cross = (a: Vec2In, b: Vec2In) => cross2D(a.x, a.y, b.x, b.y)
+export const vec2_cross = (a: Vec2In, b: Vec2In) => perpDotProduct2D(a.x, a.y, b.x, b.y)
 
 /** Computes the cross product of two vectors in a 3D space */
 export const vec3_cross = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
@@ -2139,3 +2140,97 @@ export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   minLength: number,
   maxLength: number
 ) => vec4_mulScalar(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
+
+/** Check if a point lies within a 2D triangle */
+export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number) =>
+  pointInTriangle2D(a.x, a.y, b.x, b.y, c.x, c.y, px, py)
+
+/** Compute barycentric coordinates for a point p with respect to triangle (a, b, c) */
+export const vec2_barycentric = <R extends Vec3Out = Vec3Out>(
+  out: R,
+  a: Vec2In,
+  b: Vec2In,
+  c: Vec2In,
+  px: number,
+  py: number
+) => {
+  const v0x = b.x - a.x
+  const v0y = b.y - a.y
+  const v1x = c.x - a.x
+  const v1y = c.y - a.y
+  const v2x = px - a.x
+  const v2y = py - a.y
+  const d00 = v0x * v0x + v0y * v0y
+  const d01 = v0x * v1x + v0y * v1y
+  const d11 = v1x * v1x + v1y * v1y
+  const d20 = v2x * v0x + v2y * v0y
+  const d21 = v2x * v1x + v2y * v1y
+  const denom = d00 * d11 - d01 * d01
+  const v = (d11 * d20 - d01 * d21) / denom
+  const w = (d00 * d21 - d01 * d20) / denom
+  return vec3_set(out, v, w, 1 - v - w)
+}
+
+/** Compute barycentric coordinates for a point p with respect to triangle (a, b, c) */
+export const vec3_barycentric = <R extends Vec3Out = Vec3Out>(
+  out: R,
+  a: Vec3In,
+  b: Vec3In,
+  c: Vec3In,
+  px: number,
+  py: number,
+  pz: number
+) => {
+  const v0x = b.x - a.x
+  const v0y = b.y - a.y
+  const v0z = b.z - a.z
+  const v1x = c.x - a.x
+  const v1y = c.y - a.y
+  const v1z = c.z - a.z
+  const v2x = px - a.x
+  const v2y = py - a.y
+  const v2z = pz - a.z
+  const d00 = v0x * v0x + v0y * v0y + v0z * v0z
+  const d01 = v0x * v1x + v0y * v1y + v0z * v1z
+  const d11 = v1x * v1x + v1y * v1y + v1z * v1z
+  const d20 = v2x * v0x + v2y * v0y + v2z * v0z
+  const d21 = v2x * v1x + v2y * v1y + v2z * v1z
+  const denom = d00 * d11 - d01 * d01
+  const v = (d11 * d20 - d01 * d21) / denom
+  const w = (d00 * d21 - d01 * d20) / denom
+  return vec3_set(out, v, w, 1 - v - w)
+}
+
+/** Compute barycentric coordinates for a point p with respect to triangle (a, b, c) */
+export const vec4_barycentric = <R extends Vec3Out = Vec3Out>(
+  out: R,
+  a: Vec4In,
+  b: Vec4In,
+  c: Vec4In,
+  px: number,
+  py: number,
+  pz: number,
+  pw: number
+) => {
+  const v0x = b.x - a.x
+  const v0y = b.y - a.y
+  const v0z = b.z - a.z
+  const v0w = b.w - a.w
+  const v1x = c.x - a.x
+  const v1y = c.y - a.y
+  const v1z = c.z - a.z
+  const v1w = c.w - a.w
+  const v2x = px - a.x
+  const v2y = py - a.y
+  const v2z = pz - a.z
+  const v2w = pw - a.w
+  const d00 = v0x * v0x + v0y * v0y + v0z * v0z + v0w * v0w
+  const d01 = v0x * v1x + v0y * v1y + v0z * v1z + v0w * v1w
+  const d11 = v1x * v1x + v1y * v1y + v1z * v1z + v1w * v1w
+  const d20 = v2x * v0x + v2y * v0y + v2z * v0z + v2w * v0w
+  const d21 = v2x * v1x + v2y * v1y + v2z * v1z + v2w * v1w
+  const denom = d00 * d11 - d01 * d01
+  const v = (d11 * d20 - d01 * d21) / denom
+  const w = (d00 * d21 - d01 * d20) / denom
+  return vec3_set(out, v, w, 1 - v - w)
+}
