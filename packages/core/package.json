@@ -1,26 +1,24 @@
 {
-  "name": "@mundus/vectors",
-  "version": "0.0.5",
+  "name": "@mundus/core",
+  "version": "0.0.1",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",
   "source": "index.ts",
-  "description": "Vectors for 2D and 3D",
+  "description": "Core and functional utilities",
   "keywords": [
     "mundus",
-    "math",
-    "3D"
+    "math"
   ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "bugs": {
     "url": "https://github.com/SalvatorePreviti/mundus/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SalvatorePreviti/mundus.git"
-  },
-  "peerDependencies": {
-    "@mundus/core": ">=0.0.1",
-    "@mundus/math": ">=0.0.12"
   },
   "license": "MIT",
   "author": "Salvatore Previti"

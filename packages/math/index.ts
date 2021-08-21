@@ -1488,3 +1488,7 @@ export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string 
   const i = bytes && (min(floor(logN(abs(bytes), 1024)), 6) || 0)
   return `${+(bytes / 1024 ** i).toFixed(2)} ${i ? ' kMGTPE'[i] : ''}B`
 }
+
+/** Gets the signed area of a 2D triangle */
+export const triangleSignedArea2D = (ax: number, ay: number, bx: number, by: number, cx: number, cy: number) =>
+  (by - ay) * (cx - bx) - (bx - ax) * (cy - by)
