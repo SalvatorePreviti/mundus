@@ -357,20 +357,20 @@ export const fract = /* @__PURE__ */ (value: number): number => value - floor(va
  * Returns an integer that is as far from zero as possible. 0.1 => 1, -0.1 => 1
  * @returns An integral value
  */
-export const roundFromZero = /* @__PURE__ */ (value: number) => (value < 0 ? floor(value) : ceil(value))
+export const roundFromZero = /* @__PURE__ */ (value: number): number => (value < 0 ? floor(value) : ceil(value))
 
 /**
  * Returns an integer that is as near to zero as possible. 0.1 => 0, -0.1 => 0
  * @param value The value to round
  * @returns An integral value
  */
-export const roundToZero = /* @__PURE__ */ (value: number) => (value > 0 ? floor(value) : ceil(value))
+export const roundToZero = /* @__PURE__ */ (value: number): number => (value > 0 ? floor(value) : ceil(value))
 
 /**
  * Returns the inverse of the square root of a number. 1 / sqrt(x)
  * @returns 1 / sqrt(x)
  */
-export const invSqrt = /* @__PURE__ */ /* @__INLINE__ */ (x: number) => 1 / sqrt(x)
+export const invSqrt = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => 1 / sqrt(x)
 
 /**
  * Returns the sign of the x, indicating whether x is positive, negative or zero.
@@ -412,55 +412,55 @@ export const max = /* @__PURE__ */ (a: number, b: number | undefined | null): nu
  * @param n The value to square
  * @returns n*n
  */
-export const pow2 = /* @__PURE__ */ (n: number) => n * n
+export const pow2 = /* @__PURE__ */ (n: number): number => n * n
 
 /**
  * Computes the cube of the given value.
  * @param n The value to cube
  * @returns n*n*n
  */
-export const pow3 = /* @__PURE__ */ (n: number) => n * n * n
+export const pow3 = /* @__PURE__ */ (n: number): number => n * n * n
 
 /**
  * Computes the 4th power of the given value.
  * @param n The value
  * @returns n*n*n*n
  */
-export const pow4 = /* @__PURE__ */ (n: number) => n * n * n * n
+export const pow4 = /* @__PURE__ */ (n: number): number => n * n * n * n
 
 /**
  * Computes the 5th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow5 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 5
+export const pow5 = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => n ** 5
 
 /**
  * Computes the 6th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow6 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 6
+export const pow6 = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => n ** 6
 
 /**
  * Computes the 7th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow7 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 7
+export const pow7 = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => n ** 7
 
 /**
  * Computes the 8th power of the given value.
  * @param n The value
  * @returns n*n*n*n*n
  */
-export const pow8 = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => n ** 8
+export const pow8 = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => n ** 8
 
 /**
  * Computes x to the power of x, pow(x, x)
  * @returns x ** x
  */
-export const powSelf = /* @__PURE__ */ (x: number) => x ** x
+export const powSelf = /* @__PURE__ */ (x: number): number => x ** x
 
 /**
  * Computes the euclidean modulo ((x % m) + m) % m
@@ -489,7 +489,8 @@ export const isNonZero = /* @__PURE__ */ /* @__INLINE__ */ (value: unknown): boo
  * @param value The number to check
  * @param epsilon The optional tolerance to use, by default is Number.EPSILON
  */
-export const isNearlyZero = /* @__PURE__ */ (value: number, epsilon: number = FLOAT_EPSILON) => abs(value) < epsilon
+export const isNearlyZero = /* @__PURE__ */ (value: number, epsilon: number = FLOAT_EPSILON): boolean =>
+  abs(value) < epsilon
 
 /**
  * Returns true if two numbers are equal given an absolute tolerance.
@@ -499,8 +500,11 @@ export const isNearlyZero = /* @__PURE__ */ (value: number, epsilon: number = FL
  * @param epsilon The optional absolute tolerance to use
  * @returns True if a is almost equal to b
  */
-export const isNearlyEqualAbsolute = /* @__PURE__ */ (a: number, b: number, epsilon: number = DEFAULT_TOLERANCE) =>
-  abs(a - b) < epsilon
+export const isNearlyEqualAbsolute = /* @__PURE__ */ (
+  a: number,
+  b: number,
+  epsilon: number = DEFAULT_TOLERANCE
+): boolean => abs(a - b) < epsilon
 
 /**
  * Returns true if two numbers are nearly equals.
@@ -510,7 +514,11 @@ export const isNearlyEqualAbsolute = /* @__PURE__ */ (a: number, b: number, epsi
  * @param epsilon Optional relative tolerance to use
  * @returns True if a is almost equal to b
  */
-export const isNearlyEqualRelative = /* @__PURE__ */ (a: number, b: number, epsilon: number = FLOAT_EPSILON) => {
+export const isNearlyEqualRelative = /* @__PURE__ */ (
+  a: number,
+  b: number,
+  epsilon: number = FLOAT_EPSILON
+): boolean => {
   const diff = abs(a - b)
   return a === b || diff < epsilon * EPSILON || diff < max(abs(a), abs(b)) * epsilon
 }
@@ -519,21 +527,21 @@ export const isNearlyEqualRelative = /* @__PURE__ */ (a: number, b: number, epsi
  * @param value Determines whether a value is inside the specified range.
  * @returns value >= minimum && value <= maximum
  */
-export const isInRange = /* @__PURE__ */ (value: number, minimum: number, maximum: number) =>
+export const isInRange = /* @__PURE__ */ (value: number, minimum: number, maximum: number): boolean =>
   value >= minimum && value <= maximum
 
 /**
  * @param value Determines whether a value is inside the specified range, excluding the extremes.
  * @returns value > minimum && value < maximum
  */
-export const isInsideRange = /* @__PURE__ */ (value: number, minimum: number, maximum: number) =>
+export const isInsideRange = /* @__PURE__ */ (value: number, minimum: number, maximum: number): boolean =>
   value > minimum && value < maximum
 
 /** Returns -n */
-export const num_negate = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => -n
+export const num_negate = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => -n
 
 /** Returns 1/n */
-export const num_inverse = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => 1 / n
+export const num_inverse = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => 1 / n
 
 /** Returns a + b */
 export const num_add = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a + b
@@ -567,48 +575,52 @@ export const num_addScale = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: num
   a + b * scale
 
 /** Returns x - x * x */
-export const num_minusSquaredScalar = /* @__PURE__ */ (x: number) => x - x * x
+export const num_minusSquaredScalar = /* @__PURE__ */ (x: number): number => x - x * x
 
 /** Returns true if a > b */
-export const num_gt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a > b
+export const num_gt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): boolean => a > b
 
 /** Returns true if a >= b */
-export const num_gte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a >= b
+export const num_gte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): boolean => a >= b
 
 /** Returns true if a < b */
-export const num_lt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a < b
+export const num_lt = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): boolean => a < b
 
 /** Returns true if a <= b */
-export const num_lte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a <= b
-
-export const int32_fromFloat = (n: number) => n | 0
+export const num_lte = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): boolean => a <= b
 
 /** Returns ~n */
-export const int32_not = /* @__PURE__ */ /* @__INLINE__ */ (n: number) => ~n
+export const int32_not = /* @__PURE__ */ /* @__INLINE__ */ (n: number): number => ~n
 
 /** Returns a & b, with a 32 bit integer precision */
-export const int32_and = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a & b
+export const int32_and = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a & b
 
 /** Returns a | b */
-export const int32_or = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a | b
+export const int32_or = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a | b
+
+/** Converts a number to a 32 bit integer. Returns a | 0 */
+export const int32_fromFloat = (n: number): number => n | 0
+
+/** Converts a number to a unsigned 32 bit integer. Returns a >>> 0 */
+export const uint32_fromFloat = (n: number): number => n >>> 0
 
 /** Returns a ^ b */
-export const int32_xor = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number) => a ^ b
+export const int32_xor = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a ^ b
 
 /** Returns n << amount */
-export const int32_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n << amount
+export const int32_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number): number => n << amount
 
 /** Returns n >> amount */
-export const int32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n >> amount
+export const int32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number): number => n >> amount
 
 /** Returns n >>> amount, right shift of 32 bit unsigned integers */
-export const uint32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => n >>> amount
+export const uint32_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number): number => n >>> amount
 
 /** 32 bit binary left rotation */
-export const int32_rotl = /* @__PURE__ */ (n: number, amount: number) => (n << amount) | (n >>> (32 - amount))
+export const int32_rotl = /* @__PURE__ */ (n: number, amount: number): number => (n << amount) | (n >>> (32 - amount))
 
 /** 32 bit binary right rotation */
-export const int32_rotr = /* @__PURE__ */ (n: number, amount: number) => (n << (32 - amount)) | (n >>> amount)
+export const int32_rotr = /* @__PURE__ */ (n: number, amount: number): number => (n << (32 - amount)) | (n >>> amount)
 
 /**
  * Integers - Check wether the given number is a power of two or not (1, 2, 4, 8, 16, 32, 64, 128, 256 ...)
@@ -653,49 +665,50 @@ export const in32_reverse = /* @__PURE__ */ (i32: number): number => {
 }
 
 /** Returns a & b, with a 53 bit integer precision */
-export const int53_and = /* @__PURE__ */ (a: number, b: number) =>
+export const int53_and = /* @__PURE__ */ (a: number, b: number): number =>
   (floor(a / TWO_POW_28) & floor(b / TWO_POW_28)) * TWO_POW_28 +
   (euclideanModulo(a, TWO_POW_28) & euclideanModulo(b, TWO_POW_28))
 
 /** Returns a | b, with a 53 bit integer precision */
-export const int53_or = /* @__PURE__ */ (a: number, b: number) =>
+export const int53_or = /* @__PURE__ */ (a: number, b: number): number =>
   (floor(a / TWO_POW_28) | floor(b / TWO_POW_28)) * TWO_POW_28 +
   (euclideanModulo(a, TWO_POW_28) | euclideanModulo(b, TWO_POW_28))
 
 /** Returns a ^ b, with a 53 bit integer precision */
-export const int53_xor = /* @__PURE__ */ (a: number, b: number) =>
+export const int53_xor = /* @__PURE__ */ (a: number, b: number): number =>
   (floor(a / TWO_POW_28) ^ floor(b / TWO_POW_28)) * TWO_POW_28 +
   (euclideanModulo(a, TWO_POW_28) ^ euclideanModulo(b, TWO_POW_28))
 
 /** Returns ~n, with a 53 bit integer precision */
-export const int53_not = /* @__PURE__ */ (n: number) => -n - 1
+export const int53_not = /* @__PURE__ */ (n: number): number => -n - 1
 
 /** Returns n << amount, with a 53 bit integer precision */
-export const int53_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => floor(n * 2 ** amount)
+export const int53_shl = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number): number => floor(n * 2 ** amount)
 
 /** Returns n >> amount, with a 53 bit integer precision */
-export const int53_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number) => floor(n / 2 ** amount)
+export const int53_shr = /* @__PURE__ */ /* @__INLINE__ */ (n: number, amount: number): number => floor(n / 2 ** amount)
 
 /**
  * Returns the logarithm of the given value to the given base.
  * @returns log(value) / log(base)
  */
-export const logN = /* @__PURE__ */ (value: number, base: number) => log(value) / log(base)
+export const logN = /* @__PURE__ */ (value: number, base: number): number => log(value) / log(base)
 
 /** The natural logarithm of one minus the specified value. log1p(-x) */
-export const log1m = /* @__PURE__ */ /* @__INLINE__ */ (x: number) => log1p(-x)
+export const log1m = /* @__PURE__ */ /* @__INLINE__ */ (x: number): number => log1p(-x)
 
 /** Computes the logit functio. log(x / (1 - x)). See https://en.wikipedia.org/wiki/Logit */
-export const logit = (x: number) => log(x / (1 - x))
+export const logit = (x: number): number => log(x / (1 - x))
 
 /** The natural logarithm of one minus the exponential of the specified value. */
-export const log1mexp = /* @__PURE__ */ (a: number) => (a > -LN2 ? log(-expm1(a)) : log1p(-exp(a)))
+export const log1mexp = /* @__PURE__ */ (a: number): number => (a > -LN2 ? log(-expm1(a)) : log1p(-exp(a)))
 
 /** The log of 1 plus the exponential of the specified value. */
-export const log1pexp = /* @__PURE__ */ (x: number) => (x > 0 ? x + log1p(exp(-x)) : log1p(exp(x)))
+export const log1pexp = /* @__PURE__ */ (x: number): number => (x > 0 ? x + log1p(exp(-x)) : log1p(exp(x)))
 
 /** The log sum of exponentials. */
-export const logsumexp = /* @__PURE__ */ (a: number, b: number) => (a > b ? a + log1pexp(b - a) : b + log1pexp(a - b))
+export const logsumexp = /* @__PURE__ */ (a: number, b: number): number =>
+  a > b ? a + log1pexp(b - a) : b + log1pexp(a - b)
 
 /**
  * Snaps a value to the nearest grid multiple
@@ -731,7 +744,7 @@ export const wrapSigned = (value: number, length: number): number => value + flo
  * @param length The maximum length, the result will never reach exceed this value
  * @returns value pingpong length
  */
-export const wrapPingPong = /* @__PURE__ */ (value: number, length: number) =>
+export const wrapPingPong = /* @__PURE__ */ (value: number, length: number): number =>
   length - abs(length - wrapUnsigned(value, length * 2))
 
 /**
@@ -739,21 +752,23 @@ export const wrapPingPong = /* @__PURE__ */ (value: number, length: number) =>
  * @param radians The angle in radians to wrap between -PI (excluded) ad PI (included)
  * @returns The angle in radians wrapped so it is always between -PI (excluded) ad PI (included)
  */
-export const angleWrapSigned = /* @__PURE__ */ (radians: number) => wrapSigned(radians, TWO_PI)
+export const angleWrapSigned = /* @__PURE__ */ (radians: number): number => wrapSigned(radians, TWO_PI)
 
 /**
  * Trigonometry - Wrap an angle so it is always between 0 (included) and 2*PI (excluded)
  * @param radians The angle in radians to wrap between 0 (included) and 2*PI (excluded)
  * @returns The angle in radians wrapped so it is always between 0 (included) and 2*PI (excluded)
  */
-export const angleWrapUnsigned = /* @__PURE__ */ /* @__INLINE__ */ (radians: number) => wrapUnsigned(radians, TWO_PI)
+export const angleWrapUnsigned = /* @__PURE__ */ /* @__INLINE__ */ (radians: number): number =>
+  wrapUnsigned(radians, TWO_PI)
 
 /**
  * Wraps an angle so that the returned value will be between 0 (included) and 2*PI (excluded) following a triangle wave shape.
  * @param radians The angle in radians to pingpong
  * @returns radians pingpong PI
  */
-export const angleWrapPingPong = /* @__PURE__ */ /* @__INLINE__ */ (radians: number) => wrapPingPong(radians, TWO_PI)
+export const angleWrapPingPong = /* @__PURE__ */ /* @__INLINE__ */ (radians: number): number =>
+  wrapPingPong(radians, TWO_PI)
 
 /**
  * Gets the shortest difference betwee two angles, in a range between -PI (excluded) to PI (included)
@@ -865,7 +880,7 @@ export const gudermannianInverse = /* @__PURE__ */ (x: number): number => atanh(
  * Computes sin(x) / x. If x is zero, returns 1.
  * @returns sin(x) / x. If x is zero, returns 1.
  */
-export const sinc = /* @__PURE__ */ (x: number) => (x ? sin(x) / x : 1)
+export const sinc = /* @__PURE__ */ (x: number): number => (x ? sin(x) / x : 1)
 
 /**
  * Returns true if the given value is a power of two.
@@ -940,14 +955,14 @@ export const sigmoid = /* @__PURE__ */ (t: number): number => 1 / (1 + exp(-t))
  * @param a The input value
  * @returns The inverse of the sigmoid function
  */
-export const sigmoidInverse = /* @__PURE__ */ (a: number) => log(a) - log(1 - a)
+export const sigmoidInverse = /* @__PURE__ */ (a: number): number => log(a) - log(1 - a)
 
 /**
  * Computes the gradient of the sigmoid function, sigmoid(z) * (1 - sigmoid(z))
  * @param z The input value
  * @returns The gradient of the sigmoid function
  */
-export const sigmoidGradient = /* @__PURE__ */ (z: number) => num_minusSquaredScalar(sigmoid(z))
+export const sigmoidGradient = /* @__PURE__ */ (z: number): number => num_minusSquaredScalar(sigmoid(z))
 
 /** Gets the Stirling approximation gamma of a number. See https://en.wikipedia.org/wiki/Stirling%27s_approximation */
 export const stirlingGamma = /* @__PURE__ */ (n: number): number => sqrt(TWO_PI / n) * (n / EULER) ** n
@@ -979,14 +994,14 @@ export const leastCommonMultiplier = /* @__PURE__ */ (a: number, b: number): num
   b * (a / greatestCommonDivisor(a, b)) || 0
 
 /** Heaviside step function. return x < 0 ? 0 : 1. */
-export const stepUnit = /* @__PURE__ */ (x: number) => (x < 0 ? 0 : 1)
+export const stepUnit = /* @__PURE__ */ (x: number): number => (x < 0 ? 0 : 1)
 
 /** Returns 1 only if x is inside the specified interval ]minimum, maximum]. See https://en.wikipedia.org/wiki/Boxcar_function */
-export const stepBoxcar = /* @__PURE__ */ (x: number, minimum: number, maximum: number) =>
+export const stepBoxcar = /* @__PURE__ */ (x: number, minimum: number, maximum: number): number =>
   stepUnit(x - minimum) - stepUnit(x - maximum)
 
 /** Returns 1 obly if x is inside the interval ]-1/2, +1/2]. See https://en.wikipedia.org/wiki/Rectangular_function */
-export const stepRectangular = /* @__PURE__ */ (x: number) => stepBoxcar(x, -0.5, 0.5)
+export const stepRectangular = /* @__PURE__ */ (x: number): number => stepBoxcar(x, -0.5, 0.5)
 
 /**
  * Exponential step function.
@@ -998,114 +1013,116 @@ export const stepExp = /* @__PURE__ */ (x: number, k: number, n: number): number
 export const easeInQuadratic = /* @__PURE__ */ pow2
 
 /** Quadratic easing function */
-export const easeOutQuadratic = /* @__PURE__ */ (t: number) => t * (2 - t)
+export const easeOutQuadratic = /* @__PURE__ */ (t: number): number => t * (2 - t)
 
 /** Quadratic easing function */
-export const easeInOutQuadratic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * t * 2 : t * (4 - 2 * t) - 1)
+export const easeInOutQuadratic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? t * t * 2 : t * (4 - 2 * t) - 1)
 
 /** Cubic easing function */
 export const easeInCubic = /* @__PURE__ */ pow3
 
 /** Cubic easing function */
-export const easeOutCubic = /* @__PURE__ */ (t: number) => 1 + pow3(t - 1)
+export const easeOutCubic = /* @__PURE__ */ (t: number): number => 1 + pow3(t - 1)
 
 /** Cubic easing function */
-export const easeInOutCubic = /* @__PURE__ */ (t: number) => (t < 0.5 ? pow3(t) * 4 : 1 + pow3(t - 1) * 4)
+export const easeInOutCubic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? pow3(t) * 4 : 1 + pow3(t - 1) * 4)
 
 /** Quartic easing function */
 export const easeInQuartic = /* @__PURE__ */ pow4
 
 /** Quartic easing function */
-export const easeOutQuartic = /* @__PURE__ */ (t: number) => 1 - pow4(t - 1)
+export const easeOutQuartic = /* @__PURE__ */ (t: number): number => 1 - pow4(t - 1)
 
 /** Quartic easing function */
-export const easeInOutQuartic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * pow3(t * 2) : 1 - pow4(t - 1) * 8)
+export const easeInOutQuartic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? t * pow3(t * 2) : 1 - pow4(t - 1) * 8)
 
 /** Quintic easing function */
 export const easeInQuintic = /* @__PURE__ */ pow5
 
 /** Quintic easing function */
-export const easeOutQuintic = /* @__PURE__ */ (t: number) => 1 + pow5(t - 1)
+export const easeOutQuintic = /* @__PURE__ */ (t: number): number => 1 + pow5(t - 1)
 
 /** Quintic easing function */
-export const easeInOutQuintic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * pow4(t * 2) : 1 + pow5(t - 1) * 16)
+export const easeInOutQuintic = /* @__PURE__ */ (t: number): number =>
+  t < 0.5 ? t * pow4(t * 2) : 1 + pow5(t - 1) * 16
 
 /** Sextic easing function */
 export const easeInSextic = /* @__PURE__ */ pow6
 
 /** Sextic easing function */
-export const easeOutSextic = /* @__PURE__ */ (t: number) => 1 - pow6(t - 1)
+export const easeOutSextic = /* @__PURE__ */ (t: number): number => 1 - pow6(t - 1)
 
 /** Sextic easing function */
-export const easeInOutSextic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * pow5(t * 2) : 1 - pow6(t - 1) * 32)
+export const easeInOutSextic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? t * pow5(t * 2) : 1 - pow6(t - 1) * 32)
 
 /** Septic easing function */
 export const easeInSeptic = /* @__PURE__ */ pow7
 
 /** Septic easing function */
-export const easeOutSeptic = /* @__PURE__ */ (t: number) => 1 + pow7(t - 1)
+export const easeOutSeptic = /* @__PURE__ */ (t: number): number => 1 + pow7(t - 1)
 
 /** Septic easing function */
-export const easeInOutSeptic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * pow6(t * 2) : 1 + pow7(t - 1) * 64)
+export const easeInOutSeptic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? t * pow6(t * 2) : 1 + pow7(t - 1) * 64)
 
 /** Octic easing function */
 export const easeInOctic = /* @__PURE__ */ pow8
 
 /** Octic easing function */
-export const easeOutOctic = /* @__PURE__ */ (t: number) => 1 - pow8(t - 1)
+export const easeOutOctic = /* @__PURE__ */ (t: number): number => 1 - pow8(t - 1)
 
 /** Octic easing function */
-export const easeInOutOctic = /* @__PURE__ */ (t: number) => (t < 0.5 ? t * pow7(t * 2) : 1 - pow8(t - 1) * 128)
+export const easeInOutOctic = /* @__PURE__ */ (t: number): number => (t < 0.5 ? t * pow7(t * 2) : 1 - pow8(t - 1) * 128)
 
 /** Sine easing function */
-export const easeInSine = /* @__PURE__ */ (t: number) => sin((t - 1) * PI_OVER_TWO) + 1
+export const easeInSine = /* @__PURE__ */ (t: number): number => sin((t - 1) * PI_OVER_TWO) + 1
 
 /** Sine easing function */
-export const easeOutSine = /* @__PURE__ */ (t: number) => sin(t * PI_OVER_TWO)
+export const easeOutSine = /* @__PURE__ */ (t: number): number => sin(t * PI_OVER_TWO)
 
 /** Sine easing function */
-export const easeInOutSine = /* @__PURE__ */ (t: number) => (1 - cos(t * PI)) / 2
+export const easeInOutSine = /* @__PURE__ */ (t: number): number => (1 - cos(t * PI)) / 2
 
 /** Circle easing function */
-export const easeInCircle = /* @__PURE__ */ (t: number) => 1 - sqrt(1 - t * t)
+export const easeInCircle = /* @__PURE__ */ (t: number): number => 1 - sqrt(1 - t * t)
 
 /** Circle easing function */
-export const easeOutCircle = /* @__PURE__ */ (t: number) => sqrt((2 - t) * t)
+export const easeOutCircle = /* @__PURE__ */ (t: number): number => sqrt((2 - t) * t)
 
 /** Circle easing function */
-export const easeInOutCircle = /* @__PURE__ */ (t: number) =>
+export const easeInOutCircle = /* @__PURE__ */ (t: number): number =>
   (t < 0.5 ? 1 - sqrt(1 - 4 * (t * t)) : sqrt(-(2 * t - 3) * (2 * t - 1)) + 1) / 2
 
 /** Exponential easing function */
-export const easeInExponential = /* @__PURE__ */ (t: number) => (t <= 0 ? t : pow2(10 * (t - 1)))
+export const easeInExponential = /* @__PURE__ */ (t: number): number => (t <= 0 ? t : pow2(10 * (t - 1)))
 
 /** Exponential easing function */
-export const easeOutExponential = /* @__PURE__ */ (t: number) => (t >= 1 ? t : 1 - pow2(-10 * t))
+export const easeOutExponential = /* @__PURE__ */ (t: number): number => (t >= 1 ? t : 1 - pow2(-10 * t))
 
 /** Exponential easing function */
-export const easeInOutExponential = /* @__PURE__ */ (t: number) =>
+export const easeInOutExponential = /* @__PURE__ */ (t: number): number =>
   t <= 0 || t >= 1 ? t : t < 0.5 ? pow2(20 * t - 10) / 2 : 1 - pow2(-20 * t + 10) / 2
 
 /** Elastic easing function */
-export const easeInElastic = /* @__PURE__ */ (t: number) => sin(13 * PI_OVER_TWO * t) * pow2(10 * (t - 1))
+export const easeInElastic = /* @__PURE__ */ (t: number): number => sin(13 * PI_OVER_TWO * t) * pow2(10 * (t - 1))
 
 /** Elastic easing function */
-export const easeOutElastic = /* @__PURE__ */ (t: number) => sin(-13 * PI_OVER_TWO * (t + 1)) * pow2(-10 * t) + 1
+export const easeOutElastic = /* @__PURE__ */ (t: number): number =>
+  sin(-13 * PI_OVER_TWO * (t + 1)) * pow2(-10 * t) + 1
 
 /** Elastic easing function */
-export const easeInOutElastic = /* @__PURE__ */ (t: number) =>
+export const easeInOutElastic = /* @__PURE__ */ (t: number): number =>
   (t < 0.5
     ? sin(13 * PI * t) * pow2(10 * (2 * t - 1))
     : sin(-13 * PI_OVER_TWO * (2 * t - 1 + 1)) * pow2(-10 * (2 * t - 1)) + 2) / 2
 
 /** Back easing function */
-export const easeInBack = /* @__PURE__ */ (t: number) => sin(13 * PI * t) * pow2(10 * (t - 1))
+export const easeInBack = /* @__PURE__ */ (t: number): number => sin(13 * PI * t) * pow2(10 * (t - 1))
 
 /** Back easing function */
-export const easeOutBack = /* @__PURE__ */ (t: number) => sin(-13 * PI * (t + 1)) * pow2(-10 * t) + 1
+export const easeOutBack = /* @__PURE__ */ (t: number): number => sin(-13 * PI * (t + 1)) * pow2(-10 * t) + 1
 
 /** Back easing function */
-export const easeInOutBack = /* @__PURE__ */ (p: number) => {
+export const easeInOutBack = /* @__PURE__ */ (p: number): number => {
   if (p < 0.5) {
     p *= 2
     return (p * p * p - p * sin(p * PI)) / 2
@@ -1115,10 +1132,10 @@ export const easeInOutBack = /* @__PURE__ */ (p: number) => {
 }
 
 /** Smoothstep easing function */
-export const easeInOutSmoothstep = /* @__PURE__ */ (t: number) => (3 - 2 * t) * t * t
+export const easeInOutSmoothstep = /* @__PURE__ */ (t: number): number => (3 - 2 * t) * t * t
 
 /** Smootherstep easing function */
-export const easeInOutSmootherstep = /* @__PURE__ */ (t: number) => t * t * t * (t * (t * 6 - 15) + 10)
+export const easeInOutSmootherstep = /* @__PURE__ */ (t: number): number => t * t * t * (t * (t * 6 - 15) + 10)
 
 /**
  * Linear interpolation
@@ -1148,11 +1165,11 @@ export const angleLerpUnsigned = /* @__PURE__ */ (fromRadians: number, toRadians
   angleWrapUnsigned(fromRadians + angleWrapUnsigned(toRadians - fromRadians) * t)
 
 /** Moves a value toward a target */
-export const moveTowards = (current: number, target: number, maxDelta: number) =>
+export const moveTowards = (current: number, target: number, maxDelta: number): number =>
   abs(target - current) <= maxDelta ? target : current + sign(target - current) * maxDelta
 
 /** Moves an angle toward a target */
-export const angleMoveTowards = (currentRadians: number, targetRadians: number, maxDelta: number) => {
+export const angleMoveTowards = (currentRadians: number, targetRadians: number, maxDelta: number): number => {
   const delta = angleWrapSigned(currentRadians - targetRadians)
   return -maxDelta < delta && delta < maxDelta
     ? targetRadians
@@ -1222,7 +1239,7 @@ export const pulseCubic = (x: number, c: number, w: number): number => {
  * Normal distribution, Bell curve, Gaussian curve.
  * https://en.wikipedia.org/wiki/Normal_distribution
  */
-export const gaussianDistribution = /* @__PURE__ */ (x: number, offset: number = 0, scale: number = 1) =>
+export const gaussianDistribution = /* @__PURE__ */ (x: number, offset: number = 0, scale: number = 1): number =>
   exp(-pow2(x - offset) / (2 * pow2(scale))) / (scale * SQRT_TWO_PI)
 
 /**
@@ -1269,8 +1286,11 @@ export const easing = /* @__PURE__ */ (from: number, to: number, t: number, easi
  */
 export const makeEasing =
   /* @__PURE__ */
-  (easingFunction: EasingFunction) => /* @__PURE__ */ (from: number, to: number, t: number) =>
-    lerp(from, to, easingFunction(clamp(t)))
+
+
+    (easingFunction: EasingFunction) =>
+    /* @__PURE__ */ (from: number, to: number, t: number): number =>
+      lerp(from, to, easingFunction(clamp(t)))
 
 /** Smoothstep interpolation between two values. */
 export const smoothstep = /* @__PURE__ */ makeEasing(easeInOutSmoothstep)
@@ -1298,8 +1318,14 @@ export const smoothstepInverse = /* @__PURE__ */ (y: number): number => 0.5 - si
  * @param ty The Y amount
  * @returns The 2d bilinear interpolation
  */
-export const bilerp = /* @__PURE__ */ (p00: number, p10: number, p01: number, p11: number, tx: number, ty: number) =>
-  lerp(lerp(p00, p10, tx), lerp(p01, p11, tx), ty)
+export const bilerp = /* @__PURE__ */ (
+  p00: number,
+  p10: number,
+  p01: number,
+  p11: number,
+  tx: number,
+  ty: number
+): number => lerp(lerp(p00, p10, tx), lerp(p01, p11, tx), ty)
 
 /**
  * Interpolation of t over an Hermite spline defined by two values and two tangents.
@@ -1373,7 +1399,7 @@ export const decodeRgbaBytes = /* @__PURE__ */ (r: number, g: number, b: number,
 }
 
 /** Returns a random number between minimum and maximum */
-export const mathRandomRange = /* @__PURE__ */ (minimum: number, maximum: number) =>
+export const mathRandomRange = /* @__PURE__ */ (minimum: number, maximum: number): number =>
   lerp(minimum, maximum, mathRandom())
 
 /**
@@ -1383,7 +1409,7 @@ export const mathRandomRange = /* @__PURE__ */ (minimum: number, maximum: number
  */
 export const randomXoshiro =
   /* @__PURE__ */
-  (seed0: number, seed1: number, seed2: number, seed3: number) => /* @__PURE__ */ () => {
+  (seed0: number, seed1: number, seed2: number, seed3: number) => /* @__PURE__ */ (): number => {
     const result = int32_rotl(seed1 * 5, 7) * 9
     const t = seed1 << 9
     seed2 ^= seed0
@@ -1396,13 +1422,14 @@ export const randomXoshiro =
   }
 
 /** Computes the 2D cross product, also known as the perpendicular dot product */
-export const perpDotProduct2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number) => ax * by - ay * bx
+export const perpDotProduct2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number): number =>
+  ax * by - ay * bx
 
 /** Computes the 2D dot product */
-export const dot2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number) => ax * bx + ay * by
+export const dot2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number): number => ax * bx + ay * by
 
 /** Computes the 3D dot product */
-export const dot3D = /* @__PURE__ */ (ax: number, ay: number, az: number, bx: number, by: number, bz: number) =>
+export const dot3D = /* @__PURE__ */ (ax: number, ay: number, az: number, bx: number, by: number, bz: number): number =>
   ax * bx + ay * by + az * bz
 
 /** Computes the 4D dot product */
@@ -1415,7 +1442,7 @@ export const dot4D = /* @__PURE__ */ (
   bz: number,
   aw: number,
   bw: number
-) => ax * bx + ay * by + az * bz + aw * bw
+): number => ax * bx + ay * by + az * bz + aw * bw
 
 /** Returns x * x + y * y */
 export const lengthSquared2D = /* @__PURE__ */ (x: number, y: number): number => x * x + y * y
@@ -1438,10 +1465,18 @@ export const length4D = /* @__PURE__ */ (x: number, y: number, z: number, w: num
   sqrt(x * x + y * y + z * z + w * w)
 
 /** Gets the angle in radians between two vectors */
-export const angle2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number) => atan2(bx - ax, by - ay)
+export const angle2D = /* @__PURE__ */ (ax: number, ay: number, bx: number, by: number): number =>
+  atan2(bx - ax, by - ay)
 
 /** Gets the angle in radians between two vectors */
-export const angle3D = /* @__PURE__ */ (ax: number, ay: number, az: number, bx: number, by: number, bz: number) =>
+export const angle3D = /* @__PURE__ */ (
+  ax: number,
+  ay: number,
+  az: number,
+  bx: number,
+  by: number,
+  bz: number
+): number =>
   acosSafe(
     num_divSafe(ax * bx + ay * by + az * bz, sqrt((ax * ax + ay * ay + az * bz) * (bx * bx + by * by + az * bz)))
   )
@@ -1456,7 +1491,7 @@ export const angle4D = (
   by: number,
   bz: number,
   bw: number /* @__PURE__ */
-) =>
+): number =>
   acosSafe(
     num_divSafe(
       ax * bx + ay * by + az * bz + aw * bw,
@@ -1464,7 +1499,7 @@ export const angle4D = (
     )
   )
 
-export const clampLengthMultiplier = /* @__PURE__ */ (length: number, minLength: number, maxLength: number) =>
+export const clampLengthMultiplier = /* @__PURE__ */ (length: number, minLength: number, maxLength: number): number =>
   clamp(length, minLength, maxLength) / (length || 1)
 
 /** Check if a point lies within a 2D triangle */
@@ -1477,7 +1512,7 @@ export const pointInTriangle2D = (
   cy: number,
   px: number,
   py: number
-) =>
+): boolean =>
   (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 &&
   (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
   (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0
@@ -1490,5 +1525,5 @@ export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string 
 }
 
 /** Gets the signed area of a 2D triangle */
-export const triangleSignedArea2D = (ax: number, ay: number, bx: number, by: number, cx: number, cy: number) =>
+export const triangleSignedArea2D = (ax: number, ay: number, bx: number, by: number, cx: number, cy: number): number =>
   (by - ay) * (cx - bx) - (bx - ax) * (cy - by)

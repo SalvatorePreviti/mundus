@@ -41,7 +41,7 @@ export const { prototype: function_prototype } = Function
 export const emptyArray: readonly any[] = []
 
 /** A function that does nothing. */
-export const noop = () => {}
+export const noop = (): void => {}
 
 /** Returns !arg */
 export const isFalsy = (arg: unknown): boolean => !arg
@@ -49,32 +49,26 @@ export const isFalsy = (arg: unknown): boolean => !arg
 /** Returns !!arg */
 export const isTruthy = (arg: unknown): boolean => !!arg
 
-/** A function that returns its argument */
-export const fnIdentity = <T>(x: T) => x
-
-/** A function that returns a function that returns its argument */
-export const fnReturnIdentity = () => fnIdentity
-
 /** Returns the first argument */
-export const fnArg0 = <T>(arg: T) => arg
+export const fnArg0 = <T>(arg: T): T => arg
 
 /** Returns the second argument */
-export const fnArg1 = <T>(_: unknown, arg: T) => arg
+export const fnArg1 = <T>(_: unknown, arg: T): T => arg
 
 /** Returns the third argument */
-export const fnArg2 = <T>(_: unknown, _1: unknown, arg: T) => arg
+export const fnArg2 = <T>(_: unknown, _1: unknown, arg: T): T => arg
 
 /** Returns the fourth argument */
-export const fnArg3 = <T>(_: unknown, _1: unknown, _2: unknown, arg: T) => arg
+export const fnArg3 = <T>(_: unknown, _1: unknown, _2: unknown, arg: T): T => arg
 
 /** Returns the fifth argument */
-export const fnArg4 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, arg: T) => arg
+export const fnArg4 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, arg: T): T => arg
 
 /** Returns the sixth argument */
-export const fnArg5 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, _4: unknown, arg: T) => arg
+export const fnArg5 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, _4: unknown, arg: T): T => arg
 
 /** Returns the seventh argument */
-export const fnArg6 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, _4: unknown, _5: unknown, arg: T) => arg
+export const fnArg6 = <T>(_: unknown, _1: unknown, _2: unknown, _3: unknown, _4: unknown, _5: unknown, arg: T): T => arg
 
 /** Returns the eight argument */
 export const fnArg7 = <T>(
@@ -86,7 +80,10 @@ export const fnArg7 = <T>(
   _5: unknown,
   _6: unknown,
   arg: T
-) => arg
+): T => arg
+
+/** A function that returns a function that returns its first argument */
+export const fnFnArg1 = (): ReturnType<typeof fnArg0> => fnArg0
 
 /** Creates a new array given a length and a function used to initialize every element */
 export const array_fromLength = <T>(length: number, fn: (index: number) => T): T[] =>
@@ -102,18 +99,18 @@ export const array_last = <T>(array: ArrayLike<T>): T | undefined => array[array
 export const array_keys = <T>(array: Iterable<T> | ArrayLike<T>): number[] => array_from(array, fnArg1)
 
 /** Given an array, returns the indices on that array sorted by the given sorting function */
-export const array_sortedIndices = <T>(array: ArrayLike<T>, compare: (a: T, b: T) => number) =>
+export const array_sortedIndices = <T>(array: ArrayLike<T>, compare: (a: T, b: T) => number): number[] =>
   array_keys(array).sort((a, b) => compare(array[a], array[b]))
 
 /** Reorder an array following the given indices */
-export const array_reindexed = <T>(array: ArrayLike<T>, indices: readonly number[]) => indices.map((i) => array[i])
+export const array_reindexed = <T>(array: ArrayLike<T>, indices: readonly number[]): T[] => indices.map((i) => array[i])
 
 /** Like array.map, but instead of creating a new array, it replaces the values in place */
 export const array_setEach = <T, A = T, TOut extends { [index: number]: T } = T[]>(
   out: TOut,
   input: ArrayLike<A>,
   fn: (item: A, index: number) => T
-) => {
+): TOut => {
   for (let i = 0; i < input.length; ++i) {
     out[i] = fn(input[i], i)
   }

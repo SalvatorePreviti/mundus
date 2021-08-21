@@ -17,7 +17,8 @@ import {
   vec3_set,
   Vec4In,
   Vec4Out,
-  vec4_set
+  vec4_set,
+  Vec3
 } from './vec-234'
 import type { QuatIn } from './quat'
 
@@ -125,7 +126,7 @@ const _v1 = /* @__PURE__ */ vec3_new()
 /** A temporary vector for calculations */
 const _v2 = /* @__PURE__ */ vec3_new()
 
-const _setupMatrixLookAtVectors = /* @__PURE__ */ (eye: Vec3In, center: Vec3In, up: Vec3In) =>
+const _setupMatrixLookAtVectors = /* @__PURE__ */ (eye: Vec3In, center: Vec3In, up: Vec3In): Vec3 =>
   vec3_cross(_v1, _v2, vec3_normalize(vec3_cross(_v0, up, vec3_normalize(vec3_sub(_v2, eye, center)))))
 
 /** Transforms a Vec3 with a 4x4 matrix */
@@ -236,7 +237,7 @@ export const mat4_setScaling = <T extends Mat4Out>(out: T, x: number, y: number,
 }
 
 /** Creates a new 4x4 matrix backed by 64 bit floating points */
-export const mat4_newFloat64 = /* @__PURE__ */ () => mat4_setDiagonalIdentity(new Float64Array(16))
+export const mat4_newFloat64 = /* @__PURE__ */ (): Mat4 => mat4_setDiagonalIdentity(new Float64Array(16))
 
 /** Makes an identity matrix. */
 export const mat4_identity: Mat4IdentityFunction = /* @__PURE__ */ mat4_set
@@ -258,13 +259,13 @@ let _mat4TempCount = 0
  * @param fn The function to execute with a temporarily allocated matrix
  * @returns fn(temp)
  */
-export const mat4_withTemp = <R>(fn: (temp: Float32Array) => R) => {
+export const mat4_withTemp = <R>(fn: (temp: Float32Array) => R): R => {
   const r = fn((_mat4Temp[_mat4TempCount] = mat4_identity(_mat4Temp[_mat4TempCount++])))
   --_mat4TempCount
   return r
 }
 
-const _mat_destructure = /* @__PURE__ */ (name: string = 'a') =>
+const _mat_destructure = /* @__PURE__ */ (name: string = 'a'): string =>
   `let ${array_fromLength(16, (i) => `${name}${i}=${name}[${i}]`)};`
 
 /** Multiplies two matrices */
@@ -336,7 +337,7 @@ export const mat4_fromRotation = <T extends Mat4Out = Float32Array>(
 }
 
 /** Makex an X axis rotation matrix */
-export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number) => {
+export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
   const s = sin(angleInRadians)
   const c = cos(angleInRadians)
   out = mat4_identity(out)
@@ -348,7 +349,7 @@ export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | un
 }
 
 /** Makex an Y axis rotation matrix */
-export const mat4_fromYRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number) => {
+export const mat4_fromYRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
   const s = sin(angleInRadians)
   const c = cos(angleInRadians)
   out = mat4_identity(out)
@@ -360,7 +361,7 @@ export const mat4_fromYRotation = <T extends Mat4Out = Float32Array>(out: T | un
 }
 
 /** Makex a Z axis rotation matrix */
-export const mat4_fromZRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number) => {
+export const mat4_fromZRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
   const s = sin(angleInRadians)
   const c = cos(angleInRadians)
   out = mat4_identity(out)
@@ -378,7 +379,7 @@ export const mat4_fromQuaternion = <T extends Mat4Out = Float32Array>(
   translationX: number = 0,
   translationY: number = 0,
   translationZ: number = 0
-) => {
+): T => {
   const x2 = x * 2
   const y2 = y * 2
   const z2 = z * 2
@@ -412,7 +413,7 @@ export const mat4_fromQuaternion = <T extends Mat4Out = Float32Array>(
   )
 }
 
-export const mat4_toString = (matrix: Mat4In) => {
+export const mat4_toString = (matrix: Mat4In): string => {
   const strings: string[] = []
   let result = ''
   let maxLen = 5
@@ -431,7 +432,24 @@ export const mat4_toString = (matrix: Mat4In) => {
 }
 
 /** Gets the determinant of a 4x4 matrix */
-export const mat4_determinant = ([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15]: Mat4In) => {
+export const mat4_determinant = ([
+  a0,
+  a1,
+  a2,
+  a3,
+  a4,
+  a5,
+  a6,
+  a7,
+  a8,
+  a9,
+  a10,
+  a11,
+  a12,
+  a13,
+  a14,
+  a15
+]: Mat4In): number => {
   const b0 = a0 * a5 - a1 * a4
   const b1 = a0 * a6 - a2 * a4
   const b2 = a1 * a6 - a2 * a5
@@ -462,7 +480,7 @@ export const mat4_perspective = <T extends Mat4Out>(
   aspectRatio: number,
   near: number,
   far: number
-) => {
+): T => {
   const nf = near - far
   const f = 1 / tan(fovyRadians / 2)
   out.fill(0)[0] = f / aspectRatio
@@ -479,7 +497,7 @@ export const mat4_perspectiveInfinity = <T extends Mat4Out>(
   fovyRadians: number,
   aspectRatio: number,
   near: number
-) => {
+): T => {
   mat4_perspective(out, fovyRadians, aspectRatio, near, 0)
   out[10] = -1
   out[14] = -2 * near
@@ -529,7 +547,7 @@ export const mat4_perspectiveFromFieldOfView = <T extends Mat4Out = Float32Array
   rightAngleInRadians: number,
   near: number,
   far: number
-) => {
+): T => {
   upAngleInRadians = tan(upAngleInRadians)
   downAngleInRadians = tan(downAngleInRadians)
   leftAngleInRadians = tan(leftAngleInRadians)
@@ -566,7 +584,7 @@ export const mat4_fromOrtho = <T extends Mat4Out = Float32Array>(
   top: number,
   near: number,
   far: number
-) => {
+): T => {
   const lr = left - right
   const bt = bottom - top
   const nf = near - far
@@ -596,7 +614,7 @@ export const mat4_lookAt = <T extends Mat4Out = Float32Array>(
   eye: Vec3In,
   center: Vec3In,
   up: Vec3In
-) => {
+): T => {
   _setupMatrixLookAtVectors(eye, center, up)
   return mat4_set(
     out,
@@ -624,7 +642,7 @@ export const mat4_targetTo = <T extends Mat4Out = Float32Array>(
   eye: Vec3In,
   target: Vec3In,
   up: Vec3In
-) => {
+): T => {
   _setupMatrixLookAtVectors(eye, target, up)
   return mat4_set(out, _v0.x, _v0.y, _v0.z, 0, _v1.x, _v1.y, _v1.z, 0, _v2.x, _v2.y, _v2.z, 0, eye.x, eye.y, eye.z)
 }
@@ -633,7 +651,7 @@ export const mat4_invert = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
   [a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15]: Mat4In,
   determinant?: number
-) => {
+): T => {
   const b0 = a0 * a5 - a1 * a4
   const b1 = a0 * a6 - a2 * a4
   const b2 = a0 * a7 - a3 * a4
@@ -668,5 +686,5 @@ export const mat4_invert = <T extends Mat4Out = Float32Array>(
   return vec_divScalarSafe(out, out, determinant || b0 * b11 - b1 * b10 + b2 * b9 + b3 * b8 - b4 * b7 + b5 * b6)
 }
 
-export const mat4_adjoint = <T extends Mat4Out = Float32Array>(out: T | undefined, matrix: Mat4In) =>
+export const mat4_adjoint = <T extends Mat4Out = Float32Array>(out: T | undefined, matrix: Mat4In): T =>
   mat4_invert(out, matrix, 1)

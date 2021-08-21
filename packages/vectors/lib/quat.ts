@@ -164,10 +164,10 @@ export const quat_rotateZ = (out: QuatOut, { x, y, z, w }: QuatIn, angleInRadian
 }
 
 /** Gets the W of a quaternion given the x,y,z values assuming the quaternion is 1 unit length */
-export const quat_getCalculatedW = (x: number, y: number, z: number) => sqrt(abs(1 - lengthSquared3D(x, y, z)))
+export const quat_getCalculatedW = (x: number, y: number, z: number): number => sqrt(abs(1 - lengthSquared3D(x, y, z)))
 
 /** Overrides the w component of a quat from the X, Y, and Z components assuming the quaternion is 1 unit length */
-export const quat_calculateW = (quaternion: Quat) => {
+export const quat_calculateW = (quaternion: Quat): Quat => {
   quaternion.w = quat_getCalculatedW(quaternion.x, quaternion.y, quaternion.z)
   return quaternion
 }

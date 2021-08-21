@@ -232,7 +232,7 @@ let _vec4TempCount = 0
  * @param fn The function to execute with a temporarily allocated vector
  * @returns fn(temp)
  */
-export const vec4_withTemp = <R>(fn: (temp: Vec4) => R) => {
+export const vec4_withTemp = <R>(fn: (temp: Vec4) => R): R => {
   const r = fn((_vec4Temp[_vec4TempCount] = vec4_set(_vec4Temp[_vec4TempCount++] || ({} as any))))
   --_vec4TempCount
   return r
@@ -243,40 +243,40 @@ export const vec3_withTemp = vec4_withTemp
 export const vec2_withTemp = vec4_withTemp
 
 /** Returns the sum of all components of a vector */
-export const vec2_sum = (v: Vec2In) => v.x + v.y
+export const vec2_sum = (v: Vec2In): number => v.x + v.y
 
 /** Returns the sum of all components of a vector */
-export const vec3_sum = (v: Vec3In) => v.x + v.y + v.z
+export const vec3_sum = (v: Vec3In): number => v.x + v.y + v.z
 
 /** Returns the sum of all components of a vector */
-export const vec4_sum = (v: Vec4In) => v.x + v.y + v.z + v.w
+export const vec4_sum = (v: Vec4In): number => v.x + v.y + v.z + v.w
 
 /** Returns the product of all components of a vector */
-export const vec2_product = (v: Vec2In) => v.x * v.y
+export const vec2_product = (v: Vec2In): number => v.x * v.y
 
 /** Returns the product of all components of a vector */
-export const vec3_product = (v: Vec3In) => v.x * v.y * v.z
+export const vec3_product = (v: Vec3In): number => v.x * v.y * v.z
 
 /** Returns the product of all components of a vector */
-export const vec4_product = (v: Vec4In) => v.x * v.y * v.z * v.w
+export const vec4_product = (v: Vec4In): number => v.x * v.y * v.z * v.w
 
 /** Returns the value of the smallest component in a vector */
-export const vec2_minComponent = (v: Vec2In) => min(v.x, v.y)
+export const vec2_minComponent = (v: Vec2In): number => min(v.x, v.y)
 
 /** Returns the value of the smallest component in a vector */
-export const vec3_minComponent = (v: Vec3In) => min(min(v.x, v.y), v.z)
+export const vec3_minComponent = (v: Vec3In): number => min(min(v.x, v.y), v.z)
 
 /** Returns the value of the smallest component in a vector */
-export const vec4_minComponent = (v: Vec4In) => min(min(min(v.x, v.y), v.z), v.w)
+export const vec4_minComponent = (v: Vec4In): number => min(min(min(v.x, v.y), v.z), v.w)
 
 /** Returns the value of the largest component in a vector */
-export const vec2_maxComponent = (v: Vec2In) => max(v.x, v.y)
+export const vec2_maxComponent = (v: Vec2In): number => max(v.x, v.y)
 
 /** Returns the value of the largest component in a vector */
-export const vec3_maxComponent = (v: Vec3In) => max(max(v.x, v.y), v.z)
+export const vec3_maxComponent = (v: Vec3In): number => max(max(v.x, v.y), v.z)
 
 /** Returns the value of the largest component in a vector */
-export const vec4_maxComponent = (v: Vec4In) => max(max(max(v.x, v.y), v.z), v.w)
+export const vec4_maxComponent = (v: Vec4In): number => max(max(max(v.x, v.y), v.z), v.w)
 
 /** Copies a 2D vector to another */
 export const vec2_copy = <R extends Vec2Out = Vec2Out>(out: R, copy: Vec2In): R => vec2_set(out, copy.x, copy.y)
@@ -373,13 +373,13 @@ export const vec4_some = /* @__PURE__ */ <T extends Vec4In = Vec4In>(
 ): v is T => !!v && (fn(v.x) || fn(v.y) || fn(v.z) || fn(v.w))
 
 /** Computes true if two 2D vectors are equals */
-export const vec2_equals = /* @__PURE__ */ (a: Vec2In, b: Vec2In) => a.x === b.x && a.y === b.y
+export const vec2_equals = /* @__PURE__ */ (a: Vec2In, b: Vec2In): boolean => a.x === b.x && a.y === b.y
 
 /** Computes true if two 3D vectors are equals */
-export const vec3_equals = /* @__PURE__ */ (a: Vec3In, b: Vec3In) => a.x === b.x && a.y === b.y && a.z === b.z
+export const vec3_equals = /* @__PURE__ */ (a: Vec3In, b: Vec3In): boolean => a.x === b.x && a.y === b.y && a.z === b.z
 
 /** Computes true if two 4D vectors are equals */
-export const vec4_equals = /* @__PURE__ */ (a: Vec4In, b: Vec4In) => vec3_equals(a, b) && a.w === b.w
+export const vec4_equals = /* @__PURE__ */ (a: Vec4In, b: Vec4In): boolean => vec3_equals(a, b) && a.w === b.w
 
 /** Computes true if the given 2D vector is exactly {x:0, y:0} */
 export const vec2_isZero = /* @__PURE__ */ ((v) => vec2_every(v, isZero)) as IsVec2Fn
@@ -445,31 +445,31 @@ export const vec3_isPow10 = /* @__PURE__ */ ((v) => !v || vec3_every(v, isPow2))
 export const vec4_isPow10 = /* @__PURE__ */ ((v) => !v || vec4_every(v, isPow2)) as IsVec4Fn
 
 /** Gets the angle in radians between two vectors */
-export const vec2_angle = (a: Vec2In, b: Vec2In) => angle2D(a.x, a.y, b.x, b.y)
+export const vec2_angle = (a: Vec2In, b: Vec2In): number => angle2D(a.x, a.y, b.x, b.y)
 
 /** Gets the angle in radians between two vectors */
-export const vec3_angle = (a: Vec3In, b: Vec3In) => angle3D(a.x, a.y, a.z, b.x, b.y, b.z)
+export const vec3_angle = (a: Vec3In, b: Vec3In): number => angle3D(a.x, a.y, a.z, b.x, b.y, b.z)
 
 /** Gets the angle in radians between two vectors */
-export const vec4_angle = (a: Vec4In, b: Vec4In) => angle4D(a.x, a.y, a.z, a.w, b.x, b.y, b.z, b.w)
+export const vec4_angle = (a: Vec4In, b: Vec4In): number => angle4D(a.x, a.y, a.z, a.w, b.x, b.y, b.z, b.w)
 
 /** Gets the squared length of a vector */
-export const vec2_lengthSquared = (a: Vec2In) => lengthSquared2D(a.x, a.y)
+export const vec2_lengthSquared = (a: Vec2In): number => lengthSquared2D(a.x, a.y)
 
 /** Gets the squared length of a vector */
-export const vec3_lengthSquared = (a: Vec3In) => lengthSquared3D(a.x, a.y, a.z)
+export const vec3_lengthSquared = (a: Vec3In): number => lengthSquared3D(a.x, a.y, a.z)
 
 /** Gets the squared length of a vector */
-export const vec4_lengthSquared = (a: Vec4In) => lengthSquared4D(a.x, a.y, a.z, a.w)
+export const vec4_lengthSquared = (a: Vec4In): number => lengthSquared4D(a.x, a.y, a.z, a.w)
 
 /** Gets the length (magnitude) of a vector */
-export const vec2_length = (a: Vec2In) => sqrt(vec2_lengthSquared(a))
+export const vec2_length = (a: Vec2In): number => sqrt(vec2_lengthSquared(a))
 
 /** Gets the length (magnitude) of a vector */
-export const vec3_length = (a: Vec3In) => sqrt(vec3_lengthSquared(a))
+export const vec3_length = (a: Vec3In): number => sqrt(vec3_lengthSquared(a))
 
 /** Gets the length (magnitude) of a vector */
-export const vec4_length = (a: Vec4In) => sqrt(vec4_lengthSquared(a))
+export const vec4_length = (a: Vec4In): number => sqrt(vec4_lengthSquared(a))
 
 /** Gets the squared euclidean istance between two vectors */
 export const vec2_distanceSquared = (a: Vec2In, b: Vec2In): number => lengthSquared2D(a.x - b.x, a.y - b.y)
@@ -491,39 +491,39 @@ export const vec3_distance = (a: Vec3In, b: Vec3In): number => sqrt(vec3_distanc
 export const vec4_distance = (a: Vec4In, b: Vec4In): number => sqrt(vec4_distanceSquared(a, b))
 
 /** Computes true if the given 2D vector is very near to be {x:0, y:0}, given the optional tolerance */
-export const vec2_isNearlyZero = /* @__PURE__ */ (v: Vec2In, epsilon?: number) =>
+export const vec2_isNearlyZero = /* @__PURE__ */ (v: Vec2In, epsilon?: number): boolean =>
   isNearlyZero(v.x, epsilon) && isNearlyZero(v.y, epsilon)
 
 /** Computes true if the given 3D vector is very near to be {x:0, y:0, z:0}, given the optional tolerance */
-export const vec3_isNearlyZero = /* @__PURE__ */ (v: Vec3In, epsilon?: number) =>
+export const vec3_isNearlyZero = /* @__PURE__ */ (v: Vec3In, epsilon?: number): boolean =>
   isNearlyZero(v.x, epsilon) && isNearlyZero(v.y, epsilon) && isNearlyZero(v.z, epsilon)
 
 /** Computes true if the given 4D vector is very near to be {x:0, y:0, z:0, w:0}, given the optional tolerance */
-export const vec4_isNearlyZero = /* @__PURE__ */ (v: Vec4In, epsilon?: number) =>
+export const vec4_isNearlyZero = /* @__PURE__ */ (v: Vec4In, epsilon?: number): boolean =>
   vec3_isNearlyZero(v, epsilon) && isNearlyZero(v.w, epsilon)
 
 /** Computes true if two 2D vectors are equal given an absolute tolerance. */
-export const vec2_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec2In, b: Vec2In, epsilon?: number) =>
+export const vec2_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec2In, b: Vec2In, epsilon?: number): boolean =>
   isNearlyEqualAbsolute(a.x, b.x, epsilon) && isNearlyEqualAbsolute(a.y, b.y, epsilon)
 
 /** Computes true if two 3D vectors are equal given an absolute tolerance. */
-export const vec3_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec3In, b: Vec3In, epsilon?: number) =>
+export const vec3_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec3In, b: Vec3In, epsilon?: number): boolean =>
   vec2_isNearlyEqualAbsolute(a, b, epsilon) && isNearlyEqualAbsolute(a.z, b.z, epsilon)
 
 /** Computes true if two 2D vectors are equal given a relative tolerance. */
-export const vec2_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec2In, b: Vec2In, epsilon?: number) =>
+export const vec2_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec2In, b: Vec2In, epsilon?: number): boolean =>
   isNearlyEqualRelative(a.x, b.x, epsilon) && isNearlyEqualRelative(a.y, b.y, epsilon)
 
 /** Computes true if two 3D vectors are equal given a relative tolerance. */
-export const vec3_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec3In, b: Vec3In, epsilon?: number) =>
+export const vec3_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec3In, b: Vec3In, epsilon?: number): boolean =>
   vec2_isNearlyEqualRelative(a, b, epsilon) && isNearlyEqualRelative(a.z, b.z, epsilon)
 
 /** Computes true if two 4D vectors are equal given a relative tolerance. */
-export const vec4_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec4In, b: Vec4In, epsilon?: number) =>
+export const vec4_isNearlyEqualAbsolute = /* @__PURE__ */ (a: Vec4In, b: Vec4In, epsilon?: number): boolean =>
   vec3_isNearlyEqualAbsolute(a, b, epsilon) && isNearlyEqualAbsolute(a.w, b.w, epsilon)
 
 /** Computes true if two 4D vectors are equal given a relative tolerance. */
-export const vec4_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec4In, b: Vec4In, epsilon?: number) =>
+export const vec4_isNearlyEqualRelative = /* @__PURE__ */ (a: Vec4In, b: Vec4In, epsilon?: number): boolean =>
   vec3_isNearlyEqualRelative(a, b, epsilon) && isNearlyEqualRelative(a.w, b.w, epsilon)
 
 /** Negation. out = -v = {x:-v.x, y:-v.y} */
@@ -545,281 +545,288 @@ export const vec3_inverse = /* @__PURE__ */ vec3_makeSetEach(num_inverse)
 export const vec4_inverse = /* @__PURE__ */ vec4_makeSetEach(num_inverse)
 
 /** Adds every component of the two given vectors together. */
-export const vec2_add = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_add = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, a.x + b.x, a.y + b.y)
 
 /** Adds every component of the two given vectors together. */
-export const vec3_add = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_add = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.x + b.x, a.y + b.y, a.z + b.z)
 
 /** a + b * scale */
-export const vec2_addScale = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, scale: Vec2In) =>
+export const vec2_addScaleVector = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, scale: Vec2In): R =>
   vec2_set(out, a.x + b.x * scale.x, a.y + b.y * scale.y)
 
 /** a + b * scale */
-export const vec3_addScale = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, scale: Vec3In) =>
+export const vec3_addScaleVector = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, scale: Vec3In): R =>
   vec3_set(out, a.x + b.x * scale.x, a.y + b.y * scale.y, a.z + b.z * scale.z)
 
 /** a + b * scale */
-export const vec4_addScale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, scale: Vec4In) =>
+export const vec4_addScaleVector = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, scale: Vec4In): R =>
   vec4_set(out, a.x + b.x * scale.x, a.y + b.y * scale.y, a.z + b.z * scale.z, a.w + b.w * scale.w)
 
 /** a + b * scale */
-export const vec2_addScaleScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, scale: number) =>
+export const vec2_addScale = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, scale: number): R =>
   vec2_set(out, a.x + b.x * scale, a.y + b.y * scale)
 
 /** a + b * scale */
-export const vec3_addScaleScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, scale: number) =>
+export const vec3_addScale = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, scale: number): R =>
   vec3_set(out, a.x + b.x * scale, a.y + b.y * scale, a.z + b.z * scale)
 
 /** a + b * scale */
-export const vec4_addScaleScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, scale: number) =>
+export const vec4_addScale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, scale: number): R =>
   vec4_set(out, a.x + b.x * scale, a.y + b.y * scale, a.z + b.z * scale, a.w + b.w * scale)
 
 /** Adds every component of the two given vectors together. */
-export const vec4_add = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_add = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec2_addScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
+export const vec2_addScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
   vec2_set(out, a.x + b, a.y + b)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec3_addScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_addScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, a.x + b, a.y + b, a.z + b)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec4_addScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_addScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, a.x + b, a.y + b, a.z + b, a.w + b)
 
 /** Computes a - b */
-export const vec2_sub = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_sub = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, a.x - b.x, a.y - b.y)
 
 /** Computes a - b */
-export const vec3_sub = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_sub = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.x - b.x, a.y - b.y, a.z - b.z)
 
 /** Computes a - b */
-export const vec4_sub = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_sub = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w)
 
 /** Computes a - b */
-export const vec2_subScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) => vec2_addScalar(out, a, -b)
+export const vec2_subScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
+  vec2_addScalar(out, a, -b)
 
 /** Computes a - b */
-export const vec3_subScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) => vec3_addScalar(out, a, -b)
+export const vec3_subScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
+  vec3_addScalar(out, a, -b)
 
 /** Computes a - b */
-export const vec4_subScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) => vec4_addScalar(out, a, -b)
+export const vec4_subScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
+  vec4_addScalar(out, a, -b)
 
 /** Computes a - b */
-export const vec2_scalarSub = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
+export const vec2_scalarSub = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
   vec2_set(out, a - b.x, a - b.y)
 
 /** Computes a - b */
-export const vec3_scalarSub = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In) =>
+export const vec3_scalarSub = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In): R =>
   vec3_set(out, a - b.x, a - b.y, a - b.z)
 
 /** Computes a - b */
-export const vec4_scalarSub = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In) =>
+export const vec4_scalarSub = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In): R =>
   vec4_set(out, a - b.x, a - b.y, a - b.z, a - b.w)
 
 /** Computes a * b, component by component multiplication */
-export const vec2_mul = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_mul = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, a.x * b.x, a.y * b.y)
 
 /** Computes a * b, component by component multiplication */
-export const vec3_mul = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_mul = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.x * b.x, a.y * b.y, a.z * b.z)
 
 /** Computes a * b, component by component multiplication */
-export const vec4_mul = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_mul = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w)
 
 /** Computes a * b, component by component multiplication */
-export const vec2_scale = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) => vec2_set(out, a.x * b, a.y * b)
+export const vec2_scale = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
+  vec2_set(out, a.x * b, a.y * b)
 
 /** Computes a * b, component by component multiplication */
-export const vec3_scale = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_scale = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, a.x * b, a.y * b, a.z * b)
 
 /** Computes a * b, component by component multiplication */
-export const vec4_scale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_scale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, a.x * b, a.y * b, a.z * b, a.w * b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec2_div = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_div = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, a.x / b.x, a.y / b.y)
 
 /** Computes a / b, component by component divtiplication */
-export const vec3_div = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_div = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.x / b.x, a.y / b.y, a.z / b.z)
 
 /** Computes a / b, component by component divtiplication */
-export const vec4_div = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_div = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w)
 
 /** Computes a / b, component by component divtiplication */
-export const vec2_divScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) => vec2_scale(out, a, 1 / b)
+export const vec2_divScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
+  vec2_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec3_divScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) => vec3_scale(out, a, 1 / b)
+export const vec3_divScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
+  vec3_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec4_divScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) => vec4_scale(out, a, 1 / b)
+export const vec4_divScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
+  vec4_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec2_scalarDiv = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
+export const vec2_scalarDiv = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
   vec2_set(out, a / b.x, a / b.y)
 
 /** Computes a / b, component by component divtiplication */
-export const vec3_scalarDiv = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In) =>
+export const vec3_scalarDiv = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In): R =>
   vec3_set(out, a / b.x, a / b.y, a / b.z)
 
 /** Computes a / b, component by component divtiplication */
-export const vec4_scalarDiv = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In) =>
+export const vec4_scalarDiv = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In): R =>
   vec4_set(out, a / b.x, a / b.y, a / b.z, a / b.w)
 
 /** Computes a % b, component by component modtiplication */
-export const vec2_mod = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_mod = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, a.x % b.x, a.y % b.y)
 
 /** Computes a % b, component by component modtiplication */
-export const vec3_mod = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_mod = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.x % b.x, a.y % b.y, a.z % b.z)
 
 /** Computes a % b, component by component modtiplication */
-export const vec4_mod = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_mod = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w)
 
 /** Computes a % b, component by component modtiplication */
-export const vec2_modScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
+export const vec2_modScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
   vec2_set(out, a.x % b, a.y % b)
 
 /** Computes a % b, component by component modtiplication */
-export const vec3_modScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_modScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, a.x % b, a.y % b, a.z % b)
 
 /** Computes a % b, component by component modtiplication */
-export const vec4_modScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_modScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, a.x % b, a.y % b, a.z % b, a.w % b)
 
 /** Computes a % b, component by component modtiplication */
-export const vec2_scalarMod = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
+export const vec2_scalarMod = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
   vec2_set(out, a % b.x, a % b.y)
 
 /** Computes a % b, component by component modtiplication */
-export const vec3_scalarMod = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In) =>
+export const vec3_scalarMod = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In): R =>
   vec3_set(out, a % b.x, a % b.y, a % b.z)
 
 /** Computes a % b, component by component modtiplication */
-export const vec4_scalarMod = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In) =>
+export const vec4_scalarMod = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In): R =>
   vec4_set(out, a % b.x, a % b.y, a % b.z, a % b.w)
 
-export const vec2_normalize = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In = out) =>
+export const vec2_normalize = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In = out): R =>
   vec2_divScalar(out, v, vec2_length(v) || 1)
 
-export const vec3_normalize = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In = out) =>
+export const vec3_normalize = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In = out): R =>
   vec3_divScalar(out, v, vec3_length(v) || 1)
 
-export const vec4_normalize = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In = out) =>
+export const vec4_normalize = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In = out): R =>
   vec4_divScalar(out, v, vec4_length(v) || 1)
 
 /** Computes a ** b, component by component */
-export const vec2_pow = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, exponent: Vec2In) =>
+export const vec2_pow = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, exponent: Vec2In): R =>
   vec2_set(out, v.x ** exponent.x, v.y ** exponent.y)
 
 /** Computes a ** b, component by component */
-export const vec3_pow = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, exponent: Vec3In) =>
+export const vec3_pow = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, exponent: Vec3In): R =>
   vec3_set(out, v.x ** exponent.x, v.y ** exponent.y, v.z ** exponent.z)
 
 /** Computes a ** b, component by component */
-export const vec4_pow = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, exponent: Vec4In) =>
+export const vec4_pow = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, exponent: Vec4In): R =>
   vec4_set(out, v.x ** exponent.x, v.y ** exponent.y, v.z ** exponent.z, v.w ** exponent.w)
 
 /** Computes a ** b, component by component */
-export const vec2_powScalar = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, exponent: number) =>
+export const vec2_powScalar = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, exponent: number): R =>
   vec2_set(out, v.x ** exponent, v.y ** exponent)
 
 /** Computes a ** b, component by component */
-export const vec3_powScalar = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, exponent: number) =>
+export const vec3_powScalar = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, exponent: number): R =>
   vec3_set(out, v.x ** exponent, v.y ** exponent, v.z ** exponent)
 
 /** Computes a ** b, component by component */
-export const vec4_powScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, exponent: number) =>
+export const vec4_powScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, exponent: number): R =>
   vec4_set(out, v.x ** exponent, v.y ** exponent, v.z ** exponent, v.w ** exponent)
 
 /** Computes a ** b, component by component */
-export const vec2_scalarPow = <R extends Vec2Out = Vec2Out>(out: R, v: number, exponent: Vec2In) =>
+export const vec2_scalarPow = <R extends Vec2Out = Vec2Out>(out: R, v: number, exponent: Vec2In): R =>
   vec2_set(out, v ** exponent.x, v ** exponent.y)
 
 /** Computes a ** b, component by component */
-export const vec3_scalarPow = <R extends Vec3Out = Vec3Out>(out: R, v: number, exponent: Vec3In) =>
+export const vec3_scalarPow = <R extends Vec3Out = Vec3Out>(out: R, v: number, exponent: Vec3In): R =>
   vec3_set(out, v ** exponent.x, v ** exponent.y, v ** exponent.z)
 
 /** Computes a ** b, component by component */
-export const vec4_scalarPow = <R extends Vec4Out = Vec4Out>(out: R, v: number, exponent: Vec4In) =>
+export const vec4_scalarPow = <R extends Vec4Out = Vec4Out>(out: R, v: number, exponent: Vec4In): R =>
   vec4_set(out, v ** exponent.x, v ** exponent.y, v ** exponent.z, v ** exponent.w)
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_min = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_min = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, min(a.x, b.x), min(a.y, b.y))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_min = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_min = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_min = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_min = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z), min(a.w, b.w))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_minScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
+export const vec2_minScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
   vec2_set(out, min(a.x, b), min(a.y, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_minScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_minScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, min(a.x, b), min(a.y, b), min(a.z, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_minScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_minScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, min(a.x, b), min(a.y, b), min(a.z, b), min(a.w, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_max = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_max = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, max(a.x, b.x), max(a.y, b.y))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_max = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_max = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_max = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_max = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z), max(a.w, b.w))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_maxScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
+export const vec2_maxScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
   vec2_set(out, max(a.x, b), max(a.y, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_maxScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_maxScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, max(a.x, b), max(a.y, b), max(a.z, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_maxScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_maxScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, max(a.x, b), max(a.y, b), max(a.z, b), max(a.w, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_clamp = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, minimum: Vec2In, maximum: Vec2In) =>
+export const vec2_clamp = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, minimum: Vec2In, maximum: Vec2In): R =>
   vec2_set(out, clamp(v.x, minimum.x, maximum.x), clamp(v.y, minimum.y, maximum.y))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_clamp = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, minimum: Vec3In, maximum: Vec3In) =>
+export const vec3_clamp = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, minimum: Vec3In, maximum: Vec3In): R =>
   vec3_set(out, clamp(v.x, minimum.x, maximum.x), clamp(v.y, minimum.y, maximum.y), clamp(v.z, minimum.z, maximum.z))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_clamp = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minimum: Vec4In, maximum: Vec4In) =>
+export const vec4_clamp = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minimum: Vec4In, maximum: Vec4In): R =>
   vec4_set(
     out,
     clamp(v.x, minimum.x, maximum.x),
@@ -829,15 +836,28 @@ export const vec4_clamp = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minim
   )
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_clampScalar = <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In, minimum?: number, maximum?: number) =>
-  vec2_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum))
+export const vec2_clampScalar = <R extends Vec2Out = Vec2Out>(
+  out: R,
+  v: Vec2In,
+  minimum?: number,
+  maximum?: number
+): R => vec2_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_clampScalar = <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In, minimum?: number, maximum?: number) =>
-  vec3_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum), clamp(v.z, minimum, maximum))
+export const vec3_clampScalar = <R extends Vec3Out = Vec3Out>(
+  out: R,
+  v: Vec3In,
+  minimum?: number,
+  maximum?: number
+): R => vec3_set(out, clamp(v.x, minimum, maximum), clamp(v.y, minimum, maximum), clamp(v.z, minimum, maximum))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_clampScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, minimum?: number, maximum?: number) =>
+export const vec4_clampScalar = <R extends Vec4Out = Vec4Out>(
+  out: R,
+  v: Vec4In,
+  minimum?: number,
+  maximum?: number
+): R =>
   vec4_set(
     out,
     clamp(v.x, minimum, maximum),
@@ -847,15 +867,15 @@ export const vec4_clampScalar = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In,
   )
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec2_euclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_euclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_set(out, euclideanModulo(a.x, b.x), euclideanModulo(a.y, b.y))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec3_euclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_euclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, euclideanModulo(a.x, b.x), euclideanModulo(a.y, b.y), euclideanModulo(a.z, b.z))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec4_euclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_euclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_set(
     out,
     euclideanModulo(a.x, b.x),
@@ -865,27 +885,27 @@ export const vec4_euclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: Vec
   )
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec2_euclideanModuloScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
+export const vec2_euclideanModuloScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
   vec2_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec3_euclideanModuloScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
+export const vec3_euclideanModuloScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
   vec3_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b), euclideanModulo(a.z, b))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec4_euclideanModuloScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
+export const vec4_euclideanModuloScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
   vec4_set(out, euclideanModulo(a.x, b), euclideanModulo(a.y, b), euclideanModulo(a.z, b), euclideanModulo(a.w, b))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec2_scalarEuclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
+export const vec2_scalarEuclideanModulo = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
   vec2_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec3_scalarEuclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In) =>
+export const vec3_scalarEuclideanModulo = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In): R =>
   vec3_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y), euclideanModulo(a, b.z))
 
 /** Computes the euclidean modulo ((x % m) + m) % m. Wraps a natural number around a maximum value. */
-export const vec4_scalarEuclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In) =>
+export const vec4_scalarEuclideanModulo = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In): R =>
   vec4_set(out, euclideanModulo(a, b.x), euclideanModulo(a, b.y), euclideanModulo(a, b.z), euclideanModulo(a, b.w))
 
 /**
@@ -1192,39 +1212,39 @@ export const vec3_int32_not = /* @__PURE__ */ vec2_makeSetEach(int32_not)
 export const vec4_int32_not = /* @__PURE__ */ vec2_makeSetEach(int32_not)
 
 /** Binary and of each components of two vectors */
-export const vec2_int32_and = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2) =>
+export const vec2_int32_and = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
   vec2_set(out, a.x & b.x, a.y & b.y)
 
 /** Binary and of each components of two vectors */
-export const vec3_int32_and = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3) =>
+export const vec3_int32_and = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
   vec3_set(out, a.x & b.x, a.y & b.y, a.z & b.z)
 
 /** Binary and of each components of two vectors */
-export const vec4_int32_and = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4) =>
+export const vec4_int32_and = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
   vec4_set(out, a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w)
 
 /** Binary or of each components of two vectors */
-export const vec2_int32_or = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2) =>
+export const vec2_int32_or = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
   vec2_set(out, a.x | b.x, a.y | b.y)
 
 /** Binary or of each components of two vectors */
-export const vec3_int32_or = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3) =>
+export const vec3_int32_or = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
   vec3_set(out, a.x | b.x, a.y | b.y, a.z | b.z)
 
 /** Binary or of each components of two vectors */
-export const vec4_int32_or = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4) =>
+export const vec4_int32_or = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
   vec4_set(out, a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w)
 
 /** Binary xor of each components of two vectors */
-export const vec2_int32_xor = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2) =>
+export const vec2_int32_xor = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
   vec2_set(out, a.x ^ b.x, a.y ^ b.y)
 
 /** Binary xor of each components of two vectors */
-export const vec3_int32_xor = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3) =>
+export const vec3_int32_xor = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
   vec3_set(out, a.x ^ b.x, a.y ^ b.y, a.z ^ b.z)
 
 /** Binary xor of each components of two vectors */
-export const vec4_int32_xor = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4) =>
+export const vec4_int32_xor = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
   vec4_set(out, a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w)
 
 /**
@@ -1591,10 +1611,10 @@ export const vec3_trunc = /* @__PURE__ */ vec3_makeSetEach(trunc)
 export const vec4_trunc = /* @__PURE__ */ vec4_makeSetEach(trunc)
 
 /** Computes the 2D cross product */
-export const vec2_cross = (a: Vec2In, b: Vec2In) => perpDotProduct2D(a.x, a.y, b.x, b.y)
+export const vec2_cross = (a: Vec2In, b: Vec2In): number => perpDotProduct2D(a.x, a.y, b.x, b.y)
 
 /** Computes the cross product of two vectors in a 3D space */
-export const vec3_cross = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_cross = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_set(out, a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x)
 
 /** Computes the dot product between two vectors */
@@ -1607,7 +1627,7 @@ export const vec3_dot = (a: Vec3In, b: Vec3In): number => dot3D(a.x, a.y, a.z, b
 export const vec4_dot = (a: Vec4In, b: Vec4In): number => dot4D(a.x, a.y, a.z, a.w, b.x, b.y, b.z, b.w)
 
 /** Computes the cross product of three vectors in a 4D space */
-export const vec4_cross = <R extends Vec4Out = Vec4Out>(out: R, { x, y, z, w }: Vec4In, V: Vec4In, W: Vec4In) => {
+export const vec4_cross = <R extends Vec4Out = Vec4Out>(out: R, { x, y, z, w }: Vec4In, V: Vec4In, W: Vec4In): R => {
   const A = V.x * W.y - V.y * W.x
   const B = V.x * W.z - V.z * W.x
   const C = V.x * W.w - V.w * W.x
@@ -1623,7 +1643,7 @@ export const vec3_rotateX = <R extends Vec3Out = Vec3Out>(
   angleInRadians: number,
   { x, y, z }: Vec3 = out,
   { y: originY, z: originZ }: Vec3 = VEC_ZERO
-) => {
+): R => {
   const c = cos(angleInRadians)
   const s = sin(angleInRadians)
   const py = y - originY
@@ -1637,7 +1657,7 @@ export const vec3_rotateY = <R extends Vec3Out = Vec3Out>(
   angleInRadians: number,
   { x, y, z }: Vec3 = out,
   { x: originX, z: originZ }: Vec3 = VEC_ZERO
-) => {
+): R => {
   const c = cos(angleInRadians)
   const s = sin(angleInRadians)
   const p0 = x - originX
@@ -1651,7 +1671,7 @@ export const vec3_rotateZ = <R extends Vec3Out = Vec3Out>(
   angleInRadians: number,
   { x, y, z }: Vec3 = out,
   { x: originX, y: originY }: Vec3 = VEC_ZERO
-) => {
+): R => {
   const s = sin(angleInRadians)
   const c = cos(angleInRadians)
   const p0 = x - originX
@@ -1660,33 +1680,33 @@ export const vec3_rotateZ = <R extends Vec3Out = Vec3Out>(
 }
 
 /** The midpoint of a vector */
-export const vec2_midpoint = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
-  vec2_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2)
+export const vec2_midpoint = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+  vec2_addScale(out, a, b, 0.5)
 
 /** The midpoint of a vector */
-export const vec3_midpoint = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
-  vec3_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2)
+export const vec3_midpoint = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+  vec3_addScale(out, a, b, 0.5)
 
 /** The midpoint of a vector */
-export const vec4_midpoint = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
-  vec4_set(out, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2, (a.w + b.w) / 2)
+export const vec4_midpoint = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+  vec4_addScale(out, a, b, 0.5)
 
 /** Linear interpolation between two vectors */
-export const vec2_lerp = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number) =>
+export const vec2_lerp = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number): R =>
   vec2_set(out, lerp(a.x, b.x, t), lerp(a.y, b.y, t))
 
 /** Linear interpolation between two vectors */
-export const vec3_lerp = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number) =>
+export const vec3_lerp = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number): R =>
   vec3_set(out, lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t))
 
 /** Linear interpolation between two vectors */
-export const vec4_lerp = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number) =>
+export const vec4_lerp = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number): R =>
   vec4_set(out, lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t), lerp(a.w, b.w, t))
 
 /**
  * Performs a spherical linear interpolation between two vectors
  */
-export const vec3_slerp = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number) => {
+export const vec3_slerp = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number): R => {
   const angle = acosSafe(vec3_dot(a, b))
   const s = sin(angle)
   const ra = sin((1 - t) * angle) / s
@@ -1695,75 +1715,75 @@ export const vec3_slerp = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Ve
 }
 
 /** Linear interpolation between a vector and a scalar */
-export const vec2_lerpScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number) =>
+export const vec2_lerpScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number): R =>
   vec2_set(out, lerp(a.x, b, t), lerp(a.y, b, t))
 
 /** Linear interpolation between two vectors */
-export const vec3_lerpScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number) =>
+export const vec3_lerpScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number): R =>
   vec3_set(out, lerp(a.x, b, t), lerp(a.y, b, t), lerp(a.z, b, t))
 
 /** Linear interpolation between two vectors */
-export const vec4_lerpScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number) =>
+export const vec4_lerpScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number): R =>
   vec4_set(out, lerp(a.x, b, t), lerp(a.y, b, t), lerp(a.z, b, t), lerp(a.w, b, t))
 
 /** Linear interpolation between a scalar and a vector */
-export const vec2_scalarLerp = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In, t: number) =>
+export const vec2_scalarLerp = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In, t: number): R =>
   vec2_set(out, lerp(a, b.x, t), lerp(a, b.y, t))
 
 /** Linear interpolation between a scalar and a vector */
-export const vec3_scalarlerp = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In, t: number) =>
+export const vec3_scalarlerp = <R extends Vec3Out = Vec3Out>(out: R, a: number, b: Vec3In, t: number): R =>
   vec3_set(out, lerp(a, b.x, t), lerp(a, b.y, t), lerp(a, b.z, t))
 
 /** Linear interpolation between a scalar and a vector */
-export const vec4_scalarlerp = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In, t: number) =>
+export const vec4_scalarlerp = <R extends Vec4Out = Vec4Out>(out: R, a: number, b: Vec4In, t: number): R =>
   vec4_set(out, lerp(a, b.x, t), lerp(a, b.y, t), lerp(a, b.z, t), lerp(a, b.w, t))
 
 /** Smoothstep interpolation between two vectors */
-export const vec2_smoothstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number) =>
+export const vec2_smoothstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number): R =>
   vec2_set(out, smoothstep(a.x, b.x, t), smoothstep(a.y, b.y, t))
 
 /** Smoothstep interpolation between two vectors */
-export const vec3_smoothstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number) =>
+export const vec3_smoothstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number): R =>
   vec3_set(out, smoothstep(a.x, b.x, t), smoothstep(a.y, b.y, t), smoothstep(a.z, b.z, t))
 
 /** Smoothstep interpolation between two vectors */
-export const vec4_smoothstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number) =>
+export const vec4_smoothstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number): R =>
   vec4_set(out, smoothstep(a.x, b.x, t), smoothstep(a.y, b.y, t), smoothstep(a.z, b.z, t), smoothstep(a.w, b.w, t))
 
 /** Smoothstep interpolation between a vector and a scalar */
-export const vec2_smoothstepScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number) =>
+export const vec2_smoothstepScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number): R =>
   vec2_set(out, smoothstep(a.x, b, t), smoothstep(a.y, b, t))
 
 /** Smoothstep interpolation between a vector and a scalar */
-export const vec3_smoothstepScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number) =>
+export const vec3_smoothstepScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number): R =>
   vec3_set(out, smoothstep(a.x, b, t), smoothstep(a.y, b, t), smoothstep(a.z, b, t))
 
 /** Smoothstep interpolation between a vector and a scalar */
-export const vec4_smoothstepScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number) =>
+export const vec4_smoothstepScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number): R =>
   vec4_set(out, smoothstep(a.x, b, t), smoothstep(a.y, b, t), smoothstep(a.z, b, t), smoothstep(a.w, b, t))
 
 /** Smoothstep interpolation between a scalar and a vector */
-export const vec2_scalarSmoothstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number) =>
+export const vec2_scalarSmoothstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number, t: number): R =>
   vec2_smoothstepScalar(out, a, b, 1 - t)
 
 /** Smoothstep interpolation between a scalar and a vector */
-export const vec3_scalarSmoothstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number) =>
+export const vec3_scalarSmoothstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number, t: number): R =>
   vec3_smoothstepScalar(out, a, b, 1 - t)
 
 /** Smoothstep interpolation between a scalar and a vector */
-export const vec4_scalarSmoothstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number) =>
+export const vec4_scalarSmoothstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number, t: number): R =>
   vec4_smoothstepScalar(out, a, b, 1 - t)
 
 /** Smootherstep interpolation between two vectors */
-export const vec2_smootherstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number) =>
+export const vec2_smootherstep = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In, t: number): R =>
   vec2_set(out, smootherstep(a.x, b.x, t), smootherstep(a.y, b.y, t))
 
 /** Smootherstep interpolation between two vectors */
-export const vec3_smootherstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number) =>
+export const vec3_smootherstep = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In, t: number): R =>
   vec3_set(out, smootherstep(a.x, b.x, t), smootherstep(a.y, b.y, t), smootherstep(a.z, b.z, t))
 
 /** Smootherstep interpolation between two vectors */
-export const vec4_smootherstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number) =>
+export const vec4_smootherstep = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In, t: number): R =>
   vec4_set(
     out,
     smootherstep(a.x, b.x, t),
@@ -2063,7 +2083,7 @@ export const vec2_easing = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
   to: Vec2In,
   t: number,
   easingFunction: EasingFunction
-) => vec2_lerp(out, from, to, easingFunction(clamp(t)))
+): R => vec2_lerp(out, from, to, easingFunction(clamp(t)))
 
 export const vec3_easing = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
   out: R,
@@ -2071,7 +2091,7 @@ export const vec3_easing = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
   to: Vec3In,
   t: number,
   easingFunction: EasingFunction
-) => vec3_lerp(out, from, to, easingFunction(clamp(t)))
+): R => vec3_lerp(out, from, to, easingFunction(clamp(t)))
 
 export const vec4_easing = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   out: R,
@@ -2079,7 +2099,7 @@ export const vec4_easing = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   to: Vec4In,
   t: number,
   easingFunction: EasingFunction
-) => vec4_lerp(out, from, to, easingFunction(clamp(t)))
+): R => vec4_lerp(out, from, to, easingFunction(clamp(t)))
 
 /**
  * Frame rate independet interpolation amount calculation.
@@ -2087,7 +2107,7 @@ export const vec4_easing = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
  * @param t The amount to choose between from and to
  * @param deltaTime The time passed from the previous dampLerp to the next
  */
-export const vec2_timeDamp = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, t: Vec2In, deltaTime: number) =>
+export const vec2_timeDamp = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, t: Vec2In, deltaTime: number): R =>
   vec2_set(out, timeDamp(t.x, deltaTime), timeDamp(t.y, deltaTime))
 
 /**
@@ -2096,7 +2116,7 @@ export const vec2_timeDamp = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: 
  * @param t The amount to choose between from and to
  * @param deltaTime The time passed from the previous dampLerp to the next
  */
-export const vec3_timeDamp = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, t: Vec3In, deltaTime: number) =>
+export const vec3_timeDamp = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, t: Vec3In, deltaTime: number): R =>
   vec3_set(out, timeDamp(t.x, deltaTime), timeDamp(t.y, deltaTime), timeDamp(t.z, deltaTime))
 
 /**
@@ -2105,84 +2125,93 @@ export const vec3_timeDamp = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: 
  * @param t The amount to choose between from and to
  * @param deltaTime The time passed from the previous dampLerp to the next
  */
-export const vec4_timeDamp = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, t: Vec4In, deltaTime: number) =>
+export const vec4_timeDamp = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, t: Vec4In, deltaTime: number): R =>
   vec4_set(out, timeDamp(t.x, deltaTime), timeDamp(t.y, deltaTime), timeDamp(t.z, deltaTime), timeDamp(t.w, deltaTime))
 
 /** Vector reflection */
-export const vec2_reflect = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, direction: Vec2In, normal: Vec2In) =>
-  vec2_addScaleScalar(out, direction, normal, -vec2_dot(direction, normal) * 2)
+export const vec2_reflect = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
+  out: R,
+  direction: Vec2In,
+  normal: Vec2In
+): R => vec2_addScale(out, direction, normal, -vec2_dot(direction, normal) * 2)
 
 /** Vector reflection */
-export const vec3_reflect = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, direction: Vec3In, normal: Vec3In) =>
-  vec3_addScaleScalar(out, direction, normal, -vec3_dot(direction, normal) * 2)
+export const vec3_reflect = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
+  out: R,
+  direction: Vec3In,
+  normal: Vec3In
+): R => vec3_addScale(out, direction, normal, -vec3_dot(direction, normal) * 2)
 
 /** Vector reflection */
-export const vec4_reflect = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, direction: Vec4In, normal: Vec4In) =>
-  vec4_addScaleScalar(out, direction, normal, -vec4_dot(direction, normal) * 2)
+export const vec4_reflect = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
+  out: R,
+  direction: Vec4In,
+  normal: Vec4In
+): R => vec4_addScale(out, direction, normal, -vec4_dot(direction, normal) * 2)
 
 /** Vector project */
-export const vec2_project = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_project = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_scale(out, a, num_divSafe(vec2_dot(a, b), vec2_length(b)))
 
 /** Vector project */
-export const vec3_project = /* @__PURE__ */ <R extends Vec3Out = Vec4Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_project = /* @__PURE__ */ <R extends Vec3Out = Vec4Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_scale(out, a, num_divSafe(vec3_dot(a, b), vec3_length(b)))
 
 /** Vector project */
-export const vec4_project = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_project = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_scale(out, a, num_divSafe(vec4_dot(a, b), vec4_length(b)))
 
 /** Gets the direction vector from a to b */
-export const vec2_direction = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In) =>
+export const vec2_direction = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
   vec2_normalize(vec2_sub(out, b, a))
 
 /** Gets the direction vector from a to b */
-export const vec3_direction = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In) =>
+export const vec3_direction = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
   vec3_normalize(vec3_sub(out, b, a))
 
 /** Gets the direction vector from a to b */
-export const vec4_direction = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In) =>
+export const vec4_direction = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
   vec4_normalize(vec4_sub(out, b, a))
 
 /** Slides a vector */
-export const vec2_slide = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, normal: Vec2In) =>
-  vec2_addScaleScalar(out, a, normal, -vec2_dot(a, normal))
+export const vec2_slide = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, normal: Vec2In): R =>
+  vec2_addScale(out, a, normal, -vec2_dot(a, normal))
 
 /** Slides a vector */
-export const vec3_slide = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, normal: Vec3In) =>
-  vec3_addScaleScalar(out, a, normal, -vec3_dot(a, normal))
+export const vec3_slide = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, normal: Vec3In): R =>
+  vec3_addScale(out, a, normal, -vec3_dot(a, normal))
 
 /** Slides a vector */
-export const vec4_slide = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, normal: Vec4In) =>
-  vec4_addScaleScalar(out, a, normal, -vec4_dot(a, normal))
+export const vec4_slide = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, normal: Vec4In): R =>
+  vec4_addScale(out, a, normal, -vec4_dot(a, normal))
 
 export const vec2_clampLength = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
   out: R,
   v: Vec2In,
   minLength: number,
   maxLength: number
-) => vec2_scale(out, v, clampLengthMultiplier(vec2_length(v), minLength, maxLength))
+): R => vec2_scale(out, v, clampLengthMultiplier(vec2_length(v), minLength, maxLength))
 
 export const vec3_clampLength = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
   out: R,
   v: Vec3In,
   minLength: number,
   maxLength: number
-) => vec3_scale(out, v, clampLengthMultiplier(vec3_length(v), minLength, maxLength))
+): R => vec3_scale(out, v, clampLengthMultiplier(vec3_length(v), minLength, maxLength))
 
 export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   out: R,
   v: Vec4In,
   minLength: number,
   maxLength: number
-) => vec4_scale(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
+): R => vec4_scale(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
 
 /** Check if a point lies within a 2D triangle */
-export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number) =>
+export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number): boolean =>
   pointInTriangle2D(a.x, a.y, b.x, b.y, c.x, c.y, px, py)
 
 /** Gets the signed area of a 2D triangle */
-export const vec2_triangleSignedArea = (a: Vec2In, b: Vec2In, c: Vec2In) =>
+export const vec2_triangleSignedArea = (a: Vec2In, b: Vec2In, c: Vec2In): number =>
   triangleSignedArea2D(a.x, a.y, b.x, b.y, c.y, c.y)
 
 /** Compute barycentric coordinates for a point p with respect to triangle (a, b, c) */
@@ -2193,7 +2222,7 @@ export const vec2_barycentric = <R extends Vec3Out = Vec3Out>(
   c: Vec2In,
   px: number,
   py: number
-) => {
+): R => {
   const v0x = b.x - a.x
   const v0y = b.y - a.y
   const v1x = c.x - a.x
@@ -2222,7 +2251,7 @@ export const vec2_segmentPointOrientation = (
   b: Vec2In,
   point: Vec2In,
   tolerance: number = DEFAULT_TOLERANCE
-) => {
+): number => {
   const value = (b.y - a.y) * (point.x - b.x) - (b.x - a.x) * (point.y - b.y)
   return abs(value) < tolerance ? 0 : value > 0 ? -1 : 1
 }
@@ -2230,7 +2259,7 @@ export const vec2_segmentPointOrientation = (
 /**
  * Returns true if the given point lies on the given segment
  */
-export const vec2_pointInSegment = (a: Vec2In, b: Vec2In, point: Vec2In, tolerance = DEFAULT_TOLERANCE) =>
+export const vec2_pointInSegment = (a: Vec2In, b: Vec2In, point: Vec2In, tolerance = DEFAULT_TOLERANCE): boolean =>
   !vec2_segmentPointOrientation(a, b, point, tolerance) &&
   min(a.x, b.x) <= point.x &&
   point.x <= max(a.x, b.x) &&
@@ -2246,7 +2275,7 @@ export const vec3_barycentric = <R extends Vec3Out = Vec3Out>(
   px: number,
   py: number,
   pz: number
-) => {
+): R => {
   const v0x = b.x - a.x
   const v0y = b.y - a.y
   const v0z = b.z - a.z
@@ -2277,7 +2306,7 @@ export const vec4_barycentric = <R extends Vec3Out = Vec3Out>(
   py: number,
   pz: number,
   pw: number
-) => {
+): R => {
   const v0x = b.x - a.x
   const v0y = b.y - a.y
   const v0z = b.z - a.z

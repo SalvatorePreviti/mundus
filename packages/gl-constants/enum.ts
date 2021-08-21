@@ -3985,7 +3985,7 @@ export type GL_CONSTANTS_NAME = keyof typeof GL_CONSTANTS
 /**
  * The array of all webgl2 constant names
  */
-export const GL_CONSTANTS_NAMES: GL_CONSTANTS_NAME[] = /* #__PURE__ */ (() => {
+export const GL_CONSTANTS_NAMES: GL_CONSTANTS_NAME[] = /* #__PURE__ */ ((): GL_CONSTANTS_NAME[] => {
   const _startWithNumberRegex = /^[-0-9]/
   return Object.keys(GL_CONSTANTS).filter((key) => !_startWithNumberRegex.test(key)) as any
 })()

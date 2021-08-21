@@ -8,7 +8,7 @@ export type VecOut = Vec
 export interface VecIn extends ArrayLike<number>, Iterable<number> {}
 
 /** Gets the magnitude of a vector */
-export const vec_length = (vec: VecIn) => hypot(...vec)
+export const vec_length = (vec: VecIn): number => hypot(...vec)
 
 export const vec_add = <T extends VecOut>(out: T, a: VecIn, b: VecIn): T => {
   for (let i = 0; i < a.length; ++i) {
