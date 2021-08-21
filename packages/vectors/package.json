@@ -20,7 +20,7 @@
   },
   "peerDependencies": {
     "@mundus/core": ">=0.0.1",
-    "@mundus/math": ">=0.0.12"
+    "@mundus/math": ">=0.0.13"
   },
   "license": "MIT",
   "author": "Salvatore Previti"
