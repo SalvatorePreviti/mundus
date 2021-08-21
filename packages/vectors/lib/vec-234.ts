@@ -155,14 +155,14 @@ export interface Vec4In extends Vec3In {
 export type Vec4Out = Vec4
 
 /** Set x and y components of the given 2D vector */
-export const vec2_set = <R extends Vec2Out = Vec2Out>(out: R, x: number = 0, y: number = 0): R => {
+export const vec2_set = <R extends Vec2Out = Vec2Out>(out: R, x = 0, y = 0): R => {
   out.x = x
   out.y = y
   return out
 }
 
 /** Set x, y, z components of the given 3D vector */
-export const vec3_set = <R extends Vec3Out = Vec3Out>(out: R, x: number = 0, y: number = 0, z: number = 0): R => {
+export const vec3_set = <R extends Vec3Out = Vec3Out>(out: R, x = 0, y = 0, z = 0): R => {
   out.x = x
   out.y = y
   out.z = z
@@ -170,19 +170,27 @@ export const vec3_set = <R extends Vec3Out = Vec3Out>(out: R, x: number = 0, y: 
 }
 
 /** Set x, y, z, w components of the given 4D vector */
-export const vec4_set = <R extends Vec4Out = Vec4Out>(out: R, x?: number, y?: number, z?: number, w: number = 0): R => {
-  vec3_set(out, x, y, z).w = w
+export const vec4_set = <R extends Vec4Out = Vec4Out>(out: R, x = 0, y = 0, z = 0, w = 0): R => {
+  out.x = x
+  out.y = y
+  out.z = z
+  out.w = w
   return out
 }
 
 /** Creates a new 2D vector object */
-export const vec2_new = /* @__PURE__ */ (x: number = 0, y: number = 0) => ({ x, y })
+export const vec2_new = /* @__PURE__ */ (x = 0, y = 0): Vec2 => ({ x, y })
 
 /** Creates a new 3D vector object */
-export const vec3_new = /* @__PURE__ */ (x: number = 0, y: number = 0, z: number = 0) => ({ x, y, z })
+export const vec3_new = /* @__PURE__ */ (x = 0, y = 0, z = 0): Vec3 => ({ x, y, z })
 
 /** Creates a new 4D vector object */
-export const vec4_new = /* @__PURE__ */ (x: number = 0, y: number = 0, z: number = 0, w: number = 0) => ({ x, y, z, w })
+export const vec4_new = /* @__PURE__ */ (x = 0, y = 0, z = 0, w = 0): Vec4 => ({
+  x,
+  y,
+  z,
+  w
+})
 
 /** A vector whose components are all 0 */
 export const VEC_ZERO: Vec4In = /* @__PURE__ */ vec4_new()
@@ -653,16 +661,13 @@ export const vec4_div = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4
   vec4_set(out, a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w)
 
 /** Computes a / b, component by component divtiplication */
-export const vec2_divScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) =>
-  vec2_set(out, a.x / b, a.y / b)
+export const vec2_divScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number) => vec2_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec3_divScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) =>
-  vec3_set(out, a.x / b, a.y / b, a.z / b)
+export const vec3_divScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number) => vec3_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
-export const vec4_divScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) =>
-  vec4_set(out, a.x / b, a.y / b, a.z / b, a.w / b)
+export const vec4_divScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number) => vec4_scale(out, a, 1 / b)
 
 /** Computes a / b, component by component divtiplication */
 export const vec2_scalarDiv = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In) =>
