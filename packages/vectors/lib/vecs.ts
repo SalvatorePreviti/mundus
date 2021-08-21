@@ -1,7 +1,9 @@
 import { array_copy } from '@mundus/core'
 import { hypot, max, min } from '@mundus/math'
 
-export type VecOut = Float32Array | Float64Array | number[]
+export type Vec = Float32Array | Float64Array | number[]
+
+export type VecOut = Vec
 
 export interface VecIn extends ArrayLike<number>, Iterable<number> {}
 

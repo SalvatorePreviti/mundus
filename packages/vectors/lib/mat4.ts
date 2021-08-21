@@ -21,11 +21,13 @@ import {
 } from './vec-234'
 import type { QuatIn } from './quat'
 
-import { VecIn, VecOut, vec_divScalarSafe } from './vecs'
+import { Vec, VecIn, VecOut, vec_divScalarSafe } from './vecs'
 
 export type Mat4Out = VecOut
 
 export type Mat4In = VecIn
+
+export type Mat4 = Vec
 
 /** Index of m00 in a 2x2 matrix */
 export const MAT2_00 = 0
@@ -469,29 +471,6 @@ export const mat4_perspective = <T extends Mat4Out>(
   out[10] = (far + near) / nf
   out[14] = (2 * far * near) / nf
   return out
-}
-
-/**
- * Generates a perspective projection matrix with the given bounds and a finite far plane.
- * The near/far clip planes correspond to a normalized device coordinate Z range of [-1, 1],
- * which matches WebGL/OpenGL's clip volume.
- *
- * @param out where the output will be written
- * @param fovyRadians Vertical field of view in radians
- * @param aspectRatio Aspect ratio. typically viewport width/height
- * @param near Near bound of the frustum
- * @param far Far bound of the frustum
- */
-export const mat4_perspective222 = <T extends Mat4Out>(
-  out: T,
-  fovyRadians: number,
-  aspectRatio: number,
-  near: number,
-  far: number
-) => {
-  const n = near - far
-  const f = 1 / tan(fovyRadians / 2)
-  return mat4_set(out, f / aspectRatio, 0, 0, 0, 0, f, 0, 0, 0, 0, -1, 0, 0, (far + near) / n, (far * near * 2) / n, 0)
 }
 
 /** Generates a perspective projection matrix with the given bounds and an Infinity far plane. */
