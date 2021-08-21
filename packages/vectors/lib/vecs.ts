@@ -1,4 +1,3 @@
-import { array_copy } from '@mundus/core'
 import { hypot, max, min } from '@mundus/math'
 
 export type Vec = Float32Array | Float64Array | number[]
@@ -10,7 +9,7 @@ export interface VecIn extends ArrayLike<number>, Iterable<number> {}
 /** Gets the magnitude of a vector */
 export const vec_length = (vec: VecIn): number => hypot(...vec)
 
-export const vec_add = <T extends VecOut>(out: T, a: VecIn, b: VecIn): T => {
+export const vec_add = <T extends VecOut>(out: T, a: VecIn, b: VecIn = out): T => {
   for (let i = 0; i < a.length; ++i) {
     out[i] = a[i] + b[i]
   }
@@ -52,7 +51,7 @@ export const vec_scalarSub = <T extends VecOut>(out: T, a: number, b: VecIn): T 
   return out
 }
 
-export const vec_mul = <T extends VecOut>(out: T, a: VecIn, b: VecIn): T => {
+export const vec_mul = <T extends VecOut>(out: T, a: VecIn, b: VecIn = out): T => {
   for (let i = 0; i < a.length; ++i) {
     out[i] = a[i] * b[i]
   }
@@ -79,6 +78,8 @@ export const vec_scalarDiv = <T extends VecOut>(out: T, a: number, b: VecIn): T 
   }
   return out
 }
+
+export const vec_divScalar = <T extends VecOut>(out: T, a: VecIn, b: number): T => vec_scale(out, a, 1 / b)
 
 export const vec_mod = <T extends VecOut>(out: T, a: VecIn, b: VecIn): T => {
   for (let i = 0; i < a.length; ++i) {
@@ -124,7 +125,3 @@ export const vec_minComponent = (v: VecIn): number | undefined => {
   }
   return result
 }
-
-/** Divides each component of a matrix by a scalar */
-export const vec_divScalarSafe = <T extends VecOut>(out: T, matrix: VecIn, denominator: number): T =>
-  denominator ? vec_scale(out, matrix, 1 / denominator) : array_copy(out, matrix)

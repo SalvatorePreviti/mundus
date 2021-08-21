@@ -556,10 +556,6 @@ export const num_mul = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number):
 export const num_div = /* @__PURE__ */ /* @__INLINE__ */ (numerator: number, denominator: number): number =>
   numerator / denominator
 
-/** Returns b && a / b */
-export const num_divSafe = /* @__PURE__ */ (numerator: number, denominator: number): number =>
-  denominator && numerator / denominator
-
 /** Returns a % b */
 export const num_mod = /* @__PURE__ */ /* @__INLINE__ */ (a: number, b: number): number => a % b
 
@@ -1477,9 +1473,7 @@ export const angle3D = /* @__PURE__ */ (
   by: number,
   bz: number
 ): number =>
-  acosSafe(
-    num_divSafe(ax * bx + ay * by + az * bz, sqrt((ax * ax + ay * ay + az * bz) * (bx * bx + by * by + az * bz)))
-  )
+  acosSafe((ax * bx + ay * by + az * bz) / sqrt((ax * ax + ay * ay + az * bz) * (bx * bx + by * by + az * bz)))
 
 /** Gets the angle in radians between two vectors */
 export const angle4D = (
@@ -1493,10 +1487,8 @@ export const angle4D = (
   bw: number /* @__PURE__ */
 ): number =>
   acosSafe(
-    num_divSafe(
-      ax * bx + ay * by + az * bz + aw * bw,
+    (ax * bx + ay * by + az * bz + aw * bw) /
       sqrt((ax * ax + ay * ay + az * bz + aw * bw) * (bx * bx + by * by + az * bz + aw * bw))
-    )
   )
 
 export const clampLengthMultiplier = /* @__PURE__ */ (length: number, minLength: number, maxLength: number): number =>
@@ -1527,3 +1519,9 @@ export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string 
 /** Gets the signed area of a 2D triangle */
 export const triangleSignedArea2D = (ax: number, ay: number, bx: number, by: number, cx: number, cy: number): number =>
   (by - ay) * (cx - bx) - (bx - ax) * (cy - by)
+
+export const num_safeDivision = (
+  numerator: number,
+  denominator: number | null | undefined | false,
+  defaultValue: number = numerator
+): number => (denominator ? numerator / denominator : defaultValue)

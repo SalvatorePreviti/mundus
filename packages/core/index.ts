@@ -118,8 +118,10 @@ export const array_setEach = <T, A = T, TOut extends { [index: number]: T } = T[
 }
 
 export const array_copy = <T, TOut extends { [index: number]: T } = T[]>(out: TOut, input: ArrayLike<T>): TOut => {
-  for (let i = 0; i < input.length; ++i) {
-    out[i] = input[i]
+  if (out !== (input as any)) {
+    for (let i = 0; i < input.length; ++i) {
+      out[i] = input[i]
+    }
   }
   return out
 }

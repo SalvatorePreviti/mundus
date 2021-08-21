@@ -22,7 +22,7 @@ import {
 } from './vec-234'
 import type { QuatIn } from './quat'
 
-import { Vec, VecIn, VecOut, vec_divScalarSafe } from './vecs'
+import { Vec, VecIn, VecOut, vec_scale } from './vecs'
 
 export type Mat4Out = VecOut
 
@@ -167,14 +167,14 @@ export const mat4_transform4D = <R extends Vec4Out = Vec4Out>(
   )
 
 /** Transforms a Vec3 with a 4x4 matrix */
-export const mat4_transformVec2 = <R extends Vec2Out = Vec2Out>(out: R, m: Mat4In, v: Vec2In): R =>
+export const mat4_transformVec2 = <R extends Vec2Out = Vec2Out>(out: R, m: Mat4In, v: Vec2In = out): R =>
   mat4_transform2D(out, m, v.x, v.y)
 
-export const mat4_transformVec3 = <R extends Vec3Out = Vec3Out>(out: R, m: Mat4In, v: Vec3In, w?: number): R =>
+export const mat4_transformVec3 = <R extends Vec3Out = Vec3Out>(out: R, m: Mat4In, v: Vec3In = out, w?: number): R =>
   mat4_transform3D(out, m, v.x, v.y, v.z, w)
 
 /** Transforms a Vec4 with a 4x4 matrix */
-export const mat4_transformVec4 = <R extends Vec4Out = Vec4Out>(out: R, m: Mat4In, v: Vec4In): R =>
+export const mat4_transformVec4 = <R extends Vec4Out = Vec4Out>(out: R, m: Mat4In, v: Vec4In = out): R =>
   mat4_transform4D(out, m, v.x, v.y, v.z, v.w)
 
 export interface Mat4IdentityFunction {
@@ -649,9 +649,10 @@ export const mat4_targetTo = <T extends Mat4Out = Float32Array>(
 
 export const mat4_invert = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
-  [a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15]: Mat4In,
+  mat: Mat4In,
   determinant?: number
-): T => {
+): T | null => {
+  const [a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15] = mat
   const b0 = a0 * a5 - a1 * a4
   const b1 = a0 * a6 - a2 * a4
   const b2 = a0 * a7 - a3 * a4
@@ -664,6 +665,10 @@ export const mat4_invert = <T extends Mat4Out = Float32Array>(
   const b9 = a9 * a14 - a10 * a13
   const b10 = a9 * a15 - a11 * a13
   const b11 = a10 * a15 - a11 * a14
+  determinant ||= b0 * b11 - b1 * b10 + b2 * b9 + b3 * b8 - b4 * b7 + b5 * b6
+  if (!determinant) {
+    return null
+  }
   out = mat4_set(
     out,
     a5 * b11 - a6 * b10 + a7 * b9,
@@ -683,8 +688,8 @@ export const mat4_invert = <T extends Mat4Out = Float32Array>(
     a13 * b1 - a12 * b3 - a14 * b0,
     a8 * b3 - a9 * b1 + a10 * b0
   )
-  return vec_divScalarSafe(out, out, determinant || b0 * b11 - b1 * b10 + b2 * b9 + b3 * b8 - b4 * b7 + b5 * b6)
+  return vec_scale(out, out, 1 / determinant)
 }
 
-export const mat4_adjoint = <T extends Mat4Out = Float32Array>(out: T | undefined, matrix: Mat4In): T =>
+export const mat4_adjoint = <T extends Mat4Out = Float32Array>(out: T | undefined, matrix: Mat4In): T | null =>
   mat4_invert(out, matrix, 1)

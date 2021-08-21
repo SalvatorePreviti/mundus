@@ -109,11 +109,11 @@ import {
   dot4D,
   EasingFunction,
   timeDamp,
-  num_divSafe,
   clampLengthMultiplier,
   pointInTriangle2D,
   triangleSignedArea2D,
-  DEFAULT_TOLERANCE
+  DEFAULT_TOLERANCE,
+  num_safeDivision
 } from '@mundus/math'
 
 export type IsVec2Fn = <T extends Vec2In = Vec2In>(v: T | null | undefined | false) => v is T
@@ -303,37 +303,37 @@ export const vec4_setEach = <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In, fn:
 /** Sets each component of output with the result of a function called for each component in the 2D vector */
 export const vec2_makeSetEach =
   (fn: (value: number) => number) =>
-  /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In): R =>
+  /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, v: Vec2In = out): R =>
     vec2_set(out, fn(v.x), fn(v.y))
 
 /** Sets each component of output with the result of a function called for each component in the 3D vector */
 export const vec3_makeSetEach =
   (fn: (value: number) => number) =>
-  /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In): R =>
+  /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, v: Vec3In = out): R =>
     vec3_set(out, fn(v.x), fn(v.y), fn(v.z))
 
 /** Sets each component of output with the result of a function called for each component in the 4D vector */
 export const vec4_makeSetEach =
   (fn: (value: number) => number) =>
-  /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In): R =>
+  /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, v: Vec4In = out): R =>
     vec4_set(out, fn(v.x), fn(v.y), fn(v.z), fn(v.w))
 
 /** Sets each component of output with the result of a function called for each component in the 2D vector */
 export const vec2_makeSetEach2 =
   (fn: (a: number, b: number) => number) =>
-  /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+  /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
     vec2_set(out, fn(a.x, b.x), fn(a.y, b.y))
 
 /** Sets each component of output with the result of a function called for each component in the 3D vector */
 export const vec3_makeSetEach2 =
   (fn: (a: number, b: number) => number) =>
-  /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+  /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
     vec3_set(out, fn(a.x, b.x), fn(a.y, b.y), fn(a.z, b.z))
 
 /** Sets each component of output with the result of a function called for each component in the 4D vector */
 export const vec4_makeSetEach2 =
   (fn: (a: number, b: number) => number) =>
-  /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+  /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
     vec4_set(out, fn(a.x, b.x), fn(a.y, b.y), fn(a.z, b.z), fn(a.w, b.w))
 
 /** Computes true if the given function Computes true for each component of the 2D vector */
@@ -545,11 +545,11 @@ export const vec3_inverse = /* @__PURE__ */ vec3_makeSetEach(num_inverse)
 export const vec4_inverse = /* @__PURE__ */ vec4_makeSetEach(num_inverse)
 
 /** Adds every component of the two given vectors together. */
-export const vec2_add = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_add = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_set(out, a.x + b.x, a.y + b.y)
 
 /** Adds every component of the two given vectors together. */
-export const vec3_add = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_add = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_set(out, a.x + b.x, a.y + b.y, a.z + b.z)
 
 /** a + b * scale */
@@ -577,7 +577,7 @@ export const vec4_addScale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b:
   vec4_set(out, a.x + b.x * scale, a.y + b.y * scale, a.z + b.z * scale, a.w + b.w * scale)
 
 /** Adds every component of the two given vectors together. */
-export const vec4_add = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_add = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_set(out, a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w)
 
 /** Adds every component of the given vectors and a scalar together. */
@@ -593,15 +593,15 @@ export const vec4_addScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b
   vec4_set(out, a.x + b, a.y + b, a.z + b, a.w + b)
 
 /** Computes a - b */
-export const vec2_sub = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_sub = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_set(out, a.x - b.x, a.y - b.y)
 
 /** Computes a - b */
-export const vec3_sub = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_sub = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_set(out, a.x - b.x, a.y - b.y, a.z - b.z)
 
 /** Computes a - b */
-export const vec4_sub = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_sub = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_set(out, a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w)
 
 /** Computes a - b */
@@ -629,15 +629,15 @@ export const vec4_scalarSub = <R extends Vec4Out = Vec4Out>(out: R, a: number, b
   vec4_set(out, a - b.x, a - b.y, a - b.z, a - b.w)
 
 /** Computes a * b, component by component multiplication */
-export const vec2_mul = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_mul = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_set(out, a.x * b.x, a.y * b.y)
 
 /** Computes a * b, component by component multiplication */
-export const vec3_mul = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_mul = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_set(out, a.x * b.x, a.y * b.y, a.z * b.z)
 
 /** Computes a * b, component by component multiplication */
-export const vec4_mul = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_mul = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_set(out, a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w)
 
 /** Computes a * b, component by component multiplication */
@@ -770,15 +770,15 @@ export const vec4_scalarPow = <R extends Vec4Out = Vec4Out>(out: R, v: number, e
   vec4_set(out, v ** exponent.x, v ** exponent.y, v ** exponent.z, v ** exponent.w)
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_min = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_min = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_set(out, min(a.x, b.x), min(a.y, b.y))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_min = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_min = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_min = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_min = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_set(out, min(a.x, b.x), min(a.y, b.y), min(a.z, b.z), min(a.w, b.w))
 
 /** Clamps a value between a minimum and a maximum */
@@ -794,15 +794,15 @@ export const vec4_minScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b
   vec4_set(out, min(a.x, b), min(a.y, b), min(a.z, b), min(a.w, b))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec2_max = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_max = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_set(out, max(a.x, b.x), max(a.y, b.y))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec3_max = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_max = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z))
 
 /** Clamps a value between a minimum and a maximum */
-export const vec4_max = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_max = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_set(out, max(a.x, b.x), max(a.y, b.y), max(a.z, b.z), max(a.w, b.w))
 
 /** Clamps a value between a minimum and a maximum */
@@ -1212,40 +1212,76 @@ export const vec3_int32_not = /* @__PURE__ */ vec2_makeSetEach(int32_not)
 export const vec4_int32_not = /* @__PURE__ */ vec2_makeSetEach(int32_not)
 
 /** Binary and of each components of two vectors */
-export const vec2_int32_and = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
+export const vec2_int32_and = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2 = out): R =>
   vec2_set(out, a.x & b.x, a.y & b.y)
 
 /** Binary and of each components of two vectors */
-export const vec3_int32_and = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
+export const vec3_int32_and = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3 = out): R =>
   vec3_set(out, a.x & b.x, a.y & b.y, a.z & b.z)
 
 /** Binary and of each components of two vectors */
-export const vec4_int32_and = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
+export const vec4_int32_and = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4 = out): R =>
   vec4_set(out, a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w)
 
+/** Binary and of each components of two vectors */
+export const vec2_int32_andScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: number): R =>
+  vec2_set(out, a.x & b, a.y & b)
+
+/** Binary and of each components of two vectors */
+export const vec3_int32_andScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: number): R =>
+  vec3_set(out, a.x & b, a.y & b, a.z & b)
+
+/** Binary and of each components of two vectors */
+export const vec4_int32_andScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: number): R =>
+  vec4_set(out, a.x & b, a.y & b, a.z & b, a.w & b)
+
 /** Binary or of each components of two vectors */
-export const vec2_int32_or = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
+export const vec2_int32_or = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2 = out): R =>
   vec2_set(out, a.x | b.x, a.y | b.y)
 
 /** Binary or of each components of two vectors */
-export const vec3_int32_or = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
+export const vec3_int32_or = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3 = out): R =>
   vec3_set(out, a.x | b.x, a.y | b.y, a.z | b.z)
 
 /** Binary or of each components of two vectors */
-export const vec4_int32_or = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
+export const vec4_int32_or = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4 = out): R =>
   vec4_set(out, a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w)
 
+/** Binary or of each components of two vectors */
+export const vec2_int32_orScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: number): R =>
+  vec2_set(out, a.x | b, a.y | b)
+
+/** Binary or of each components of two vectors */
+export const vec3_int32_orScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: number): R =>
+  vec3_set(out, a.x | b, a.y | b, a.z | b)
+
+/** Binary or of each components of two vectors */
+export const vec4_int32_orScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: number): R =>
+  vec4_set(out, a.x | b, a.y | b, a.z | b, a.w | b)
+
 /** Binary xor of each components of two vectors */
-export const vec2_int32_xor = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2): R =>
+export const vec2_int32_xor = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: Vec2 = out): R =>
   vec2_set(out, a.x ^ b.x, a.y ^ b.y)
 
 /** Binary xor of each components of two vectors */
-export const vec3_int32_xor = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3): R =>
+export const vec3_int32_xor = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: Vec3 = out): R =>
   vec3_set(out, a.x ^ b.x, a.y ^ b.y, a.z ^ b.z)
 
 /** Binary xor of each components of two vectors */
-export const vec4_int32_xor = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4): R =>
+export const vec4_int32_xor = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: Vec4 = out): R =>
   vec4_set(out, a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w)
+
+/** Binary xor of each components of two vectors */
+export const vec2_int32_xorScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2, b: number): R =>
+  vec2_set(out, a.x ^ b, a.y ^ b)
+
+/** Binary xor of each components of two vectors */
+export const vec3_int32_xorScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3, b: number): R =>
+  vec3_set(out, a.x ^ b, a.y ^ b, a.z ^ b)
+
+/** Binary xor of each components of two vectors */
+export const vec4_int32_xorScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4, b: number): R =>
+  vec4_set(out, a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b)
 
 /**
  * Normal distribution, Bell curve, Gaussian curve.
@@ -1680,15 +1716,15 @@ export const vec3_rotateZ = <R extends Vec3Out = Vec3Out>(
 }
 
 /** The midpoint of a vector */
-export const vec2_midpoint = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
+export const vec2_midpoint = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In = out): R =>
   vec2_addScale(out, a, b, 0.5)
 
 /** The midpoint of a vector */
-export const vec3_midpoint = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In): R =>
+export const vec3_midpoint = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: Vec3In = out): R =>
   vec3_addScale(out, a, b, 0.5)
 
 /** The midpoint of a vector */
-export const vec4_midpoint = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
+export const vec4_midpoint = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In = out): R =>
   vec4_addScale(out, a, b, 0.5)
 
 /** Linear interpolation between two vectors */
@@ -2149,17 +2185,29 @@ export const vec4_reflect = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   normal: Vec4In
 ): R => vec4_addScale(out, direction, normal, -vec4_dot(direction, normal) * 2)
 
+/** Amount to scale a vector to project onto another */
+export const vec2_projectionLength = /* @__PURE__ */ (a: Vec2In, b: Vec2In): number =>
+  num_safeDivision(vec2_dot(a, b), vec2_length(b), 0)
+
+/** Amount to scale a vector to project onto another */
+export const vec3_projectionLength = /* @__PURE__ */ (a: Vec3In, b: Vec3In): number =>
+  num_safeDivision(vec3_dot(a, b), vec2_length(b), 0)
+
+/** Amount to scale a vector to project onto another */
+export const vec4_projectionLength = /* @__PURE__ */ (a: Vec4In, b: Vec4In): number =>
+  num_safeDivision(vec4_dot(a, b), vec2_length(b), 0)
+
 /** Vector project */
 export const vec2_project = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
-  vec2_scale(out, a, num_divSafe(vec2_dot(a, b), vec2_length(b)))
+  vec2_scale(out, a, vec2_projectionLength(a, b))
 
 /** Vector project */
 export const vec3_project = /* @__PURE__ */ <R extends Vec3Out = Vec4Out>(out: R, a: Vec3In, b: Vec3In): R =>
-  vec3_scale(out, a, num_divSafe(vec3_dot(a, b), vec3_length(b)))
+  vec3_scale(out, a, vec3_projectionLength(a, b))
 
 /** Vector project */
 export const vec4_project = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
-  vec4_scale(out, a, num_divSafe(vec4_dot(a, b), vec4_length(b)))
+  vec4_scale(out, a, vec4_projectionLength(a, b))
 
 /** Gets the direction vector from a to b */
 export const vec2_direction = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
