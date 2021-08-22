@@ -178,6 +178,36 @@ export const vec4_set = <R extends Vec4Out = Vec4Out>(out: R, x = 0, y = 0, z = 
   return out
 }
 
+export const vec2_toArray = <R extends { [index: number]: number }>(out: R, v: Vec2, offset = 0): number => {
+  out[offset++] = v.x
+  out[offset++] = v.y
+  return offset
+}
+
+export const vec3_toArray = <R extends { [index: number]: number }>(out: R, v: Vec3, offset = 0): number => {
+  out[offset++] = v.x
+  out[offset++] = v.y
+  out[offset++] = v.z
+  return offset
+}
+
+export const vec4_toArray = <R extends { [index: number]: number }>(out: R, v: Vec4, offset = 0): number => {
+  out[offset++] = v.x
+  out[offset++] = v.y
+  out[offset++] = v.z
+  out[offset++] = v.w
+  return offset
+}
+
+export const vec2_fromArray = <R extends Vec2Out = Vec2Out>(out: R, array: ArrayLike<number>, offset = 0): R =>
+  vec2_set(out, array[offset], array[offset + 1])
+
+export const vec3_fromArray = <R extends Vec3Out = Vec3Out>(out: R, array: ArrayLike<number>, offset = 0): R =>
+  vec3_set(out, array[offset], array[offset + 1], array[offset + 2])
+
+export const vec4_fromArray = <R extends Vec4Out = Vec4Out>(out: R, array: ArrayLike<number>, offset = 0): R =>
+  vec4_set(out, array[offset], array[offset + 1], array[offset + 2], array[offset + 3])
+
 /** Creates a new 2D vector object */
 export const vec2_new = /* @__PURE__ */ (x = 0, y = 0): Vec2 => ({ x, y })
 
@@ -2253,6 +2283,21 @@ export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   minLength: number,
   maxLength: number
 ): R => vec4_scale(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
+
+export const vec3_fromYawPitch = <T extends Vec3Out>(out: T, yaw: number, pitch: number): T => {
+  const sy = sin(yaw)
+  const cy = cos(yaw)
+  const sp = sin(pitch)
+  const cp = cos(pitch)
+  return vec3_normalize(vec3_set(out, sy * cp, -sp, cy * cp))
+}
+
+export const vec3_orthogonal = <T extends Vec3Out>(out: T, v: Vec3In = out): T => {
+  const ax = abs(v.x)
+  const ay = abs(v.y)
+  const az = abs(v.z)
+  return vec3_cross(out, v, vec3_set(out, +(ax < ay && ax < az), +(ay <= ax && ay < az), +(az <= ax && az <= ay)))
+}
 
 /** Check if a point lies within a 2D triangle */
 export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number): boolean =>
