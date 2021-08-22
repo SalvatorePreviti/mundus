@@ -32,8 +32,8 @@
     ]
   },
   "devDependencies": {
-    "@balsamic/eslint-config": "^0.0.36",
-    "@balsamic/esrun": "^0.0.19",
+    "@balsamic/eslint-config": "^0.0.37",
+    "@balsamic/esrun": "^0.0.20",
     "@types/chai": "^4.2.21",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.7.1",

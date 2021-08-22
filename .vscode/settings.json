@@ -72,6 +72,7 @@
     "**/**.mjs": { "when": "$(basename).tsx" },
     "**/*.d.ts": { "when": "$(basename).ts" },
     "**/**.d.ts": { "when": "$(basename).tsx" },
+    "**/*.map": true,
     ".downloads/": true,
     "**/node_modules": true,
     "**/bower_components": true,
