@@ -1,4 +1,4 @@
-import { hypot, max, min } from '@mundus/math'
+import { hypot, max, min, NEGATIVE_INFINITY, POSITIVE_INFINITY } from '@mundus/math'
 
 export type Vec = Float32Array | Float64Array | number[]
 
@@ -16,7 +16,7 @@ export const vec_add = <T extends VecOut>(out: T, a: VecIn, b: VecIn = out): T =
   return out
 }
 
-export const vec_addScalar = <T extends VecOut>(out: T, a: VecIn, b: number): T => {
+export const vec_scalarAdd = <T extends VecOut>(out: T, b: number, a: VecIn = out): T => {
   for (let i = 0; i < a.length; ++i) {
     out[i] = a[i] + b
   }
@@ -58,7 +58,7 @@ export const vec_mul = <T extends VecOut>(out: T, a: VecIn, b: VecIn = out): T =
   return out
 }
 
-export const vec_scale = <T extends VecOut>(out: T, a: VecIn, b: number): T => {
+export const vec_scale = <T extends VecOut>(out: T, b: number, a: VecIn = out): T => {
   for (let i = 0; i < a.length; ++i) {
     out[i] = a[i] * b
   }
@@ -79,7 +79,7 @@ export const vec_scalarDiv = <T extends VecOut>(out: T, a: number, b: VecIn): T 
   return out
 }
 
-export const vec_divScalar = <T extends VecOut>(out: T, a: VecIn, b: number): T => vec_scale(out, a, 1 / b)
+export const vec_divScalar = <T extends VecOut>(out: T, a: VecIn, b: number): T => vec_scale(out, 1 / b, a)
 
 export const vec_mod = <T extends VecOut>(out: T, a: VecIn, b: VecIn): T => {
   for (let i = 0; i < a.length; ++i) {
@@ -110,18 +110,18 @@ export const vec_sum = (v: VecIn): number => {
   return result
 }
 
-export const vec_maxComponent = (v: VecIn): number | undefined => {
-  let result: number | undefined
+export const vec_maxComponent = (v: VecIn): number => {
+  let result = NEGATIVE_INFINITY
   for (let i = 0; i < v.length; ++i) {
-    result = i ? max(result!, v[i]) : v[0]
+    result = max(result!, v[i])
   }
   return result
 }
 
-export const vec_minComponent = (v: VecIn): number | undefined => {
-  let result: number | undefined
+export const vec_minComponent = (v: VecIn): number => {
+  let result = POSITIVE_INFINITY
   for (let i = 0; i < v.length; ++i) {
-    result = i ? min(result!, v[i]) : v[0]
+    result = min(result!, v[i])
   }
   return result
 }

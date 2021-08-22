@@ -611,15 +611,15 @@ export const vec4_add = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4
   vec4_set(out, a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec2_addScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
+export const vec2_scalarAdd = <R extends Vec2Out = Vec2Out>(out: R, b: number, a: Vec2In = out): R =>
   vec2_set(out, a.x + b, a.y + b)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec3_addScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
+export const vec3_scalarAdd = <R extends Vec3Out = Vec3Out>(out: R, b: number, a: Vec3In = out): R =>
   vec3_set(out, a.x + b, a.y + b, a.z + b)
 
 /** Adds every component of the given vectors and a scalar together. */
-export const vec4_addScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
+export const vec4_scalarAdd = <R extends Vec4Out = Vec4Out>(out: R, b: number, a: Vec4In = out): R =>
   vec4_set(out, a.x + b, a.y + b, a.z + b, a.w + b)
 
 /** Computes a - b */
@@ -636,15 +636,15 @@ export const vec4_sub = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4
 
 /** Computes a - b */
 export const vec2_subScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
-  vec2_addScalar(out, a, -b)
+  vec2_scalarAdd(out, -b, a)
 
 /** Computes a - b */
 export const vec3_subScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
-  vec3_addScalar(out, a, -b)
+  vec3_scalarAdd(out, -b, a)
 
 /** Computes a - b */
 export const vec4_subScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
-  vec4_addScalar(out, a, -b)
+  vec3_scalarAdd(out, -b, a)
 
 /** Computes a - b */
 export const vec2_scalarSub = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
@@ -671,16 +671,16 @@ export const vec4_mul = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4
   vec4_set(out, a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w)
 
 /** Computes a * b, component by component multiplication */
-export const vec2_scale = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
-  vec2_set(out, a.x * b, a.y * b)
+export const vec2_scale = <R extends Vec2Out = Vec2Out>(out: R, m: number, v: Vec2In = out): R =>
+  vec2_set(out, v.x * m, v.y * m)
 
 /** Computes a * b, component by component multiplication */
-export const vec3_scale = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
-  vec3_set(out, a.x * b, a.y * b, a.z * b)
+export const vec3_scale = <R extends Vec3Out = Vec3Out>(out: R, m: number, v: Vec3In = out): R =>
+  vec3_set(out, v.x * m, v.y * m, v.z * m)
 
 /** Computes a * b, component by component multiplication */
-export const vec4_scale = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
-  vec4_set(out, a.x * b, a.y * b, a.z * b, a.w * b)
+export const vec4_scale = <R extends Vec4Out = Vec4Out>(out: R, m: number, v: Vec4In = out): R =>
+  vec4_set(out, v.x * m, v.y * m, v.z * m, v.w * m)
 
 /** Computes a / b, component by component divtiplication */
 export const vec2_div = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
@@ -696,15 +696,15 @@ export const vec4_div = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4
 
 /** Computes a / b, component by component divtiplication */
 export const vec2_divScalar = <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: number): R =>
-  vec2_scale(out, a, 1 / b)
+  vec2_scale(out, 1 / b, a)
 
 /** Computes a / b, component by component divtiplication */
 export const vec3_divScalar = <R extends Vec3Out = Vec3Out>(out: R, a: Vec3In, b: number): R =>
-  vec3_scale(out, a, 1 / b)
+  vec3_scale(out, 1 / b, a)
 
 /** Computes a / b, component by component divtiplication */
 export const vec4_divScalar = <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: number): R =>
-  vec4_scale(out, a, 1 / b)
+  vec4_scale(out, 1 / b, a)
 
 /** Computes a / b, component by component divtiplication */
 export const vec2_scalarDiv = <R extends Vec2Out = Vec2Out>(out: R, a: number, b: Vec2In): R =>
@@ -2229,15 +2229,15 @@ export const vec4_projectionLength = /* @__PURE__ */ (a: Vec4In, b: Vec4In): num
 
 /** Vector project */
 export const vec2_project = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
-  vec2_scale(out, a, vec2_projectionLength(a, b))
+  vec2_scale(out, vec2_projectionLength(a, b), a)
 
 /** Vector project */
 export const vec3_project = /* @__PURE__ */ <R extends Vec3Out = Vec4Out>(out: R, a: Vec3In, b: Vec3In): R =>
-  vec3_scale(out, a, vec3_projectionLength(a, b))
+  vec3_scale(out, vec3_projectionLength(a, b), a)
 
 /** Vector project */
 export const vec4_project = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(out: R, a: Vec4In, b: Vec4In): R =>
-  vec4_scale(out, a, vec4_projectionLength(a, b))
+  vec4_scale(out, vec4_projectionLength(a, b), a)
 
 /** Gets the direction vector from a to b */
 export const vec2_direction = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(out: R, a: Vec2In, b: Vec2In): R =>
@@ -2268,28 +2268,25 @@ export const vec2_clampLength = /* @__PURE__ */ <R extends Vec2Out = Vec2Out>(
   v: Vec2In,
   minLength: number,
   maxLength: number
-): R => vec2_scale(out, v, clampLengthMultiplier(vec2_length(v), minLength, maxLength))
+): R => vec2_scale(out, clampLengthMultiplier(vec2_length(v), minLength, maxLength), v)
 
 export const vec3_clampLength = /* @__PURE__ */ <R extends Vec3Out = Vec3Out>(
   out: R,
   v: Vec3In,
   minLength: number,
   maxLength: number
-): R => vec3_scale(out, v, clampLengthMultiplier(vec3_length(v), minLength, maxLength))
+): R => vec3_scale(out, clampLengthMultiplier(vec3_length(v), minLength, maxLength), v)
 
 export const vec4_clampLength = /* @__PURE__ */ <R extends Vec4Out = Vec4Out>(
   out: R,
   v: Vec4In,
   minLength: number,
   maxLength: number
-): R => vec4_scale(out, v, clampLengthMultiplier(vec4_length(v), minLength, maxLength))
+): R => vec4_scale(out, clampLengthMultiplier(vec4_length(v), minLength, maxLength), v)
 
 export const vec3_fromYawPitch = <T extends Vec3Out>(out: T, yaw: number, pitch: number): T => {
-  const sy = sin(yaw)
-  const cy = cos(yaw)
-  const sp = sin(pitch)
   const cp = cos(pitch)
-  return vec3_normalize(vec3_set(out, sy * cp, -sp, cy * cp))
+  return vec3_normalize(vec3_set(out, sin(yaw) * cp, -sin(pitch), cos(yaw) * cp))
 }
 
 export const vec3_orthogonal = <T extends Vec3Out>(out: T, v: Vec3In = out): T => {

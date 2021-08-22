@@ -10,11 +10,13 @@ import {
   lengthSquared3D,
   lengthSquared4D,
   log,
+  num_safeDivision,
   PI,
   pow2,
   sin,
   sqrt
 } from '@mundus/math'
+import { Vec3In } from '@mundus/math/vecs'
 import {
   VEC_UNIT_Y,
   Vec3Out,
@@ -42,7 +44,8 @@ import {
   vec3_withTemp,
   vec4_withTemp,
   Vec3,
-  vec3_copy
+  vec3_copy,
+  vec3_lengthSquared
 } from './vec-234'
 
 export type Quat = Vec4
@@ -164,16 +167,16 @@ export const quat_rotateZ = (out: QuatOut, { x, y, z, w }: QuatIn, angleInRadian
 }
 
 /** Gets the W of a quaternion given the x,y,z values assuming the quaternion is 1 unit length */
-export const quat_getCalculatedW = (x: number, y: number, z: number): number => sqrt(abs(1 - lengthSquared3D(x, y, z)))
+export const quat_getCalculatedW = (xyz: Vec3In): number => sqrt(abs(1 - vec3_lengthSquared(xyz)))
 
 /** Overrides the w component of a quat from the X, Y, and Z components assuming the quaternion is 1 unit length */
 export const quat_calculateW = (quaternion: Quat): Quat => {
-  quaternion.w = quat_getCalculatedW(quaternion.x, quaternion.y, quaternion.z)
+  quaternion.w = quat_getCalculatedW(quaternion)
   return quaternion
 }
 
 /** Calculate the exponential of a unit quaternion. */
-export const quat_exp = (out: QuatOut, { x, y, z, w }: QuatIn): QuatOut => {
+export const quat_exp = (out: QuatOut, { x, y, z, w }: QuatIn = out): QuatOut => {
   const r = lengthSquared3D(x, y, z)
   const e = exp(w)
   const s = r > 0 ? (e * sin(r)) / r : 0
@@ -189,11 +192,7 @@ export const quat_log = (out: QuatOut, { x, y, z, w }: QuatIn): QuatOut => {
 }
 
 /** Calculate the scalar power of a unit quaternion. */
-export const quat_pow = (out: QuatOut, a: QuatIn, b: number): QuatOut => {
-  quat_log(out, a)
-  quat_scale(out, out, b)
-  return quat_exp(out, out)
-}
+export const quat_pow = (out: QuatOut, a: QuatIn, b: number): QuatOut => quat_exp(quat_scale(quat_log(out, a), b))
 
 /** Performs a spherical linear interpolation between two quaternions. */
 export const quat_slerp = (
@@ -234,11 +233,8 @@ export const quat_slerp = (
 }
 
 /** Calculates the inverse of a quaternion */
-export const quat_invert = (out: QuatOut, { x, y, z, w }: QuatIn): QuatOut => {
-  const dot = lengthSquared4D(x, y, z, w)
-  const invDot = dot ? -1 / dot : 0
-  return vec4_set(out, x * invDot, y * invDot, z * invDot, -w * invDot)
-}
+export const quat_invert = (out: QuatOut, { x, y, z, w }: QuatIn): QuatOut =>
+  vec4_scale(vec4_set(out, x, y, z, -w), num_safeDivision(-1, lengthSquared4D(x, y, z, w), 0))
 
 /**
  * Sets a quaternion to represent the shortest rotation from one vector to another.
