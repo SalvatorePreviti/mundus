@@ -35,7 +35,6 @@ describe('@mundus/gl-constants', () => {
     it('has known constants', () => {
       const set = new Set(GL_CONSTANTS_NAMES as string[])
       expect(set.has('DEPTH_BUFFER_BIT')).to.equal(true)
-      expect(set.has('COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL')).to.equal(true)
       expect(set.has('FRAMEBUFFER_ATTACHMENT_RED_SIZE')).to.equal(true)
       expect(set.has('COLOR_ATTACHMENT4')).to.equal(true)
       expect(set.has('DEPTH_BUFFER_BITXXX')).to.equal(false)
@@ -55,12 +54,10 @@ describe('@mundus/gl-constants', () => {
   describe('glConstantGetName', () => {
     it('returns constant names by number', () => {
       expect(glConstantGetName(0x00000100)).to.equal('DEPTH_BUFFER_BIT')
-      expect(glConstantGetName(0x87ee)).to.equal('COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL')
       expect(glConstantGetName(0x8212)).to.equal('FRAMEBUFFER_ATTACHMENT_RED_SIZE')
     })
 
     it('returns constant names by decimal number string', () => {
-      expect(glConstantGetName('34798')).to.equal('COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL')
       expect(glConstantGetName('256')).to.equal('DEPTH_BUFFER_BIT')
     })
 

@@ -14,7 +14,7 @@ const CONSTANTS_EXPECTED_COUNT = 609
 const FILE_HEADER =
   `// WebGL constants from ${CONSTANTS_HTML_URL}\n` +
   `// It gets minified better to use the raw constants instad of using webglContext.CONSTANT\n` +
-  `// Those values are standard in all browsers.\n\n`
+  `// Those values are standard in all browsers.\n\n/* eslint-disable @typescript-eslint/no-redeclare */\n\n`
 
 async function main() {
   const parsed = parseConstantsFromHtml(await downloadHtml(CONSTANTS_HTML_URL, CONSTANTS_HTML_CACHE))
@@ -34,8 +34,10 @@ function generateIndexTs(parsed) {
   let result = FILE_HEADER
   result += generateConstantsCode(parsed, {
     fn: (c) => `export const GL_${c.name} = ${c.value}`,
+    fnType: (c) => `export type GL_${c.name} = typeof GL_${c.name}`,
     fnRepeated: (c) => `// GL_${c.name} = ${c.value}`
   })
+
   return result
 }
 
@@ -118,10 +120,12 @@ function writeSourceFile(filename, content) {
   }
 }
 
-function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepeated = null }) {
+function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnType, fnRepeated = null }) {
+  const len = parsed.length
   let prevGroup = ''
   let text = ''
   let isFirst = true
+  let pendingGroup
 
   const ensureSeparated = () => {
     if (text && !text.endsWith('\n\n')) {
@@ -132,8 +136,7 @@ function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepe
     }
   }
 
-  let pendingGroup
-  for (let i = 0, len = parsed.length; i < len; ++i) {
+  const writeEntry = (i) => {
     const c = parsed[i]
 
     const group = c.group
@@ -144,9 +147,7 @@ function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepe
       prevGroup = group
     }
 
-    const value = c.repeated ? fnRepeated && fnRepeated(c) : fn(c)
-
-    if (value) {
+    const writeValue = (value) => {
       if (isFirst) {
         isFirst = false
       } else {
@@ -175,7 +176,31 @@ function generateConstantsCode(parsed, { indent = '', separator = '', fn, fnRepe
         }
       }
     }
+
+    if (c.repeated) {
+      const value = fnRepeated && fnRepeated(c)
+      if (value) {
+        writeValue(value)
+      }
+    } else {
+      const value = fn(c)
+      if (value) {
+        writeValue(value)
+
+        if (fnType) {
+          const type = fnType(c)
+          if (type) {
+            writeValue(type)
+          }
+        }
+      }
+    }
   }
+
+  for (let i = 0; i < len; ++i) {
+    writeEntry(i)
+  }
+
   if (!text.endsWith('\n')) {
     text += '\n'
   }

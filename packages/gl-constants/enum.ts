@@ -2,6 +2,8 @@
 // It gets minified better to use the raw constants instad of using webglContext.CONSTANT
 // Those values are standard in all browsers.
 
+/* eslint-disable @typescript-eslint/no-redeclare */
+
 /**
  * All Webgl2 constants in a single enum.
  * NOTE: Use this only for debugging or tooling, enum values are not tree shakeable
@@ -3549,29 +3551,6 @@ export enum GL_CONSTANTS {
    * WEBGL_compressed_texture_etc1
    */
   COMPRESSED_RGB_ETC1_WEBGL = 0x8d64,
-
-  // WEBGL_compressed_texture_atc
-
-  /**
-   * COMPRESSED_RGB_ATC_WEBGL = 0x8c92
-   * Compresses RGB textures with no alpha channel.
-   * WEBGL_compressed_texture_atc
-   */
-  COMPRESSED_RGB_ATC_WEBGL = 0x8c92,
-
-  /**
-   * COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL = 0x8c92
-   * Compresses RGBA textures using explicit alpha encoding (useful when alpha transitions are sharp).
-   * WEBGL_compressed_texture_atc
-   */
-  COMPRESSED_RGBA_ATC_EXPLICIT_ALPHA_WEBGL = 0x8c92,
-
-  /**
-   * COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL = 0x87ee
-   * Compresses RGBA textures using interpolated alpha encoding (useful when alpha transitions are gradient).
-   * WEBGL_compressed_texture_atc
-   */
-  COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL = 0x87ee,
 
   // WEBGL_depth_texture
 
