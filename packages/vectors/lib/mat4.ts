@@ -25,7 +25,8 @@ import {
   VEC_UNIT_Y,
   VEC_TEMP$0,
   VEC_TEMP$1,
-  VEC_TEMP$2
+  VEC_TEMP$2,
+  VEC_ONE
 } from './vec-234'
 import type { QuatIn } from './quat'
 
@@ -33,7 +34,7 @@ import {
   vec_add,
   vec_scalarAdd,
   vec_addScale,
-  vec_length,
+  vec_magnitude,
   vec_maxComponent,
   vec_minComponent,
   vec_mul,
@@ -43,11 +44,10 @@ import {
   vec_subScalar,
   vec_sum
 } from './vecs'
-import type { Mat3In } from './mat3'
 
 export type Mat4 = Float32Array | Float64Array | number[]
 
-export type Mat4Out = Mat4
+export type Mat4Out = Float32Array | Float64Array | number[]
 
 export interface Mat4In extends ArrayLike<number>, Iterable<number> {}
 
@@ -106,7 +106,7 @@ export const MAT4_32 = 14
 export const MAT4_33 = 15
 
 /** Gets the magnitude of a matrix */
-export const mat_frob: (vec: Mat4In) => number = vec_length
+export const mat_frob: (vec: Mat4In) => number = vec_magnitude
 
 export const mat_add: <T extends Mat4Out>(out: T, a: Mat4In, b?: Mat4In) => T = vec_add
 
@@ -233,17 +233,14 @@ export const MAT4_TEMP4 = /* @__PURE__ */ mat4_set()
 export const mat4_getDiagonalVec = <R extends Vec4Out>(out: R, matrix: Mat4In): R =>
   vec4_set(out, matrix[0], matrix[5], matrix[10], matrix[15])
 
-/** Sets the main diagonal components to 1 */
-export const mat4_setDiagonalIdentity = <T extends Mat4Out>(out: T): T => {
-  out[0] = 1
-  out[5] = 1
-  out[10] = 1
-  out[15] = 1
-  return out
-}
-
 /** Sets the main diagonal components */
-export const mat4_setDiagonal = <T extends Mat4Out>(out: T, x: number, y: number, z: number, w: number): T => {
+export const mat4_setDiagonal = <T extends Mat4Out>(
+  out: T,
+  x: number = 1,
+  y: number = 1,
+  z: number = 1,
+  w: number = 1
+): T => {
   out[0] = x
   out[5] = y
   out[10] = z
@@ -252,23 +249,40 @@ export const mat4_setDiagonal = <T extends Mat4Out>(out: T, x: number, y: number
 }
 
 /** Sets the translation components, MAT4_30=x, MAT4_31=y, MAT4_32=z */
-export const mat4_setTranslation = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T => {
+export const mat4_setTranslation = <T extends Mat4Out>(out: T, x: number = 0, y: number = 0, z: number = 0): T => {
   out[12] = x
   out[13] = y
   out[14] = z
   return out
 }
 
+/** Gets the translation components, x=MAT4_30, y=MAT4_31, z=MAT4_32 */
+export const mat4_getTranslationVec = <R extends Vec3Out = Vec3>(out: R, matrix: Mat4In): R =>
+  vec3_set(out, matrix[12], matrix[13], matrix[15])
+
+/** Sets the translation components, MAT4_30=x, MAT4_31=y, MAT4_32=z */
+export const mat4_setTranslationVec = <T extends Mat4Out = Float32Array>(out: T, vec: Partial<Vec3In> = VEC_ZERO): T =>
+  mat4_setTranslation(out, vec.x, vec.y, vec.z)
+
 /** Sets the scaling components, MAT4_00=x, MAT4_11=y, MAT4_22=z */
-export const mat4_setScaling = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T => {
+export const mat4_setScaling = <T extends Mat4Out = Float32Array>(
+  out: T,
+  x: number = 1,
+  y: number = 1,
+  z: number = 1
+): T => {
   out[0] = x
   out[5] = y
   out[10] = z
   return out
 }
 
+/** Sets the scaling components, MAT4_00=x, MAT4_11=y, MAT4_22=z */
+export const mat4_setScalingVec = <T extends Mat4Out = Float32Array>(out: T, vec: Partial<Vec3In> = VEC_ONE): T =>
+  mat4_setScaling(out, vec.x, vec.y, vec.z)
+
 /** Creates a new 4x4 matrix backed by 64 bit floating points */
-export const mat4_newFloat64 = /* @__PURE__ */ (): Mat4 => mat4_setDiagonalIdentity(new Float64Array(16))
+export const mat4_newFloat64 = /* @__PURE__ */ (): Mat4 => mat4_setDiagonal(new Float64Array(16))
 
 /** Makes an identity matrix. */
 export const mat4_identity: Mat4IdentityFunction = /* @__PURE__ */ mat4_set
@@ -316,6 +330,10 @@ export const mat4_transpose = /* @__PURE__ */ new Function(
 export const mat4_fromTranslation = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T =>
   mat4_setTranslation(mat4_identity(out), x, y, z)
 
+/** Makes a translation matrix */
+export const mat4_fromTranslationVec = <T extends Mat4Out>(out: T, translation?: Partial<Vec3In>): T =>
+  mat4_setTranslationVec(mat4_identity(out), translation)
+
 /** Translates a matrix */
 export const mat4_translate = /* @__PURE__ */ new Function(
   ...'oaxyz',
@@ -325,20 +343,21 @@ export const mat4_translate = /* @__PURE__ */ new Function(
   )},o`
 ) as <T extends Mat4Out>(out: T, a: Mat4In, x: number, y: number, z: number) => T
 
-export const mat4_translateVec = <T extends Mat4Out = Float32Array>(out: T | undefined, translation: Vec3In): T =>
-  mat4_setScaling(mat4_identity(out), translation.x, translation.y, translation.z)
+/** Translates a matrix */
+export const mat4_translateVec = <T extends Mat4Out = Float32Array>(out: T, matrix: Mat4In, translation: Vec3In): T =>
+  mat4_translate(out, matrix, translation.x, translation.y, translation.z)
 
-/** Makes a scale matrix */
+/** Makes a scaling matrix */
 export const mat4_fromScaling = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
-  x: number,
-  y: number,
-  z: number
+  x?: number,
+  y?: number,
+  z?: number
 ): T => mat4_setScaling(mat4_identity(out), x, y, z)
 
-/** Makes a scale matrix */
-export const mat4_fromScalingVec = <T extends Mat4Out = Float32Array>(out: T | undefined, scale: Vec3In): T =>
-  mat4_setScaling(mat4_identity(out), scale.x, scale.y, scale.z)
+/** Makes a scaling matrix */
+export const mat4_fromScalingVec = <T extends Mat4Out = Float32Array>(out: T | undefined, scale?: Partial<Vec3In>): T =>
+  mat4_setScalingVec(mat4_identity(out), scale)
 
 /** Scales a matrix */
 export const mat4_scale = new Function(
@@ -346,35 +365,40 @@ export const mat4_scale = new Function(
   `return ${array_fromLength(16, (i) => `o[${i}]=a[${i}]${i < 11 ? `*${'xyz'[i >> 2]}` : ''}`)},o`
 ) as <T extends Mat4Out>(out: T, matrix: Mat4In, x: number, y: number, z: number) => T
 
+/** Scales a matrix */
 export const mat4_scaleVec = <T extends Mat4Out>(out: T, scale: Vec3In, matrix: Mat4In = out): T =>
   mat4_scale(out, matrix, scale.x, scale.y, scale.z)
 
-export const mat4_fromFromMat3 = <T extends Mat4Out = Float32Array>(out: T | undefined, mat3x3: Mat3In): T =>
-  mat4_set(out, mat3x3[0], mat3x3[3], mat3x3[6], 0, mat3x3[1], mat3x3[4], mat3x3[7], 0, mat3x3[2], mat3x3[5], mat3x3[8])
-
+/** Gets basis X axis */
 export const mat4_getBasisX = <R extends Vec3Out>(out: R, matrix: Mat4In): R => vec3_fromArray(out, matrix, 0)
 
+/** Gets basis Y axis */
 export const mat4_getBasisY = <R extends Vec3Out>(out: R, matrix: Mat4In): R => vec3_fromArray(out, matrix, 4)
 
+/** Gets basis Z axis */
 export const mat4_getBasisZ = <R extends Vec3Out>(out: R, matrix: Mat4In): R => vec3_fromArray(out, matrix, 8)
 
+/** Gets basis X, Y, Z axes */
 export const mat4_getBasis = (outXAxis: Vec3Out, outYAxis: Vec3Out, outZAxis: Vec3Out, matrix: Mat4In): void => {
   mat4_getBasisX(outXAxis, matrix)
   mat4_getBasisY(outYAxis, matrix)
   mat4_getBasisZ(outZAxis, matrix)
 }
 
+/** Gets the scale applied to a matrix */
 export const mat4_getScale = <R extends Vec3Out>(out: R, matrix: Mat4In): R => {
   mat4_getBasis(VEC_TEMP$0, VEC_TEMP$1, VEC_TEMP$2, matrix)
   return vec3_set(out, vec3_length(VEC_TEMP$0), vec3_length(VEC_TEMP$1), vec3_length(VEC_TEMP$2))
 }
 
+/** Makes a matrix that has only the rotation of the given matrix, with no scale and no translation */
 export const mat4_extractRotation = <T extends Mat4Out = Float32Array>(out: T, m: Mat4In): T =>
   mat4_scaleVec(
     mat4_set(out, m[0], m[1], m[2], 0, m[4], m[5], m[6], 0, m[8], m[9], m[10]),
     mat4_getScale(VEC_TEMP$0, m)
   )
 
+/** Makes a shear matrix */
 export const mat4_fromShear = <T extends Mat4Out = Float32Array>(
   out: T,
   xy: number,
@@ -385,12 +409,12 @@ export const mat4_fromShear = <T extends Mat4Out = Float32Array>(
   zy: number
 ): T => mat4_set(out, 1, yx, zx, 0, xy, 1, zy, 0, xz, yz, 1)
 
-/** Makes a matrix from a quaternion, a translation and scale vector */
-export const mat4_fromQuaternionTranslationScale = <T extends Mat4Out = Float32Array>(
+/** Makes a matrix from a quaternion, an optional translation and an optional scale */
+export const mat4_fromQuaternion = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
   { x, y, z, w }: QuatIn,
-  translation: Vec3In,
-  { x: sx, y: sy, z: sz }: Vec3In
+  translation: Partial<Vec3In> = VEC_ZERO,
+  { x: sx = 1, y: sy = 1, z: sz = 1 }: Partial<Vec3In> = VEC_ONE
 ): T => {
   const x2 = x + x
   const y2 = y + y
@@ -424,31 +448,21 @@ export const mat4_fromQuaternionTranslationScale = <T extends Mat4Out = Float32A
   )
 }
 
+/** Multiplies the given matrix by a rotation matrix. */
+export const mat4_mulQuaternionTranslationScale = <T extends Mat4Out = Float32Array>(
+  out: T,
+  matrix: Mat4In,
+  quaternion: QuatIn,
+  translation?: Partial<Vec3In>,
+  scale?: Partial<Vec3In>
+): T => mat4_mul(out, matrix, mat4_fromQuaternion(MAT4_TEMP$, quaternion, scale, translation))
+
 export const mat4_setBasis = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
   xAxis: Vec3In,
   yAxis: Vec3In,
-  zAxis: Vec3In,
-  translation: { readonly x?: number; y?: number; z?: number } = VEC_ZERO
-): T =>
-  mat4_set(
-    out,
-    xAxis.x,
-    yAxis.x,
-    zAxis.x,
-    0,
-    xAxis.y,
-    yAxis.y,
-    zAxis.y,
-    0,
-    xAxis.z,
-    yAxis.z,
-    zAxis.z,
-    0,
-    translation.x,
-    translation.y,
-    translation.z
-  )
+  zAxis: Vec3In
+): T => mat4_set(out, xAxis.x, yAxis.x, zAxis.x, 0, xAxis.y, yAxis.y, zAxis.y, 0, xAxis.z, yAxis.z, zAxis.z)
 
 /** Makes a rotation matrix given an angle and an axis. */
 export const mat4_fromAxisAngle = <T extends Mat4Out = Float32Array>(
@@ -526,6 +540,15 @@ export const mat4_fromEulerXYZ = <T extends Mat4Out = Float32Array>(
   return mat4_set(out, c * e, af + be * d, bf - ae * d, 0, -c * f, ae - bf * d, be + af * d, 0, d, -b * c, a * c)
 }
 
+/** Multiplies the given matrix by a rotation matrix. */
+export const mat4_rotateEulerXYZ = <T extends Mat4Out = Float32Array>(
+  out: T,
+  matrix: Mat4In,
+  yaw: number,
+  pitch: number,
+  roll: number
+): T => mat4_mul(out, matrix, mat4_fromEulerXYZ(MAT4_TEMP$, yaw, pitch, roll))
+
 export const mat4_fromEulerZYX = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
   x: number,
@@ -545,43 +568,14 @@ export const mat4_fromEulerZYX = <T extends Mat4Out = Float32Array>(
   return mat4_set(out, c * e, c * f, -d, 0, be * d - af, bf * d + ae, b * c, 0, ae * d + bf, af * d - be, a * c)
 }
 
-/** Creates a rottion matrix from yaw, pitch and roll. Order of rotation is zyx */
-export const mat4_fromYawPitchRoll = <T extends Mat4Out = Float32Array>(
-  out: T | undefined,
-  yaw: number,
-  pitch: number,
-  roll: number
-): T => {
-  const sy = sin(yaw)
-  const cy = cos(yaw)
-  const sp = sin(pitch)
-  const cp = cos(pitch)
-  const sr = sin(roll)
-  const cr = cos(roll)
-  return mat4_set(
-    out,
-    cp * cy,
-    cp * sy,
-    -sp,
-    0,
-    sr * sp * cy - cr * sy,
-    cr * cy + sr * sp * sy,
-    sr * cp,
-    0,
-    sr * sy + cr * sp * cy,
-    cr * sp * sy - sr * cy,
-    cr * cp
-  )
-}
-
-/** Multiplies the given matrix by a rotation matrix. Order of rotation is zyx */
-export const mat4_rotateYawPitchRoll = <T extends Mat4Out = Float32Array>(
+/** Multiplies the given matrix by a rotation matrix. */
+export const mat4_rotateEulerZYX = <T extends Mat4Out = Float32Array>(
   out: T,
   matrix: Mat4In,
   yaw: number,
   pitch: number,
   roll: number
-): T => mat4_mul(out, matrix, mat4_fromYawPitchRoll(MAT4_TEMP$, yaw, pitch, roll))
+): T => mat4_mul(out, matrix, mat4_fromEulerZYX(MAT4_TEMP$, yaw, pitch, roll))
 
 /** Makex an X axis rotation matrix */
 export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
@@ -630,46 +624,6 @@ export const mat4_fromZRotation = <T extends Mat4Out = Float32Array>(out: T | un
 /** Multiplies the given matrix by a rotation matrix */
 export const mat4_rotateZ = <T extends Mat4Out = Float32Array>(out: T, matrix: Mat4In, angleInRadians: number): T =>
   mat4_mul(out, matrix, mat4_fromZRotation(MAT4_TEMP$, angleInRadians))
-
-/** Creates a matrix from a quaternion rotation and an optional translation. The translation is applied before the rotation. */
-export const mat4_fromQuaternion = <T extends Mat4Out = Float32Array>(
-  out: T | undefined,
-  { x, y, z, w }: QuatIn
-): T => {
-  const x2 = x * 2
-  const y2 = y * 2
-  const z2 = z * 2
-  const xx = x * x2
-  const xy = x * y2
-  const xz = x * z2
-  const yy = y * y2
-  const yz = y * z2
-  const zz = z * z2
-  const wx = w * x2
-  const wy = w * y2
-  const wz = w * z2
-  return mat4_set(
-    out,
-    1 - (yy + zz),
-    xy + wz,
-    xz - wy,
-    0,
-    xy - wz,
-    1 - (xx + zz),
-    yz + wx,
-    0,
-    xz + wy,
-    yz - wx,
-    1 - (xx + yy)
-  )
-}
-
-/** Multiplies the given matrix by a rotation matrix. Order of rotation is zyx */
-export const mat4_rotateQuaternion = <T extends Mat4Out = Float32Array>(
-  out: T,
-  matrix: Mat4In,
-  quaternion: QuatIn
-): T => mat4_mul(out, matrix, mat4_fromQuaternion(MAT4_TEMP$, quaternion))
 
 export const mat4_toString = (matrix: Mat4In): string => {
   const strings: string[] = []
@@ -933,8 +887,7 @@ export const mat4_targetTo = <T extends Mat4Out = Float32Array>(
 export const mat4_fromDirection = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
   direction: Vec3In,
-  up: Vec3In = VEC_UNIT_Y,
-  translation?: { readonly x: number; readonly y?: number; readonly z?: number }
+  up: Vec3In = VEC_UNIT_Y
 ): T =>
   mat4_setBasis(
     out,
@@ -946,8 +899,7 @@ export const mat4_fromDirection = <T extends Mat4Out = Float32Array>(
         vec3_normalize(vec3_cross(VEC_TEMP$0, up, vec3_normalize(VEC_TEMP$2, direction)))
       )
     ),
-    VEC_TEMP$2,
-    translation
+    VEC_TEMP$2
   )
 
 /** Create a matrix for mirroring about the given plane. */

@@ -2,12 +2,12 @@ import { hypot, max, min, NEGATIVE_INFINITY, POSITIVE_INFINITY } from '@mundus/m
 
 export type Vec = Float32Array | Float64Array | number[]
 
-export type VecOut = Vec
+export type VecOut = Float32Array | Float64Array | number[]
 
 export interface VecIn extends ArrayLike<number>, Iterable<number> {}
 
 /** Gets the magnitude of a vector */
-export const vec_length = (vec: VecIn): number => hypot(...vec)
+export const vec_magnitude = (vec: VecIn): number => hypot(...vec)
 
 export const vec_add = <T extends VecOut>(out: T, a: VecIn, b: VecIn = out): T => {
   for (let i = 0; i < a.length; ++i) {
