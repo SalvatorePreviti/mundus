@@ -5,7 +5,6 @@
 import { array_fromLength, array_from } from '@mundus/core'
 import { acosSafe, cos, max, sin, tan } from '@mundus/math'
 import {
-  vec3_new,
   vec3_sub,
   Vec2In,
   Vec2Out,
@@ -22,8 +21,11 @@ import {
   Vec3,
   vec3_fromArray,
   vec3_length,
-  vec4_new,
-  VEC_UNIT_Y
+  VEC_ZERO,
+  VEC_UNIT_Y,
+  VEC_TEMP$0,
+  VEC_TEMP$1,
+  VEC_TEMP$2
 } from './vec-234'
 import type { QuatIn } from './quat'
 
@@ -42,7 +44,6 @@ import {
   vec_sum
 } from './vecs'
 import type { Mat3In } from './mat3'
-import { VEC_ZERO } from '@mundus/math/vecs'
 
 export type Mat4 = Float32Array | Float64Array | number[]
 
@@ -103,15 +104,6 @@ export const MAT4_32 = 14
 
 /** Index of m33 in a 4x4 matrix */
 export const MAT4_33 = 15
-
-/** A temporary vector for calculations */
-const _v0 = /* @__PURE__ */ vec3_new()
-
-/** A temporary vector for calculations */
-const _v1 = /* @__PURE__ */ vec3_new()
-
-/** A temporary vector for calculations */
-const _v2 = /* @__PURE__ */ vec4_new()
 
 /** Gets the magnitude of a matrix */
 export const mat_frob: (vec: Mat4In) => number = vec_length
@@ -220,23 +212,23 @@ export const mat4_set = new Function(
   )},o)`
 )() as Mat4SetFunction
 
-/** Temporary matrix used for multiplication */
-export const mat4_tempM = /* @__PURE__ */ mat4_set()
+/** Temporary matrix used used internally for calculations */
+export const MAT4_TEMP$ = /* @__PURE__ */ mat4_set()
 
 /** Temporary matrix 0 */
-export const mat4_temp0 = /* @__PURE__ */ mat4_set()
+export const MAT4_TEMP0 = /* @__PURE__ */ mat4_set()
 
 /** Temporary matrix 1 */
-export const mat4_temp1 = /* @__PURE__ */ mat4_set()
+export const MAT4_TEMP1 = /* @__PURE__ */ mat4_set()
 
 /** Temporary matrix 2 */
-export const mat4_temp2 = /* @__PURE__ */ mat4_set()
+export const MAT4_TEMP2 = /* @__PURE__ */ mat4_set()
 
 /** Temporary matrix 3 */
-export const mat4_temp3 = /* @__PURE__ */ mat4_set()
+export const MAT4_TEMP3 = /* @__PURE__ */ mat4_set()
 
 /** Temporary matrix 4 */
-export const mat4_temp4 = /* @__PURE__ */ mat4_set()
+export const MAT4_TEMP4 = /* @__PURE__ */ mat4_set()
 
 export const mat4_getDiagonalVec = <R extends Vec4Out>(out: R, matrix: Mat4In): R =>
   vec4_set(out, matrix[0], matrix[5], matrix[10], matrix[15])
@@ -373,12 +365,15 @@ export const mat4_getBasis = (outXAxis: Vec3Out, outYAxis: Vec3Out, outZAxis: Ve
 }
 
 export const mat4_getScale = <R extends Vec3Out>(out: R, matrix: Mat4In): R => {
-  mat4_getBasis(_v0, _v1, _v2, matrix)
-  return vec3_set(out, vec3_length(_v0), vec3_length(_v1), vec3_length(_v2))
+  mat4_getBasis(VEC_TEMP$0, VEC_TEMP$1, VEC_TEMP$2, matrix)
+  return vec3_set(out, vec3_length(VEC_TEMP$0), vec3_length(VEC_TEMP$1), vec3_length(VEC_TEMP$2))
 }
 
 export const mat4_extractRotation = <T extends Mat4Out = Float32Array>(out: T, m: Mat4In): T =>
-  mat4_scaleVec(mat4_set(out, m[0], m[1], m[2], 0, m[4], m[5], m[6], 0, m[8], m[9], m[10]), mat4_getScale(_v0, m))
+  mat4_scaleVec(
+    mat4_set(out, m[0], m[1], m[2], 0, m[4], m[5], m[6], 0, m[8], m[9], m[10]),
+    mat4_getScale(VEC_TEMP$0, m)
+  )
 
 export const mat4_fromShear = <T extends Mat4Out = Float32Array>(
   out: T,
@@ -434,7 +429,7 @@ export const mat4_setBasis = <T extends Mat4Out = Float32Array>(
   xAxis: Vec3In,
   yAxis: Vec3In,
   zAxis: Vec3In,
-  translation: { readonly x: number; y?: number; z?: number } = VEC_ZERO
+  translation: { readonly x?: number; y?: number; z?: number } = VEC_ZERO
 ): T =>
   mat4_set(
     out,
@@ -463,7 +458,7 @@ export const mat4_fromAxisAngle = <T extends Mat4Out = Float32Array>(
 ): T => {
   const s = sin(angleInRadians)
   const c = cos(angleInRadians)
-  const { x, y, z } = vec3_normalize(_v0, axis)
+  const { x, y, z } = vec3_normalize(VEC_TEMP$0, axis)
   const t = 1 - c
   const xt = x * t
   const yt = y * t
@@ -493,7 +488,7 @@ export const mat4_rotateAxisAngle = <T extends Mat4Out = Float32Array>(
   matrix: Mat4In,
   axis: Vec3In,
   angleInRadians: number
-): T => mat4_mul(out, matrix, mat4_fromAxisAngle(mat4_tempM, axis, angleInRadians))
+): T => mat4_mul(out, matrix, mat4_fromAxisAngle(MAT4_TEMP$, axis, angleInRadians))
 
 /** Create a matrix that rotates the given source to the given target vector. */
 export const mat4_fromVectorRotation = <T extends Mat4Out = Float32Array>(
@@ -501,8 +496,8 @@ export const mat4_fromVectorRotation = <T extends Mat4Out = Float32Array>(
   source: Vec3In,
   target: Vec3In
 ): T => {
-  const angle = acosSafe(vec3_dot(vec3_normalize(_v0, source), vec3_normalize(_v1, target)))
-  return mat4_fromAxisAngle(out, vec3_cross(_v0, _v1, _v0), angle)
+  const angle = acosSafe(vec3_dot(vec3_normalize(VEC_TEMP$0, source), vec3_normalize(VEC_TEMP$1, target)))
+  return mat4_fromAxisAngle(out, vec3_cross(VEC_TEMP$0, VEC_TEMP$1, VEC_TEMP$0), angle)
 }
 
 export const mat4_rotateVectorRotation = <T extends Mat4Out = Float32Array>(
@@ -510,7 +505,7 @@ export const mat4_rotateVectorRotation = <T extends Mat4Out = Float32Array>(
   matrix: Mat4In,
   source: Vec3In,
   target: Vec3In
-): T => mat4_mul(out, matrix, mat4_fromVectorRotation(mat4_tempM, source, target))
+): T => mat4_mul(out, matrix, mat4_fromVectorRotation(MAT4_TEMP$, source, target))
 
 export const mat4_fromEulerXYZ = <T extends Mat4Out = Float32Array>(
   out: T | undefined,
@@ -586,7 +581,7 @@ export const mat4_rotateYawPitchRoll = <T extends Mat4Out = Float32Array>(
   yaw: number,
   pitch: number,
   roll: number
-): T => mat4_mul(out, matrix, mat4_fromYawPitchRoll(mat4_tempM, yaw, pitch, roll))
+): T => mat4_mul(out, matrix, mat4_fromYawPitchRoll(MAT4_TEMP$, yaw, pitch, roll))
 
 /** Makex an X axis rotation matrix */
 export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
@@ -602,7 +597,7 @@ export const mat4_fromXRotation = <T extends Mat4Out = Float32Array>(out: T | un
 
 /** Multiplies the given matrix by a rotation matrix */
 export const mat4_rotateX = <T extends Mat4Out = Float32Array>(out: T, matrix: Mat4In, angleInRadians: number): T =>
-  mat4_mul(out, matrix, mat4_fromXRotation(mat4_tempM, angleInRadians))
+  mat4_mul(out, matrix, mat4_fromXRotation(MAT4_TEMP$, angleInRadians))
 
 /** Makex an Y axis rotation matrix */
 export const mat4_fromYRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
@@ -618,7 +613,7 @@ export const mat4_fromYRotation = <T extends Mat4Out = Float32Array>(out: T | un
 
 /** Multiplies the given matrix by a rotation matrix */
 export const mat4_rotateY = <T extends Mat4Out = Float32Array>(out: T, matrix: Mat4In, angleInRadians: number): T =>
-  mat4_mul(out, matrix, mat4_fromYRotation(mat4_tempM, angleInRadians))
+  mat4_mul(out, matrix, mat4_fromYRotation(MAT4_TEMP$, angleInRadians))
 
 /** Makex a Z axis rotation matrix */
 export const mat4_fromZRotation = <T extends Mat4Out = Float32Array>(out: T | undefined, angleInRadians: number): T => {
@@ -634,7 +629,7 @@ export const mat4_fromZRotation = <T extends Mat4Out = Float32Array>(out: T | un
 
 /** Multiplies the given matrix by a rotation matrix */
 export const mat4_rotateZ = <T extends Mat4Out = Float32Array>(out: T, matrix: Mat4In, angleInRadians: number): T =>
-  mat4_mul(out, matrix, mat4_fromZRotation(mat4_tempM, angleInRadians))
+  mat4_mul(out, matrix, mat4_fromZRotation(MAT4_TEMP$, angleInRadians))
 
 /** Creates a matrix from a quaternion rotation and an optional translation. The translation is applied before the rotation. */
 export const mat4_fromQuaternion = <T extends Mat4Out = Float32Array>(
@@ -674,7 +669,7 @@ export const mat4_rotateQuaternion = <T extends Mat4Out = Float32Array>(
   out: T,
   matrix: Mat4In,
   quaternion: QuatIn
-): T => mat4_mul(out, matrix, mat4_fromQuaternion(mat4_tempM, quaternion))
+): T => mat4_mul(out, matrix, mat4_fromQuaternion(MAT4_TEMP$, quaternion))
 
 export const mat4_toString = (matrix: Mat4In): string => {
   const strings: string[] = []
@@ -872,7 +867,11 @@ export const mat4_fromOrtho = <T extends Mat4Out = Float32Array>(
 }
 
 const _setupMatrixLookAtVectors = /* @__PURE__ */ (eye: Vec3In, center: Vec3In, up: Vec3In): Vec3 =>
-  vec3_cross(_v1, _v2, vec3_normalize(vec3_cross(_v0, up, vec3_normalize(vec3_sub(_v2, eye, center)))))
+  vec3_cross(
+    VEC_TEMP$1,
+    VEC_TEMP$2,
+    vec3_normalize(vec3_cross(VEC_TEMP$0, up, vec3_normalize(vec3_sub(VEC_TEMP$2, eye, center))))
+  )
 
 /** Generates a look-at matrix with the given eye position, focal point, and up axis. */
 export const mat4_lookAt = <T extends Mat4Out = Float32Array>(
@@ -884,21 +883,21 @@ export const mat4_lookAt = <T extends Mat4Out = Float32Array>(
   _setupMatrixLookAtVectors(eye, center, up)
   return mat4_set(
     out,
-    _v0.x,
-    _v1.x,
-    _v2.x,
+    VEC_TEMP$0.x,
+    VEC_TEMP$1.x,
+    VEC_TEMP$2.x,
     0,
-    _v0.y,
-    _v1.y,
-    _v2.y,
+    VEC_TEMP$0.y,
+    VEC_TEMP$1.y,
+    VEC_TEMP$2.y,
     0,
-    _v0.z,
-    _v1.z,
-    _v2.z,
+    VEC_TEMP$0.z,
+    VEC_TEMP$1.z,
+    VEC_TEMP$2.z,
     0,
-    -vec3_dot(_v0, eye),
-    -vec3_dot(_v1, eye),
-    -vec3_dot(_v2, eye)
+    -vec3_dot(VEC_TEMP$0, eye),
+    -vec3_dot(VEC_TEMP$1, eye),
+    -vec3_dot(VEC_TEMP$2, eye)
   )
 }
 
@@ -910,7 +909,24 @@ export const mat4_targetTo = <T extends Mat4Out = Float32Array>(
   up: Vec3In
 ): T => {
   _setupMatrixLookAtVectors(eye, target, up)
-  return mat4_set(out, _v0.x, _v0.y, _v0.z, 0, _v1.x, _v1.y, _v1.z, 0, _v2.x, _v2.y, _v2.z, 0, eye.x, eye.y, eye.z)
+  return mat4_set(
+    out,
+    VEC_TEMP$0.x,
+    VEC_TEMP$0.y,
+    VEC_TEMP$0.z,
+    0,
+    VEC_TEMP$1.x,
+    VEC_TEMP$1.y,
+    VEC_TEMP$1.z,
+    0,
+    VEC_TEMP$2.x,
+    VEC_TEMP$2.y,
+    VEC_TEMP$2.z,
+    0,
+    eye.x,
+    eye.y,
+    eye.z
+  )
 }
 
 /** Makes a matrix from a direction vector and an optional up vector */
@@ -922,9 +938,15 @@ export const mat4_fromDirection = <T extends Mat4Out = Float32Array>(
 ): T =>
   mat4_setBasis(
     out,
-    _v0,
-    vec3_normalize(vec3_cross(_v1, _v2, vec3_normalize(vec3_cross(_v0, up, vec3_normalize(_v2, direction))))),
-    _v2,
+    VEC_TEMP$0,
+    vec3_normalize(
+      vec3_cross(
+        VEC_TEMP$1,
+        VEC_TEMP$2,
+        vec3_normalize(vec3_cross(VEC_TEMP$0, up, vec3_normalize(VEC_TEMP$2, direction)))
+      )
+    ),
+    VEC_TEMP$2,
     translation
   )
 

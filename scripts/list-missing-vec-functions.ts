@@ -1,6 +1,6 @@
 import * as math from '../packages/math'
 
-import * as vec from '../packages/math/vecs'
+import * as vec from '../packages/vectors/lib/vec-234'
 
 const mathFuncs = new Set<string>()
 for (const [k, v] of Object.entries(math)) {

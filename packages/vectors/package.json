@@ -1,6 +1,6 @@
 {
   "name": "@mundus/vectors",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",
@@ -20,7 +20,7 @@
   },
   "peerDependencies": {
     "@mundus/core": ">=0.0.2",
-    "@mundus/math": ">=0.0.14"
+    "@mundus/math": ">=0.0.15"
   },
   "license": "MIT",
   "author": "Salvatore Previti"

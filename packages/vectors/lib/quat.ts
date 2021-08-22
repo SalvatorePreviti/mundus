@@ -16,8 +16,8 @@ import {
   sin,
   sqrt
 } from '@mundus/math'
-import { Vec3In } from '@mundus/math/vecs'
 import {
+  Vec3In,
   VEC_UNIT_Y,
   Vec3Out,
   vec3_set,

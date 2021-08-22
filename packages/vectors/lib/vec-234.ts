@@ -243,6 +243,15 @@ export const VEC_UNIT_Z: Vec4In = /* @__PURE__ */ vec4_new(0, 0, 1)
 /** {x:0, y:0, z:0, w:1} */
 export const VEC_UNIT_W: Vec4In = /* @__PURE__ */ vec4_new(0, 0, 0, 1)
 
+/** A temporary vector used internally for calculations */
+export const VEC_TEMP$0 = /* @__PURE__ */ vec4_new()
+
+/** A temporary vector used internally for calculations */
+export const VEC_TEMP$1 = /* @__PURE__ */ vec4_new()
+
+/** A temporary vector used internally for calculations */
+export const VEC_TEMP$2 = /* @__PURE__ */ vec4_new()
+
 export const VEC_TEMP0 = /* @__PURE__ */ vec4_new()
 
 export const VEC_TEMP1 = /* @__PURE__ */ vec4_new()
