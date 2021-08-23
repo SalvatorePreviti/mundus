@@ -126,7 +126,7 @@ export const array_copy = <T, TOut extends { [index: number]: T } = T[]>(out: TO
   return out
 }
 
-export const array_set = <T, TArray extends { [n: number]: T }>(out: TArray, ...args: T[]): TArray =>
+export const array_set = <T, TArray extends { [n: number]: T } = T[]>(out: TArray, ...args: T[]): TArray =>
   array_copy(out, args)
 
 /** Given a sorted array of numbers, find the index of the first item greater than the given minimum. The array needs to be sorted. */
@@ -150,4 +150,16 @@ export const array_binarySearchMin = (
     ++index
   }
   return index
+}
+
+/** Swap two items in the array by their indices */
+export const array_swapPair = <TArray extends { [n: number]: any } = []>(
+  array: TArray,
+  i: number,
+  j: number
+): TArray => {
+  const tmp = array[i]
+  array[i] = array[j]
+  array[j] = tmp
+  return array
 }
