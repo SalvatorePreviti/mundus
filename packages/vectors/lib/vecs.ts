@@ -125,3 +125,11 @@ export const vec_minComponent = (v: VecIn): number => {
   }
   return result
 }
+
+/** Writes a vec to an array. Returns the new offset. */
+export const vec_write = (out: { [index: number]: number }, v: ArrayLike<number>, offset: number = 0): number => {
+  for (let i = 0; i < v.length; ++i) {
+    out[offset++] = v[i]
+  }
+  return offset
+}

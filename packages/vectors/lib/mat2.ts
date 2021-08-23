@@ -14,7 +14,8 @@ import {
   vec_scale,
   vec_sub,
   vec_subScalar,
-  vec_sum
+  vec_sum,
+  vec_write
 } from './vecs'
 
 export type Mat2 = Float32Array | Float64Array | number[]
@@ -76,6 +77,8 @@ export const mat2_minComponent: (v: Mat2In) => number | undefined = vec_minCompo
 
 /** Gets the largest component of a matrix */
 export const mat2_maxComponent: (v: Mat2In) => number | undefined = vec_maxComponent
+
+export const mat2_write = vec_write
 
 export interface Mat2SetFunction {
   <T extends Mat2Out>(out?: T, m00?: number, m01?: number, m10?: number, m11?: number): T

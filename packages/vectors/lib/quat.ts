@@ -45,7 +45,8 @@ import {
   vec4_withTemp,
   Vec3,
   vec3_copy,
-  vec3_lengthSquared
+  vec3_lengthSquared,
+  vec4_write
 } from './vec-234'
 
 export type Quat = Vec4
@@ -97,6 +98,8 @@ export const quat_isNearlyEquals = vec4_isNearlyEqualAbsolute
 
 /** Computes the dot product between two quaternions */
 export const quat_dot = vec4_dot
+
+export const quat_write = vec4_write
 
 /**
  * Calculates the conjugate of a quaternion.

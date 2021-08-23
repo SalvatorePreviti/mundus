@@ -45,7 +45,8 @@ import {
   vec_subScalar,
   vec_sum,
   vec_scalarDiv,
-  vec_divScalar
+  vec_divScalar,
+  vec_write
 } from './vecs'
 
 export type Mat4 = Float32Array | Float64Array | number[]
@@ -149,6 +150,8 @@ export const mat4_minComponent: (v: Mat4In) => number = vec_minComponent
 
 /** Gets the largest component of a matrix */
 export const mat4_maxComponent: (v: Mat4In) => number = vec_maxComponent
+
+export const mat4_write = vec_write
 
 /** Transforms a Vec3 with a 4x4 matrix */
 export const mat4_transform2D = <R extends Vec2Out = Vec2Out>(out: R, m: Mat4In, x: number, y: number): R =>
