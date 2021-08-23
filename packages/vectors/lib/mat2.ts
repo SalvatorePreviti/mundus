@@ -24,6 +24,8 @@ export type Mat2Out = Float32Array | Float64Array | number[]
 
 export interface Mat2In extends ArrayLike<number>, Iterable<number> {}
 
+export const MAT2_SIZE = 4
+
 /** Index of m00 in a 2x2 matrix */
 export const MAT2_00 = 0
 

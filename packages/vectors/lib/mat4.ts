@@ -55,11 +55,7 @@ export type Mat4Out = Float32Array | Float64Array | number[]
 
 export interface Mat4In extends ArrayLike<number>, Iterable<number> {}
 
-/** Index of m21 in a 3x3 matrix */
-export const MAT3_21 = 7
-
-/** Index of m22 in a 3x3 matrix */
-export const MAT3_22 = 8
+export const MAT4_SIZE = 16
 
 /** Index of m00 in a 4x4 matrix */
 export const MAT4_00 = 0
@@ -225,7 +221,7 @@ export interface Mat4SetFunction {
 
 // eslint-disable-next-line no-new-func
 export const mat4_set = new Function(
-  `return(o=,${array_fromLength(16, (i) => `i${i}=${+!(i % 5)}`)})=>(${array_fromLength(16, (i) => `o[${i}]=i${i}`)},o)`
+  `return(o,${array_fromLength(16, (i) => `i${i}=${+!(i % 5)}`)})=>(${array_fromLength(16, (i) => `o[${i}]=i${i}`)},o)`
 )() as Mat4SetFunction
 
 /** Sets the main diagonal components */
