@@ -4,18 +4,6 @@ export type Mat3Out = Mat3
 
 export interface Mat3In extends ArrayLike<number>, Iterable<number> {}
 
-/** Index of m00 in a 2x2 matrix */
-export const MAT2_00 = 0
-
-/** Index of m01 in a 2x2 matrix */
-export const MAT2_01 = 1
-
-/** Index of m10 in a 2x2 matrix */
-export const MAT2_10 = 2
-
-/** Index of m11 in a 2x2 matrix */
-export const MAT2_11 = 3
-
 /** Index of m00 in a 3x3 matrix */
 export const MAT3_00 = 0
 
