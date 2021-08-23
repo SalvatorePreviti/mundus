@@ -4,6 +4,8 @@ export * from './lib/vec-234'
 
 export * from './lib/plane'
 
+export * from './lib/polygons'
+
 export * from './lib/mat2'
 
 export * from './lib/mat3'

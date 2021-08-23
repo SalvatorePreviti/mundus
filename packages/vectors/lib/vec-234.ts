@@ -2324,7 +2324,7 @@ export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number
 
 /** Gets the signed area of a 2D triangle */
 export const vec2_triangleSignedArea = (a: Vec2In, b: Vec2In, c: Vec2In): number =>
-  triangleSignedArea2D(a.x, a.y, b.x, b.y, c.y, c.y)
+  triangleSignedArea2D(a.x, a.y, b.x, b.y, c.x, c.y)
 
 /** Compute barycentric coordinates for a point p with respect to triangle (a, b, c) */
 export const vec2_barycentric = <R extends Vec3Out = Vec3Out>(
