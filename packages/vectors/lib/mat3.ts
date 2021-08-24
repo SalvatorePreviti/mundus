@@ -138,13 +138,13 @@ export const mat3_setDiagonal = <T extends Mat3Out>(out: T, x: number = 1, y: nu
 }
 
 /** Creates a new 3x3 matrix backed by 32 bit floating points */
-export const mat3_newFloat32Array = /* @__PURE__ */ (): Float32Array => mat3_setDiagonal(new Float32Array(16))
+export const mat3_newFloat32Array = /* @__PURE__ */ (): Float32Array => mat3_setDiagonal(new Float32Array(9))
 
 /** Creates a new 3x3 matrix backed by 64 bit floating points */
-export const mat3_newFloat64Array = /* @__PURE__ */ (): Float64Array => mat3_setDiagonal(new Float64Array(16))
+export const mat3_newFloat64Array = /* @__PURE__ */ (): Float64Array => mat3_setDiagonal(new Float64Array(9))
 
 /** Creates a new 3x3 matrix backed by a regular array */
-export const mat3_newArray = /* @__PURE__ */ (): number[] => mat3_setDiagonal(new Array(16).fill(0))
+export const mat3_newArray = /* @__PURE__ */ (): number[] => mat3_setDiagonal(new Array(9).fill(0))
 
 /** Creates a new 3x3 matrix backed by 32 bit floating points */
 export const mat3_new = mat3_newFloat32Array

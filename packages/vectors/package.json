@@ -1,6 +1,6 @@
 {
   "name": "@mundus/vectors",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "type": "module",
   "sideEffects": false,
   "module": "index.mjs",
