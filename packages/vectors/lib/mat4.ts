@@ -49,7 +49,7 @@ import {
   vec_divScalar,
   vec_write
 } from './vecs'
-import { Mat3In, Mat3Out, mat3_set, mat3_fromEulerZYX, mat3_fromEulerXYZ } from './mat3'
+import { Mat3In, Mat3Out, mat3_set } from './mat3'
 
 export type Mat4 = Float32Array | Float64Array | number[]
 
@@ -228,7 +228,7 @@ export const mat4_set = new Function(
 
 /** Makes a Mat4 from a Mat3 */
 export const mat4_fromMat3 = new Function(
-  'o',
+  ...'om',
   `${array_fromLength(16, (i) => `o[${i}]=${i > 14 ? '1' : i < 11 && i % 4 < 3 ? `m[${i - (i >> 2)}]` : 0}`)}`
 ) as <T extends Mat4Out>(out: T, mat3: Mat3In) => T
 
@@ -422,7 +422,7 @@ export const mat4_extractRotation = <T extends Mat4Out>(out: T, m: Mat4In): T =>
   )
 
 /** Makes a matrix that has only the rotation of the given matrix, with no scale and no translation */
-export const mat3_fromMat4 = <T extends Mat3Out>(out: T, m: Mat4In): T => {
+export const mat3_fromMat4Rotation = <T extends Mat3Out>(out: T, m: Mat4In): T => {
   const { x, y, z } = mat4_getScale(VEC_TEMP$0, m)
   return mat3_set(out, m[0] / x, m[1] / x, m[2] / x, m[4] / y, m[5] / y, m[6] / y, m[8] / z, m[9] / z, m[10] / z)
 }
@@ -538,8 +538,19 @@ export const mat4_rotateVectorRotation = <T extends Mat4Out>(
   target: Vec3In
 ): T => mat4_mul(out, matrix, mat4_fromVectorRotation(MAT4_TEMP$, source, target))
 
-export const mat4_fromEulerXYZ = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T =>
-  mat4_fromMat3(out, mat3_fromEulerXYZ(MAT4_TEMP$, x, y, z))
+export const mat4_fromEulerXYZ = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T => {
+  const a = cos(x)
+  const b = sin(x)
+  const c = cos(y)
+  const d = sin(y)
+  const e = cos(z)
+  const f = sin(z)
+  const ae = a * e
+  const af = a * f
+  const be = b * e
+  const bf = b * f
+  return mat4_set(out, c * e, af + be * d, bf - ae * d, 0, -c * f, ae - bf * d, be + af * d, 0, d, -b * c, a * c)
+}
 
 /** Multiplies the given matrix by a rotation matrix. */
 export const mat4_rotateEulerXYZ = <T extends Mat4Out>(
@@ -550,8 +561,19 @@ export const mat4_rotateEulerXYZ = <T extends Mat4Out>(
   roll: number
 ): T => mat4_mul(out, matrix, mat4_fromEulerXYZ(MAT4_TEMP$, yaw, pitch, roll))
 
-export const mat4_fromEulerZYX = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T =>
-  mat4_fromMat3(out, mat3_fromEulerZYX(MAT4_TEMP$, x, y, z))
+export const mat4_fromEulerZYX = <T extends Mat4Out>(out: T, x: number, y: number, z: number): T => {
+  const a = cos(x)
+  const b = sin(x)
+  const c = cos(y)
+  const d = sin(y)
+  const e = cos(z)
+  const f = sin(z)
+  const ae = a * e
+  const af = a * f
+  const be = b * e
+  const bf = b * f
+  return mat4_set(out, c * e, c * f, -d, 0, be * d - af, bf * d + ae, b * c, 0, ae * d + bf, af * d - be, a * c)
+}
 
 /** Multiplies the given matrix by a rotation matrix. */
 export const mat4_rotateEulerZYX = <T extends Mat4Out>(
