@@ -1,4 +1,5 @@
 import { array_fromLength } from '@mundus/core'
+import { cos, sin } from '@mundus/math'
 
 export type Mat3 = Float32Array | Float64Array | number[]
 
@@ -81,3 +82,31 @@ export const mat3_new = mat3_newFloat32Array
 
 /** Makes an identity matrix. */
 export const mat3_identity: Mat3IdentityFunction = /* @__PURE__ */ mat3_set
+
+export const mat3_fromEulerZYX = <T extends Mat3Out>(out: T, x: number, y: number, z: number): T => {
+  const a = cos(x)
+  const b = sin(x)
+  const c = cos(y)
+  const d = sin(y)
+  const e = cos(z)
+  const f = sin(z)
+  const ae = a * e
+  const af = a * f
+  const be = b * e
+  const bf = b * f
+  return mat3_set(out, c * e, c * f, -d, be * d - af, bf * d + ae, b * c, ae * d + bf, af * d - be, a * c)
+}
+
+export const mat3_fromEulerXYZ = <T extends Mat3Out>(out: T, x: number, y: number, z: number): T => {
+  const a = cos(x)
+  const b = sin(x)
+  const c = cos(y)
+  const d = sin(y)
+  const e = cos(z)
+  const f = sin(z)
+  const ae = a * e
+  const af = a * f
+  const be = b * e
+  const bf = b * f
+  return mat3_set(out, c * e, af + be * d, bf - ae * d, -c * f, ae - bf * d, be + af * d, d, -b * c, a * c)
+}
