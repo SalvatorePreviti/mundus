@@ -228,6 +228,7 @@ export const mat4_set = new Function(
 
 /** Makes a Mat4 from a Mat3 */
 export const mat4_fromMat3 = new Function(
+  'o',
   `${array_fromLength(16, (i) => `o[${i}]=${i > 14 ? '1' : i < 11 && i % 4 < 3 ? `m[${i - (i >> 2)}]` : 0}`)}`
 ) as <T extends Mat4Out>(out: T, mat3: Mat3In) => T
 
