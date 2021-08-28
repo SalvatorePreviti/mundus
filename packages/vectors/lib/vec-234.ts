@@ -2437,11 +2437,15 @@ export const vec4_barycentric = <R extends Vec4Out = Vec4Out>(
   return vec3_set(out, v, w, 1 - v - w)
 }
 
-export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number): boolean =>
-  vec3_minComponent(vec2_barycentric(VEC_TEMP$0, a, b, c, px, py)) >= 0
+export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number): boolean => {
+  const { x, y, z } = vec2_barycentric(VEC_TEMP$0, a, b, c, px, py)
+  return min(x, y) >= 0 && z > 0
+}
 
-export const vec3_pointInTriangle = (a: Vec3In, b: Vec3In, c: Vec3In, px: number, py: number, pz: number): boolean =>
-  vec3_minComponent(vec3_barycentric(VEC_TEMP$0, a, b, c, px, py, pz)) >= 0
+export const vec3_pointInTriangle = (a: Vec3In, b: Vec3In, c: Vec3In, px: number, py: number, pz: number): boolean => {
+  const { x, y, z } = vec3_barycentric(VEC_TEMP$0, a, b, c, px, py, pz)
+  return min(x, y) >= 0 && z > 0
+}
 
 export const vec4_pointInTriangle = (
   a: Vec4In,
@@ -2451,7 +2455,10 @@ export const vec4_pointInTriangle = (
   py: number,
   pz: number,
   pw: number
-): boolean => vec3_minComponent(vec4_barycentric(VEC_TEMP$0, a, b, c, px, py, pz, pw)) >= 0
+): boolean => {
+  const { x, y, z } = vec4_barycentric(VEC_TEMP$0, a, b, c, px, py, pz, pw)
+  return min(x, y) >= 0 && z > 0
+}
 
 /** Writes a vec2 to an array. Returns the new offset. */
 export const vec2_write = (out: Vec, v: Vec2In, offset: number = 0): number => {
