@@ -2353,15 +2353,14 @@ export const vec2_barycentric = <R extends Vec3Out = Vec3Out>(
   { x: ax, y: ay }: Vec2In,
   { x: bx, y: by }: Vec2In,
   { x: cx, y: cy }: Vec2In,
-  px: number,
-  py: number
+  p: Vec2In
 ): R => {
   const v0x = bx - ax
   const v0y = by - ay
   const v1x = cx - ax
   const v1y = cy - ay
-  const v2x = px - ax
-  const v2y = py - ay
+  const v2x = p.x - ax
+  const v2y = p.y - ay
   const d00 = v0x * v0x + v0y * v0y
   const d01 = v0x * v1x + v0y * v1y
   const d11 = v1x * v1x + v1y * v1y
@@ -2379,9 +2378,7 @@ export const vec3_barycentric = <R extends Vec3Out = Vec3Out>(
   { x: ax, y: ay, z: az }: Vec3In,
   { x: bx, y: by, z: bz }: Vec3In,
   { x: cx, y: cy, z: cz }: Vec3In,
-  px: number,
-  py: number,
-  pz: number
+  p: Vec3In
 ): R => {
   const v0x = bx - ax
   const v0y = by - ay
@@ -2389,9 +2386,9 @@ export const vec3_barycentric = <R extends Vec3Out = Vec3Out>(
   const v1x = cx - ax
   const v1y = cy - ay
   const v1z = cz - az
-  const v2x = px - ax
-  const v2y = py - ay
-  const v2z = pz - az
+  const v2x = p.x - ax
+  const v2y = p.y - ay
+  const v2z = p.z - az
   const d00 = v0x * v0x + v0y * v0y + v0z * v0z
   const d01 = v0x * v1x + v0y * v1y + v0z * v1z
   const d11 = v1x * v1x + v1y * v1y + v1z * v1z
@@ -2409,10 +2406,7 @@ export const vec4_barycentric = <R extends Vec4Out = Vec4Out>(
   { x: ax, y: ay, z: az, w: aw }: Vec4In,
   { x: bx, y: by, z: bz, w: bw }: Vec4In,
   { x: cx, y: cy, z: cz, w: cw }: Vec4In,
-  px: number,
-  py: number,
-  pz: number,
-  pw: number
+  p: Vec4In
 ): R => {
   const v0x = bx - ax
   const v0y = by - ay
@@ -2422,10 +2416,10 @@ export const vec4_barycentric = <R extends Vec4Out = Vec4Out>(
   const v1y = cy - ay
   const v1z = cz - az
   const v1w = cw - aw
-  const v2x = px - ax
-  const v2y = py - ay
-  const v2z = pz - az
-  const v2w = pw - aw
+  const v2x = p.x - ax
+  const v2y = p.y - ay
+  const v2z = p.z - az
+  const v2w = p.w - aw
   const d00 = v0x * v0x + v0y * v0y + v0z * v0z + v0w * v0w
   const d01 = v0x * v1x + v0y * v1y + v0z * v1z + v0w * v1w
   const d11 = v1x * v1x + v1y * v1y + v1z * v1z + v1w * v1w
@@ -2437,26 +2431,18 @@ export const vec4_barycentric = <R extends Vec4Out = Vec4Out>(
   return vec3_set(out, v, w, 1 - v - w)
 }
 
-export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, px: number, py: number): boolean => {
-  const { x, y, z } = vec2_barycentric(VEC_TEMP$0, a, b, c, px, py)
+export const vec2_pointInTriangle = (a: Vec2In, b: Vec2In, c: Vec2In, p: Vec2In): boolean => {
+  const { x, y, z } = vec2_barycentric(VEC_TEMP$0, a, b, c, p)
   return min(x, y) >= 0 && z > 0
 }
 
-export const vec3_pointInTriangle = (a: Vec3In, b: Vec3In, c: Vec3In, px: number, py: number, pz: number): boolean => {
-  const { x, y, z } = vec3_barycentric(VEC_TEMP$0, a, b, c, px, py, pz)
+export const vec3_pointInTriangle = (a: Vec3In, b: Vec3In, c: Vec3In, p: Vec3In): boolean => {
+  const { x, y, z } = vec3_barycentric(VEC_TEMP$0, a, b, c, p)
   return min(x, y) >= 0 && z > 0
 }
 
-export const vec4_pointInTriangle = (
-  a: Vec4In,
-  b: Vec4In,
-  c: Vec4In,
-  px: number,
-  py: number,
-  pz: number,
-  pw: number
-): boolean => {
-  const { x, y, z } = vec4_barycentric(VEC_TEMP$0, a, b, c, px, py, pz, pw)
+export const vec4_pointInTriangle = (a: Vec4In, b: Vec4In, c: Vec4In, p: Vec4In): boolean => {
+  const { x, y, z } = vec4_barycentric(VEC_TEMP$0, a, b, c, p)
   return min(x, y) >= 0 && z > 0
 }
 
