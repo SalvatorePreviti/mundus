@@ -1494,21 +1494,6 @@ export const angle4D = (
 export const clampLengthMultiplier = /* @__PURE__ */ (length: number, minLength: number, maxLength: number): number =>
   clamp(length, minLength, maxLength) / (length || 1)
 
-/** Check if a point lies within a 2D triangle */
-export const pointInTriangle2D = (
-  ax: number,
-  ay: number,
-  bx: number,
-  by: number,
-  cx: number,
-  cy: number,
-  px: number,
-  py: number
-): boolean =>
-  (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 &&
-  (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
-  (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0
-
 /** Gets a size in bytes in an human readable form. */
 export const humanReadableSizeInBytes = /* @__PURE__ */ (bytes: number): string => {
   bytes = roundFromZero(bytes)
